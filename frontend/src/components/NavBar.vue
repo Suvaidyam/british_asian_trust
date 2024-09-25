@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-[#2D3538] h-[72px] py-4 px-6 flex justify-between items-center">
+    <header class="bg-[#2D3538] h-[72px] py-4 px-16 flex justify-between items-center">
         <div class="flex items-center">
             <svg width="300" height="39" viewBox="0 0 300 39" fill="none" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -14,17 +14,20 @@
             </svg>
         </div>
         <nav>
-            <button class="text-yellow-400 hover:text-yellow-300 transition-colors duration-200 ">
+            <!-- <button class="text-yellow-400 hover:text-yellow-300 transition-colors duration-200 ">
                 LOGIN
+            </button> -->
+            <button class=" text-[12px]  leading-[15.4px]  text-yellow-400 hover:text-yellow-300 transition-colors duration-200 ">
+                REGISTER AS A NGO
             </button>
         </nav>
     </header>
 </template>
 
-<script setup>
-// No additional script needed for this component
-</script>
+<script>
 
-<style scoped>
-/* Add any component-specific styles here if needed */
-</style>
+export default {
+	
+	inject: ['$auth']
+};
+</script>
