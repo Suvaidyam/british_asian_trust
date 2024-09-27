@@ -56,3 +56,19 @@
 }
   
 
+
+:root{
+  font-family: sans-serif;
+  background: #CA2247;
+ 
+}
+
+h2{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+p{
+  font-size: 14px;
+  font-weight: 400;
+}

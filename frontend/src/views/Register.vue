@@ -3,10 +3,10 @@
         <!-- Login Form Section -->
         <div class="w-full lg:w-1/2 sm:w-full flex items-center lg:justify-normal justify-center relative z-10">
             <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-                <h2 class="text-[20px] leading-[26.6px] text-center font-semibold font-sans text-[#212529] mb-2 ">
+                <h2 class="text-center font-semibold font-sans text-[#212529] mb-2 ">
                     Welcome to British Asian Trust Portal
                 </h2>
-                <p class="text-[12px] text-center leading-[18.34px] font-normal text-[#212529] mb-6">
+                <p class="text-center  text-[#212529] mb-6">
                     Sign up to empower your organization. Register today and gain access to surveys, personalized
                     recommendations, and tools to drive impact.
                 </p>
@@ -44,7 +44,7 @@
                     <!-- Step 1: Organization Details -->
                     <div class="flex flex-col gap-4" v-if="currentStep === 1">
                         <div>
-                            <label for="pan" class="block text-[14px] leading-[18.34px] font-sans mb-1">Organization PAN
+                            <label for="pan" class="block  mb-1">Organization PAN
                                 Number</label>
                             <input type="text" id="pan" name="pan" v-model="pan"
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
@@ -52,14 +52,14 @@
                         </div>
                         <div>
                             <label for="organization"
-                                class="block text-[14px] leading-[18.34px] font-sans mb-1">Organization</label>
+                                class="block  mb-1">Organization</label>
                             <input type="text" id="organization" name="organization" v-model="organization"
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                                 placeholder="Enter your organization name">
                         </div>
                         <div>
                             <label for="address"
-                                class="block text-[14px] leading-[18.34px] font-sans mb-1">Address</label>
+                                class="block  mb-1">Address</label>
                             <input type="text" id="address" name="address" v-model="address"
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                                 placeholder="Enter your address">
@@ -68,7 +68,6 @@
 
                     <!-- Step 2: Admin Details -->
                     <div class="flex flex-col gap-4" v-if="currentStep === 2">
-
                         <div>
                             <label for="full-name" class="block text-[14px]  leading-[18.34px] font-sans mb-1">Full
                                 Name</label>
@@ -111,24 +110,52 @@
                                 I agree with <a href="#" class="text-red-600 hover:text-red-500">terms & conditions</a>
                             </label>
                         </div>
-
-
                     </div>
 
                     <!-- Next/Submit button -->
                     <div class="flex flex-col justify-center items-center gap-2">
                         <button type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#CA2247] hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                            {{ currentStep === 1 ? 'Fill admin information' : 'Submit' }}
+                            class="w-full flex uppercase justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#CA2247] hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                            {{ currentStep === 1 ? 'Fill admin information' : 'Setup the account' }}
                         </button>
                         <!-- "Go Back" button (only visible in step 2) -->
                         <div v-if="currentStep === 2" type="button" @click="goBack"
-                            class="cursor-pointer text-[14px] leading-[18.34px] font-sans">
+                            class="cursor-pointer ">
                             Go Back
                         </div>
                     </div>
-
                 </form>
+
+                <!-- Popup Modal -->
+                <div v-if="showModal"
+                    class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center">
+                        <!-- Icon section -->
+                        <div class="flex justify-center mb-4">
+                            <div class="w-[60px] h-[60px] bg-[#E6F5FB] flex items-center justify-center rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" class="w-8 h-8 text-[#CA2247]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.39 4.03a4 4 0 004.22 0L21 8m-9 4V21" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Text section -->
+                        <h3 class="text-xl font-semibold mb-2">Thank you for submitting your details!</h3>
+                        <p class="text-gray-600 text-sm mb-6">
+                            We've sent a verification email to your registered address. Please check your inbox and
+                            follow the link to verify your email. Once verified, you'll be able to set your password and
+                            complete your registration.
+                        </p>
+
+                        <!-- Button section -->
+                        <button @click="closeModal"
+                            class="w-full bg-[#CA2247] text-white py-2 px-4 rounded-md hover:bg-red-700">
+                            Close
+                        </button>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -144,7 +171,6 @@
             <img src="../assets/register1.png" alt="Two women in traditional attire"
                 class="absolute inset-0 w-full h-full object-cover">
         </div>
-
     </div>
 </template>
 
@@ -152,34 +178,39 @@
 export default {
     data() {
         return {
-            pan: null,
-            organization: null,
-            address: null,
             currentStep: 1,
-            fullName: null,
-            email: null,
-            phone: null,
-            role: null,
-            termsAccepted: false
-
-
-
+            pan: '',
+            organization: '',
+            address: '',
+            fullName: '',
+            email: '',
+            phone: '',
+            role: '',
+            termsAccepted: false,
+            showModal: false, // State for modal visibility
         };
     },
     methods: {
         nextStep() {
-            if (this.currentStep === 1 && this.pan && this.organization && this.address) {
-                // Move to the next step only if all the fields in step 1 are filled
+            // Validation for Step 1
+            if (this.currentStep === 1) {
+                if (!this.pan || !this.organization || !this.address) {
+                    alert("Please fill in all the required fields in the Organization section.");
+                    return; // Stop the process if fields are not filled
+                }
                 this.currentStep = 2;
-            } else if (this.currentStep === 2) {
-                // Submit form or handle final step
-                console.log("Admin details submitted");
+            } else {
+                // Handle the form submission or modal logic for Step 2
+                this.showModal = true;
+                // You can handle form data submission here if needed
             }
         },
         goBack() {
-            // Set step back to 1
             this.currentStep = 1;
-        }
-    }
-}
+        },
+        closeModal() {
+            this.showModal = false; // Close the modal
+        },
+    },
+};
 </script>

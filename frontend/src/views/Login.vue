@@ -4,22 +4,22 @@
 		<!-- Login Form Section -->
 		<div class="w-full lg:w-1/2 sm:w-full flex items-center lg:justify-normal  justify-center  relative z-10">
 			<div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-				<h2 class="text-[20px] leading-[26.6px] text-center font-semibold font-sans text-[#212529] mb-2 ">
+				<h2 class="  text-center font-semibold font-sans text-[#212529] mb-2 ">
 					Welcome to British Asian Trust Portal
 				</h2>
-				<p class="text-[12px] text-center leading-[18.34px] font-normal text-[#212529] mb-6">
+				<p class=" text-center  text-[#212529] mb-6">
 					Login to access your dashboard, complete surveys, earn points, and get personalized recommendations
 					to support your wellness.
 				</p>
 				<form @submit.prevent="login" class="space-y-4">
 					<div>
-						<label for="email" class="block  text-[14px]  leading-[18.34px] font-sans mb-1">Email</label>
+						<label for="email" class="block mb-1">Email</label>
 						<input type="text" id="email" name="email" v-model="email"
 							class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
 							placeholder="Enter your email address">
 					</div>
 					<div>
-						<label for="password" class="block text-[14px]  leading-[18.34px] font-sans mb-1">Password</label>
+						<label for="password" class="bloc mb-1">Password</label>
 						<input type="password" id="password" name="password" v-model="password"
 							class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
 							placeholder="Enter your password">
