@@ -2,7 +2,7 @@
 	<div class="flex min-h-screen bg-[#EDE8E5] relative overflow-hidden px-16">
 
 		<!-- Login Form Section -->
-		<div class="w-full lg:w-1/2 flex items-center   relative z-10">
+		<div class="w-full lg:w-1/2 sm:w-full flex items-center lg:justify-normal  justify-center  relative z-10">
 			<div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
 				<h2 class="text-[20px] leading-[26.6px] text-center font-semibold font-sans text-[#212529] mb-2 ">
 					Welcome to British Asian Trust Portal
@@ -37,11 +37,11 @@
 			</div>
 		</div>
 
-		<div class="hidden lg:block lg:w-1/2 relative z-10">
+		<div class="hidden lg:block lg:w-1/2 relative ">
 			<!-- Image of Two Women -->
 
 			<!-- SVG Element positioned absolutely over the image -->
-			<svg class="absolute right-0 bottom-0 w-[300px] h-[300px] lg:w-[700px] lg:h-[600px]" viewBox="0 0 719 681"
+			<svg class="absolute right-0 bottom-0 w-[300px] h-[300px] lg:w-[700px] lg:h-[700px]" viewBox="0 0 719 681"
 				fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" clip-rule="evenodd"
 					d="M10.6721 358.09C43.7944 290.528 148.486 299.88 203.921 248.991C237.118 218.516 233.243 164.646 260.492 128.755C298.361 78.8762 330.329 2.09349 392.93 0.0381908C454.772 -1.99227 485.461 77.4593 530.486 119.891C565.441 152.832 598.797 184.384 628.553 222.085C662.81 265.488 725.275 303.219 718.489 358.09C711.449 415.017 625.945 426.357 597.155 475.972C568.46 525.423 606.218 613.235 555.318 639.29C503.188 665.974 451.086 573.596 392.93 580.511C321.677 588.984 278.12 686.509 206.596 680.755C139.575 675.363 89.6252 610.766 54.7335 553.303C19.5091 495.292 -19.2021 419.028 10.6721 358.09Z"
