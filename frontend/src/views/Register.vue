@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-[#EDE8E5] relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row min-h-screen">
         <!-- Registration Form Section -->
-        <div class="w-full lg:w-1/2 flex items-center justify-center lg:justify-start relative z-10 py-12 lg:py-0">
+        <div class="w-full lg:w-1/2 flex items-center justify-center lg:justify-start relative z-10 py-12 lg:py-6">
           <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
             <h2 class="text-center font-semibold font-sans text-[#212529] mb-2">
               Welcome to British Asian Trust Portal
@@ -56,9 +56,11 @@
                     type="text"
                     id="pan"
                     v-model="pan"
+                    @input="validateField('pan')"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     placeholder="Enter PAN number"
                   >
+                  <p v-if="errors.pan" class="text-red-500 text-sm mt-1">{{ errors.pan }}</p>
                 </div>
                 <div>
                   <label for="organization" class="block mb-1">Organization</label>
@@ -66,9 +68,11 @@
                     type="text"
                     id="organization"
                     v-model="organization"
+                    @input="validateField('organization')"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     placeholder="Enter your organization name"
                   >
+                  <p v-if="errors.organization" class="text-red-500 text-sm mt-1">{{ errors.organization }}</p>
                 </div>
                 <div>
                   <label for="address" class="block mb-1">Address</label>
@@ -76,9 +80,11 @@
                     type="text"
                     id="address"
                     v-model="address"
+                    @input="validateField('address')"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     placeholder="Enter your address"
                   >
+                  <p v-if="errors.address" class="text-red-500 text-sm mt-1">{{ errors.address }}</p>
                 </div>
               </div>
   
@@ -90,9 +96,11 @@
                     type="text"
                     id="full-name"
                     v-model="fullName"
+                    @input="validateField('fullName')"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     placeholder="Enter your full name"
                   >
+                  <p v-if="errors.fullName" class="text-red-500 text-sm mt-1">{{ errors.fullName }}</p>
                 </div>
                 <div>
                   <label for="email" class="block text-[14px] leading-[18.34px] font-sans mb-1">Email Address</label>
@@ -100,9 +108,11 @@
                     type="email"
                     id="email"
                     v-model="email"
+                    @input="validateField('email')"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     placeholder="Enter your email address"
                   >
+                  <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
                 </div>
                 <div>
                   <label for="phone" class="block text-[14px] leading-[18.34px] font-sans mb-1">Phone Number (optional)</label>
@@ -114,10 +124,12 @@
                       type="tel"
                       id="phone"
                       v-model="phone"
+                      @input="validateField('phone')"
                       class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-red-500 focus:border-red-500 border border-gray-300 sm:text-sm"
                       placeholder="Enter your phone number"
                     >
                   </div>
+                  <p v-if="errors.phone" class="text-red-500 text-sm mt-1">{{ errors.phone }}</p>
                 </div>
                 <div>
                   <label for="role" class="block text-[14px] leading-[18.34px] font-sans mb-1">Role in Organization</label>
@@ -125,21 +137,25 @@
                     type="text"
                     id="role"
                     v-model="role"
+                    @input="validateField('role')"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     placeholder="Enter your designation"
                   >
+                  <p v-if="errors.role" class="text-red-500 text-sm mt-1">{{ errors.role }}</p>
                 </div>
                 <div class="flex items-center">
                   <input
                     id="terms"
                     type="checkbox"
                     v-model="termsAccepted"
+                    @change="validateField('termsAccepted')"
                     class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                   >
                   <label for="terms" class="ml-2 block text-sm text-gray-900">
                     I agree with <a href="#" class="text-red-600 hover:text-red-500">terms & conditions</a>
                   </label>
                 </div>
+                <p v-if="errors.termsAccepted" class="text-red-500 text-sm mt-1">{{ errors.termsAccepted }}</p>
               </div>
   
               <!-- Next/Submit button -->
@@ -201,14 +217,14 @@
           <svg class="absolute right-0 bottom-0 w-[400px] h-[400px] lg:w-[700px] lg:h-[600px]" viewBox="0 0 719 681" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6721 358.09C43.7944 290.528 148.486 299.88 203.921 248.991C237.118 218.516 233.243 164.646 260.492 128.755C298.361 78.8762 330.329 2.09349 392.93 0.0381908C454.772 -1.99227 485.461 77.4593 530.486 119.891C565.441 152.832 598.797 184.384 628.553 222.085C662.81 265.488 725.275 303.219 718.489 358.09C711.449 415.017 625.945 426.357 597.155 475.972C568.46 525.423 606.218 613.235 555.318 639.29C503.188 665.974 451.086 573.596 392.93 580.511C321.677 588.984 278.12 686.509 206.596 680.755C139.575 675.363 89.6252 610.766 54.7335 553.303C19.5091 495.292 -19.2021 419.028 10.6721 358.09Z" fill="#DBB729" />
           </svg>
-          <img src="../assets/register1.png" alt="Two women in traditional attire" class="absolute inset-0 w-full h-full object-cover">
+          <img src="../../public/register1.png" alt="Two women in traditional attire" class="absolute inset-0 w-full h-full object-cover">
         </div>
       </div>
     </div>
   </template>
   
   <script setup>
-  import { ref } from 'vue'
+  import { ref, reactive } from 'vue'
   
   const currentStep = ref(1)
   const pan = ref('')
@@ -221,16 +237,89 @@
   const termsAccepted = ref(false)
   const showModal = ref(false)
   
+  const errors = reactive({
+    pan: '',
+    organization: '',
+    address: '',
+    fullName: '',
+    email: '',
+    phone: '',
+    role: '',
+    termsAccepted: ''
+  })
+  
+  const validatePAN = (value) => {
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/
+    return panRegex.test(value)
+  }
+  
+  const validateEmail = (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(value)
+  }
+  
+  const validatePhone = (value) => {
+    const phoneRegex = /^[6-9]\d{9}$/
+    return phoneRegex.test(value)
+  }
+  
+  const validateField = (field) => {
+    errors[field] = ''
+    switch (field) {
+      case 'pan':
+        if (!pan.value) errors.pan = 'PAN is required'
+        else if (!validatePAN(pan.value)) errors.pan = 'Invalid PAN format'
+        break
+      case 'organization':
+        if (!organization.value) errors.organization = 'Organization name is required'
+        break
+      case 'address':
+        if (!address.value) errors.address = 'Address is required'
+        break
+      case 'fullName':
+        if (!fullName.value) errors.fullName = 'Full name is required'
+        break
+      case 'email':
+        if (!email.value) errors.email = 'Email is required'
+        else if (!validateEmail(email.value)) errors.email = 'Invalid email format'
+        break
+      case 'phone':
+        if (phone.value && !validatePhone(phone.value)) errors.phone = 'Invalid phone number'
+        break
+      case 'role':
+        if (!role.value) errors.role = 'Role is required'
+        break
+      case 'termsAccepted':
+        if (!termsAccepted.value) errors.termsAccepted = 'You must accept the terms and conditions'
+        break
+    }
+  }
+  
+  const validateStep1 = () => {
+    validateField('pan')
+    validateField('organization')
+    validateField('address')
+    return !errors.pan && !errors.organization && !errors.address
+  }
+  
+  const validateStep2 = () => {
+    validateField('fullName')
+    validateField('email')
+    validateField('phone')
+    validateField('role')
+    validateField('termsAccepted')
+    return !errors.fullName && !errors.email && !errors.phone && !errors.role && !errors.termsAccepted
+  }
+  
   const nextStep = () => {
     if (currentStep.value === 1) {
-      if (!pan.value || !organization.value || !address.value) {
-        alert("Please fill in all the required fields in the Organization section.")
-        return
+      if (validateStep1()) {
+        currentStep.value = 2
       }
-      currentStep.value = 2
     } else {
-      showModal.value = true
-      // You can handle form data submission here if needed
+      if (validateStep2()) {
+        showModal.value = true
+      }
     }
   }
   

@@ -68,7 +68,7 @@ const sections = [
               </p>
             </div>
 
-            <img src="../assets/assessiment.png" alt="Person writing on paper"
+            <img src="../../public/assessiment.png" alt="Person writing on paper"
               class="w-full h-48 sm:h-64 object-cover rounded-lg mb-6" />
 
             <div class="mb-6">
@@ -161,17 +161,17 @@ const sections = [
 
         <!-- Sidebar -->
         <div class="lg:w-1/4 space-y-6">
-          <div class="bg-[#CA2247] text-white p-6 rounded-lg shadow-md">
+          <div class="bg-[#CA2247] text-white p-5 rounded-lg shadow-md">
             <h2 class="text-xl font-bold mb-4">Ready to take the survey?</h2>
             <button @click="showPopup = true"
-              class="w-full bg-white text-[#CA2247] font-semibold py-2 px-4 rounded hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#CA2247] focus:ring-white">
+              class=" bg-white text-[#CA2247]  p-1.5 px-3  rounded hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#CA2247] focus:ring-white">
               START ASSESSMENT
             </button>
           </div>
           <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="bg-red-600 text-white p-4">
+            <div class="bg-[#CA2247] text-white p-4">
               <h2 class="text-xl font-bold mb-2">Check your score here</h2>
-              <button class="bg-white text-red-600 px-4 py-2 rounded font-semibold hover:bg-red-100 transition-colors">
+              <button class="bg-white text-red-600 px-4 py-2 rounded  hover:bg-red-100 transition-colors">
                 DOWNLOAD REPORT CARD
               </button>
             </div>
@@ -245,11 +245,11 @@ const sections = [
 
           <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
             <button
-              class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500">
+              class="bg-white border hover:bg-gray-400 text-gray-800 p-1 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500">
               SAVE AS DRAFT
             </button>
             <button
-              class="bg-[#CA2247] hover:bg-[#A61C39] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-[#CA2247]">
+              class="bg-[#CA2247] hover:bg-[#A61C39] text-white  px-4 rounded focus:outline-none focus:ring-2 focus:ring-[#CA2247]">
               SAVE & NEXT
             </button>
           </div>
