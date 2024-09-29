@@ -45,7 +45,7 @@
                 laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
                 beatae vitae dicta sunt explicabo.
               </p>
-              <h2 class="text-gray-800 mt-8 mb-4">
+              <h2 class=" text-sm text-gray-800 mt-8 mb-4">
                 Survey Impact: Why Your Participation Matters
               </h2>
               <ol class="list-decimal pl-5 space-y-4">
@@ -170,11 +170,11 @@
           </div>
 
           <div class="mb-6">
-            <div class="flex space-x-2 mb-6 overflow-x-auto pb-2">
+            <div class="flex space-x-2 mb-6  border-b overflow-x-auto ">
               <button v-for="section in ['A', 'B', 'C', 'D', 'E']" :key="section" @click="currentSection = section"
                 :class="[
-                  'px-4 py-2 rounded-full text-sm font-medium focus:outline-none transition-colors duration-200',
-                  currentSection === section ? 'bg-[#CA2247] text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  'px-4 py-2 text-sm font-medium focus:outline-none transition-colors duration-200',
+                  currentSection === section ? ' border-b-2  border-[#CA2247] text-gray-900' : 'text-gray-500 hover:text-gray-700'
                 ]">
                 Section {{ section }}
               </button>
