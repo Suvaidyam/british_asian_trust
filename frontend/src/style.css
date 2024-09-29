@@ -1,27 +1,16 @@
+/* Tailwind Base, Components, and Utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.bg-main-img {
-  background-image: url('./assets/main_bg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.bg-main-user {
-  background-image: url('./assets/main_bg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
-
-
-
+/* Scrollbar Styling */
 /* Hide scrollbars initially */
 .master::-webkit-scrollbar {
   display: none;
 }
 
-/* General scrollbar styling */
+/* General Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 6px; /* Set the width of the scrollbar */
   height: 6px; /* Set the height of the horizontal scrollbar */
@@ -43,7 +32,7 @@
   background: #555; /* Darken the handle on hover */
 }
 
-/* Horizontal scrollbar styling */
+/* Horizontal Scrollbar Specific Styling */
 ::-webkit-scrollbar-horizontal {
   height: 6px; /* Set the height of the horizontal scrollbar */
 }
@@ -60,32 +49,71 @@
 ::-webkit-scrollbar-thumb-piece:hover {
   background: #555; /* Darken the handle on hover */
 }
-  
 
-
-:root{
+/* Global Styling */
+/* Root Styling */
+:root {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
   /* background: #CA2247; */
- 
 }
 
-h1{
+/* Typography */
+h1 {
   font-family: sans-serif;
 }
 
-p{
+h2 {
+  font-family: sans-serif;
+  font-size: 20px;
+  height: 22px;
+}
+
+p {
   font-family: sans-serif;
   font-size: 12.5px;
-  
 }
-label{
+
+label {
   font-size: 14px;
   font-weight: 400;
   font-family: sans-serif;
 }
 
-button{
+button {
   font-size: 16px;
   font-weight: 400;
   font-family: sans-serif;
+}
+
+/* Background Image Classes */
+.bg-main-img {
+  background-image: url("../public/main-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-main-user {
+  background-image: url("../public/main-bg-user.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-thankyou {
+  background-image: url("../public/thankyou.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-my-user {
+  background-image: url("../public/myuser-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-assessment {
+  background-image: url("../public/assessiment-btn.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

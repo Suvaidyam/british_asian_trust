@@ -51,13 +51,13 @@
               <!-- Step 1: Organization Details -->
               <div v-if="currentStep === 1" class="flex flex-col gap-4">
                 <div>
-                  <label for="pan" class="block mb-1">Organization PAN Number</label>
+                  <label for="pan" class="block mb-1 ">Organization PAN Number</label>
                   <input
                     type="text"
                     id="pan"
                     v-model="pan"
                     @input="validateField('pan')"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                    class="mt-1 block w-full border  border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     placeholder="Enter PAN number"
                   >
                   <p v-if="errors.pan" class="text-red-500 text-sm mt-1">{{ errors.pan }}</p>
@@ -182,7 +182,7 @@
               v-if="showModal"
               class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
             >
-              <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center">
+              <div class="bg-white bg-thankyou p-6 rounded-lg shadow-lg max-w-md w-full text-center">
                 <!-- Icon section -->
                 <div class="flex justify-center mb-4">
                   <div class="w-[60px] h-[60px] bg-[#E6F5FB] flex items-center justify-center rounded-full">
