@@ -10,6 +10,7 @@ class BATUsers(Document):
 		if not frappe.db.exists("User", self.email_address):
 			new_user = frappe.new_doc("User")
 			new_user.email = self.email_address
+			new_user.role_profile_name = "Admin" if self.is_primary_user else "Member"
 			if len(self.full_name.split(" ")) > 2:
 				new_user.first_name = self.full_name.split(" ")[0]
 				new_user.middle_name = self.full_name.split(" ")[1]

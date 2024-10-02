@@ -28,14 +28,14 @@ const routes = [
   {
 
     path: "/myuser",
-    name: "Myuser",
+    name: "MyUser",
     component: Myuser,
   },
 ];
 
 const router = createRouter({
-  base: "/frontend/",
-  history: createWebHistory(),
+  base: "/bat",
+  history: createWebHistory('/bat'),
   routes,
 });
 

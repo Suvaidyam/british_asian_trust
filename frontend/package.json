@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build --base=/assets/british_asian_trust/frontend/ && yarn copy-html-entry",
     "preview": "vite preview",
-    "copy-html-entry": "cp ../british_asian_trust/public/frontend/index.html ../british_asian_trust/www/frontend.html"
+    "copy-html-entry": "cp ../british_asian_trust/public/frontend/index.html ../british_asian_trust/www/bat.html"
   },
   "dependencies": {
     "lucide-vue-next": "^0.446.0",
