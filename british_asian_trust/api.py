@@ -2,10 +2,10 @@ import frappe
 from frappe import _
 
 @frappe.whitelist(allow_guest=True)
-def register_organization( pan , email, organization_name, role_in_organization, organization_address, organization_phone ,full_name):
+def register_organization( pan , email, organization_name, role_in_organization, organization_address, organization_phone ,full_name ,termsAccepted):
     # Validate mandatory fields
-    if not all([ pan ,email, organization_name, role_in_organization, organization_address, organization_phone ,full_name]):
-        return _("Missing required fields: email, organization_name, role_in_organization, organization_address, organization_phone")
+    if not all([ pan ,email, organization_name, role_in_organization, organization_address, organization_phone ,full_name ,termsAccepted]):
+        return _("Missing required fields: email, organization_name, role_in_organization, organization_address, organization_phone ,termsAccepted")
 
     # Validate if the organization already exists
     if frappe.db.exists("Organization", {"pan_number": pan}):
@@ -25,7 +25,8 @@ def register_organization( pan , email, organization_name, role_in_organization,
             "full_name": full_name,
             "email_address": email,
             "phone_number": organization_phone,
-            "role_in_organization": role_in_organization
+            "role_in_organization": role_in_organization,
+            "concent_check": termsAccepted  
         })
         organization.insert(ignore_permissions=True)
         frappe.db.commit()
@@ -45,3 +46,9 @@ def register_organization( pan , email, organization_name, role_in_organization,
     except Exception as e:
         frappe.log_error(frappe.get_traceback(), _("Failed to register organization"))
         return _("An error occurred during registration: {0}").format(str(e))
+
+
+@frappe.whitelist(allow_guest=True)
+def get_designations():
+    print("get_designations"*100)
+    return frappe.get_all("Designation", fields=["*"])
