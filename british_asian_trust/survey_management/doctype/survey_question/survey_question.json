@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SU-Q-{####}",
+ "creation": "2024-10-04 17:20:15.668434",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "survey",
+  "question_text",
+  "question_type",
+  "options",
+  "required"
+ ],
+ "fields": [
+  {
+   "fieldname": "survey",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Survey",
+   "options": "Survey",
+   "reqd": 1
+  },
+  {
+   "fieldname": "question_text",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Question Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "question_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Question Type",
+   "options": "MCQ\nText\nScale\nMatrix",
+   "reqd": 1
+  },
+  {
+   "fieldname": "options",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Options",
+   "options": "MCQ Option",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "required",
+   "fieldtype": "Check",
+   "label": "Required"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-10-04 17:52:23.448551",
+ "modified_by": "Administrator",
+ "module": "Survey Management",
+ "name": "Survey Question",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

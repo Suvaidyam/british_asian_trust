@@ -99,12 +99,8 @@
               </div>
               <div>
                 <label for="designation" class="block text-[14px] leading-[18.34px] font-sans mb-1">Designation</label>
-                <select
-                  v-model="selectedDesignation"
-                  id="designation"
-                  @change="validateField('designation')"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                >
+                <select v-model="selectedDesignation" id="designation" @change="validateField('designation')"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
                   <option value="" disabled>Select a designation</option>
                   <option v-for="d in designations" :key="d.name" :value="d.name">
                     {{ d.name }}
@@ -179,26 +175,12 @@
       </div>
     </div>
 
-    <!-- Toast Notification -->
-    <transition name="toast">
-      <div v-if="showToast" 
-           :class="[
-             'fixed top-4 right-4 px-4 py-2 rounded-md shadow-lg text-white',
-             {
-               'bg-green-500': toastType === 'success',
-               'bg-red-500': toastType === 'error',
-               'bg-blue-500': toastType === 'info'
-             }
-           ]">
-        {{ toastMessage }}
-      </div>
-    </transition>
+  
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, inject, onMounted } from 'vue'
-
 const currentStep = ref(1)
 const pan = ref('')
 const organization = ref('')
@@ -212,10 +194,6 @@ const termsAccepted = ref(false)
 const showModal = ref(false)
 const call = inject('$call')
 
-// Toast notification
-const showToast = ref(false)
-const toastMessage = ref('')
-const toastType = ref('info')
 
 const errors = reactive({
   pan: '',
@@ -291,21 +269,13 @@ const validateStep2 = () => {
   return !errors.fullName && !errors.email && !errors.phone && !errors.designation && !errors.termsAccepted
 }
 
-const showToastNotification = (message, type = 'info') => {
-  toastMessage.value = message
-  toastType.value = type
-  showToast.value = true
-  setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
 
 const nextStep = async () => {
   if (currentStep.value === 1) {
     if (validateStep1()) {
       currentStep.value = 2;
     } else {
-      showToastNotification('Please fill in all required fields correctly.', 'error');
+      console.log('Please fill in all required fields correctly.', 'error');
     }
   } else {
     if (validateStep2()) {
@@ -321,14 +291,14 @@ const nextStep = async () => {
           termsAccepted: termsAccepted.value,
         });
         showModal.value = true;
-        showToastNotification('Registration successful!', 'success');
+        console.log('Registration successful!', 'success');
         console.log('Success:', result);
       } catch (error) {
         console.error('API Error:', error);
-        showToastNotification('An error occurred during registration. Please try again.', 'error');
+        console.log('An error occurred during registration. Please try again.', 'error');
       }
     } else {
-      showToastNotification('Please fill in all required fields correctly.', 'error');
+      console.log('Please fill in all required fields correctly.', 'error');
     }
   }
 };
@@ -340,7 +310,7 @@ const fetchDesignations = async () => {
     designations.value = result;
   } catch (error) {
     console.error('Failed to fetch designations:', error);
-    showToastNotification('Failed to load designations. Please refresh the page.', 'error');
+    console.log('Failed to load designations. Please refresh the page.', 'error');
   }
 };
 
@@ -358,13 +328,5 @@ const closeModal = () => {
 </script>
 
 <style scoped>
-.toast-enter-active,
-.toast-leave-active {
-  transition: opacity 0.5s, transform 0.5s;
-}
-.toast-enter-from,
-.toast-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
+/* Your component styles */
 </style>

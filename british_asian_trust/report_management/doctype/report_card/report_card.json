@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:REP-CA-{####}",
+ "creation": "2024-10-04 17:59:14.063249",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "survey",
+  "respondent",
+  "overall_score",
+  "section_wise_scores",
+  "strengths"
+ ],
+ "fields": [
+  {
+   "fieldname": "survey",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Survey",
+   "options": "Survey",
+   "reqd": 1
+  },
+  {
+   "fieldname": "respondent",
+   "fieldtype": "Link",
+   "label": "Respondent",
+   "options": "Respondent",
+   "reqd": 1
+  },
+  {
+   "fieldname": "overall_score",
+   "fieldtype": "Float",
+   "label": "Overall Score"
+  },
+  {
+   "fieldname": "section_wise_scores",
+   "fieldtype": "Data",
+   "label": "Section Wise Scores"
+  },
+  {
+   "fieldname": "strengths",
+   "fieldtype": "Data",
+   "label": "Strengths"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-04 18:03:07.838512",
+ "modified_by": "Administrator",
+ "module": "Report Management",
+ "name": "Report Card",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
