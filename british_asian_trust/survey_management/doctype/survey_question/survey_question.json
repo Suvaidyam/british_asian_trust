@@ -6,21 +6,12 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "survey",
   "question_text",
   "question_type",
   "options",
   "required"
  ],
  "fields": [
-  {
-   "fieldname": "survey",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Survey",
-   "options": "Survey",
-   "reqd": 1
-  },
   {
    "fieldname": "question_text",
    "fieldtype": "Small Text",
@@ -33,16 +24,16 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Question Type",
-   "options": "MCQ\nText\nScale\nMatrix",
+   "options": "\nMCQ\nText\nScale\nMatrix",
    "reqd": 1
   },
   {
+   "depends_on": "eval:doc.question_type == \"MCQ\"",
    "fieldname": "options",
-   "fieldtype": "Link",
-   "in_list_view": 1,
+   "fieldtype": "Table",
    "label": "Options",
-   "options": "MCQ Option",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.question_type == \"MCQ\"",
+   "options": "MCQ Option"
   },
   {
    "default": "0",
@@ -52,15 +43,27 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "istable": 1,
  "links": [],
- "modified": "2024-10-04 17:52:23.448551",
+ "modified": "2024-10-07 12:51:25.933610",
  "modified_by": "Administrator",
  "module": "Survey Management",
  "name": "Survey Question",
  "naming_rule": "Expression",
  "owner": "Administrator",
- "permissions": [],
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

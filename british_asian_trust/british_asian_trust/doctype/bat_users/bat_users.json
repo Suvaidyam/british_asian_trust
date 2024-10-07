@@ -34,7 +34,7 @@
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
-   "options": "Designation",
+   "options": "Role Profile",
    "reqd": 1
   },
   {
@@ -59,7 +59,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-25 17:33:46.945819",
+ "modified": "2024-10-07 16:11:59.449876",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "BAT Users",

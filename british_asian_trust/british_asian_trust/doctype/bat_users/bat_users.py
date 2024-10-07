@@ -10,7 +10,7 @@ class BATUsers(Document):
 		if not frappe.db.exists("User", self.email_address):
 			new_user = frappe.new_doc("User")
 			new_user.email = self.email_address
-			new_user.role_profile_name = "Admin" if self.is_primary_user else "Member"
+			new_user.role_profile_name = "Admin" 
 			if len(self.full_name.split(" ")) > 2:
 				new_user.first_name = self.full_name.split(" ")[0]
 				new_user.middle_name = self.full_name.split(" ")[1]
@@ -36,3 +36,7 @@ class BATUsers(Document):
 			existing_user.mobile_no = self.mobile_number
 			existing_user.save(ignore_permissions=True)
 
+	def on_trash(self):
+		if frappe.db.exists("User", self.email_address):
+			user = frappe.get_doc("User", self.email_address)
+			user.delete(ignore_permissions=True)

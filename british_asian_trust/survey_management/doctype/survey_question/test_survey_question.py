@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestDesignation(FrappeTestCase):
+class TestSurveyQuestion(FrappeTestCase):
 	pass
