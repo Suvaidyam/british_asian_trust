@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class Designation(Document):
+class SurveyQuestionChild(Document):
 	pass

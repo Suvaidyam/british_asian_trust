@@ -1,14 +1,12 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:SU-RE-{###}",
- "creation": "2024-10-04 17:53:20.767319",
+ "creation": "2024-10-07 12:44:04.790029",
  "doctype": "DocType",
+ "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "question",
-  "response",
-  "response_date"
+  "question"
  ],
  "fields": [
   {
@@ -18,27 +16,15 @@
    "label": "Question",
    "options": "Survey Question",
    "reqd": 1
-  },
-  {
-   "fieldname": "response",
-   "fieldtype": "Small Text",
-   "label": "Response"
-  },
-  {
-   "fieldname": "response_date",
-   "fieldtype": "Datetime",
-   "label": "Response Date",
-   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-10-07 12:58:43.361100",
+ "modified": "2024-10-07 12:44:38.183673",
  "modified_by": "Administrator",
- "module": "Respondent Management",
- "name": "Survey Response",
- "naming_rule": "Expression",
+ "module": "Survey Management",
+ "name": "Survey Question Child",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

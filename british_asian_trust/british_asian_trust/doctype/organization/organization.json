@@ -72,7 +72,7 @@
    "fieldname": "role_in_organization",
    "fieldtype": "Link",
    "label": "Role In Organization",
-   "options": "Designation",
+   "options": "Role Profile",
    "reqd": 1
   },
   {
@@ -84,7 +84,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-02 10:38:41.364651",
+ "modified": "2024-10-07 11:37:52.582683",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "Organization",

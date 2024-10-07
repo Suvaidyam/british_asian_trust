@@ -15,8 +15,7 @@
   "start_date",
   "end_date",
   "section_break_nbeg",
-  "questions",
-  "respondents"
+  "questions"
  ],
  "fields": [
   {
@@ -69,14 +68,8 @@
    "fieldname": "questions",
    "fieldtype": "Table",
    "label": "Questions",
-   "options": "Survey Question",
+   "options": "Survey Question Child",
    "reqd": 1
-  },
-  {
-   "fieldname": "respondents",
-   "fieldtype": "Table",
-   "label": "Respondents",
-   "options": "Respondent"
   },
   {
    "fieldname": "column_break_xhfq",
@@ -89,7 +82,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-04 18:05:25.822617",
+ "modified": "2024-10-07 12:56:44.161786",
  "modified_by": "Administrator",
  "module": "Survey Management",
  "name": "Survey",
