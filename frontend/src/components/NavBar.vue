@@ -75,8 +75,8 @@
         <div class="md:hidden">
           <button @click="toggleMobileMenu" type="button"
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-            aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
+            aria-controls="mobile-menu" :aria-expanded="isMobileMenuOpen">
+            <span class="sr-only">{{ isMobileMenuOpen ? 'Close main menu' : 'Open main menu' }}</span>
             <MenuIcon v-if="!isMobileMenuOpen" class="block h-6 w-6" aria-hidden="true" />
             <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </button>
@@ -84,28 +84,40 @@
       </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75"
-      leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-      <div v-if="isMobileMenuOpen" class="md:hidden" id="mobile-menu">
+    <!-- Mobile Menu (Slide from right) -->
+    <transition
+      enter-active-class="transition ease-out duration-300 transform"
+      enter-from-class="translate-x-full"
+      enter-to-class="translate-x-0"
+      leave-active-class="transition ease-in duration-300 transform"
+      leave-from-class="translate-x-0"
+      leave-to-class="translate-x-full"
+    >
+      <div v-if="isMobileMenuOpen" 
+           class="md:hidden fixed top-0 right-0 bottom-0 w-64 bg-gray-900 shadow-lg z-50 overflow-y-auto"
+           id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <button v-if="currentRoute === '/login'" @click="$router.push({ name: 'Register' })"
+          <button @click="closeMobileMenu" 
+                  class="absolute top-4 right-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  aria-label="Close menu">
+            <XIcon class="h-6 w-6" aria-hidden="true" />
+          </button>
+          <button v-if="currentRoute === '/login'" @click="$router.push({ name: 'Register' }); closeMobileMenu();"
             class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-yellow-400 hover:text-yellow-300 hover:bg-gray-700 transition-colors duration-200">
             REGISTER AS A NGO
           </button>
-          <button v-if="currentRoute === '/register'" @click="$router.push({ name: 'Login' })"
+          <button v-if="currentRoute === '/register'" @click="$router.push({ name: 'Login' }); closeMobileMenu();"
             class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-yellow-400 hover:text-yellow-300 hover:bg-gray-700 transition-colors duration-200">
             LOGIN
           </button>
           <template v-if="$auth.isLoggedIn">
-            <a href="/"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-            <a href="/assessment"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Assessments</a>
-            <a href="/myuser"
+            <router-link :to="{ name: 'Home' }" @click="closeMobileMenu"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</router-link>
+            <router-link :to="{ name: 'Assessment' }" @click="closeMobileMenu"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Assessments</router-link>
+            <router-link :to="{ name: 'MyUser' }" @click="closeMobileMenu"
               class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">My
-              Users</a>
+              Users</router-link>
           </template>
         </div>
         <div v-if="$auth.isLoggedIn" class="pt-4 pb-3 border-t border-gray-700">
@@ -124,12 +136,12 @@
             </button>
           </div>
           <div class="mt-3 px-2 space-y-1">
-            <a href="#"
+            <a href="#" @click="closeMobileMenu"
               class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Your
               Profile</a>
-            <a href="#"
+            <a href="#" @click="closeMobileMenu"
               class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Settings</a>
-            <a href="#" @click="$auth.logout()"
+            <a href="#" @click="$auth.logout(); closeMobileMenu();"
               class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Log
               out</a>
           </div>
@@ -165,6 +177,10 @@ const toggleDropdown = () => {
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
 }
 
 defineOptions({

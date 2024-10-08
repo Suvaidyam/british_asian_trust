@@ -7,12 +7,15 @@ import resourceManager from "./doppio/resourceManager";
 import call from "./doppio/controllers/call";
 import socket from "./doppio/controllers/socket";
 import Auth from "./doppio/controllers/auth";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 const app = createApp(App);
 const auth = reactive(new Auth());
 
 // Plugins
 app.use(router);
+app.use(Toast)
 app.use(resourceManager);
 
 // Global Properties,

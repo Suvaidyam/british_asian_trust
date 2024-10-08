@@ -174,13 +174,13 @@
           class="absolute inset-0 w-full h-full object-cover">
       </div>
     </div>
-
-  
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, inject, onMounted } from 'vue'
+import { useToast } from 'vue-toastification'
+
 const currentStep = ref(1)
 const pan = ref('')
 const organization = ref('')
@@ -193,7 +193,7 @@ const selectedDesignation = ref('')
 const termsAccepted = ref(false)
 const showModal = ref(false)
 const call = inject('$call')
-
+const toast = useToast()
 
 const errors = reactive({
   pan: '',
@@ -226,7 +226,7 @@ const validateField = (field) => {
   switch (field) {
     case 'pan':
       if (!pan.value) errors.pan = 'PAN is required'
-      else if (!validatePAN(pan.value)) errors.pan = 'Invalid PAN format'
+      else if (!validatePAN(pan.value)) errors.pan = 'Invalid  PAN format'
       break
     case 'organization':
       if (!organization.value) errors.organization = 'Organization name is required'
@@ -269,13 +269,39 @@ const validateStep2 = () => {
   return !errors.fullName && !errors.email && !errors.phone && !errors.designation && !errors.termsAccepted
 }
 
-
 const nextStep = async () => {
   if (currentStep.value === 1) {
     if (validateStep1()) {
       currentStep.value = 2;
+      toast.success("Step 1 completed successfully!", {
+        position: "top-right",
+        timeout: 3000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false
+      });
     } else {
-      console.log('Please fill in all required fields correctly.', 'error');
+      toast.error('Please fill in all required fields correctly.', {
+        position: "top-right",
+        timeout: 3000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false
+      });
     }
   } else {
     if (validateStep2()) {
@@ -291,14 +317,53 @@ const nextStep = async () => {
           termsAccepted: termsAccepted.value,
         });
         showModal.value = true;
-        console.log('Registration successful!', 'success');
+        toast.success('Registration successful!', {
+          position: "top-right",
+          timeout: 3000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false
+        });
         console.log('Success:', result);
       } catch (error) {
         console.error('API Error:', error);
-        console.log('An error occurred during registration. Please try again.', 'error');
+        toast.error('An error occurred during registration. Please try again.', {
+          position: "top-right",
+          timeout: 3000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false
+        });
       }
     } else {
-      console.log('Please fill in all required fields correctly.', 'error');
+      toast.error('Please fill in all required fields correctly.', {
+        position: "top-right",
+        timeout: 3000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false
+      });
     }
   }
 };
@@ -310,7 +375,20 @@ const fetchDesignations = async () => {
     designations.value = result;
   } catch (error) {
     console.error('Failed to fetch designations:', error);
-    console.log('Failed to load designations. Please refresh the page.', 'error');
+    toast.error('Failed to load designations. Please refresh the page.', {
+      position: "top-right",
+      timeout: 3000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false
+    });
   }
 };
 

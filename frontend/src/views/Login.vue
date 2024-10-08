@@ -67,6 +67,7 @@
   import { ref, reactive, computed } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import { inject } from 'vue'
+  import { useToast } from 'vue-toastification'
   
   const email = ref('')
   const password = ref('')
@@ -79,6 +80,7 @@
   const $auth = inject('$auth')
   const router = useRouter()
   const route = useRoute()
+  const toast = useToast()
   
   const validateEmail = (value) => {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -108,9 +110,40 @@
 	validateField('password')
 	
 	if (isFormValid.value) {
-	  let res = await $auth.login(email.value, password.value)
-	  if (res) {
-		router.push({ name: 'Home' })
+	  try {
+		let res = await $auth.login(email.value, password.value)
+		if (res) {
+		  toast.success("Login successful!", {
+			position: "top-right",
+			timeout: 5000,
+			closeOnClick: true,
+			pauseOnFocusLoss: true,
+			pauseOnHover: true,
+			draggable: true,
+			draggablePercent: 0.6,
+			showCloseButtonOnHover: false,
+			hideProgressBar: true,
+			closeButton: "button",
+			icon: true,
+			rtl: false
+		  })
+		  router.push({ name: 'Home' })
+		}
+	  } catch (error) {
+		toast.error("Login failed. Please check your credentials and try again.", {
+		  position: "top-right",
+		  timeout: 5000,
+		  closeOnClick: true,
+		  pauseOnFocusLoss: true,
+		  pauseOnHover: true,
+		  draggable: true,
+		  draggablePercent: 0.6,
+		  showCloseButtonOnHover: false,
+		  hideProgressBar: true,
+		  closeButton: "button",
+		  icon: true,
+		  rtl: false
+		})
 	  }
 	}
   }
