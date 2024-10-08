@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-100 px-16 py-4">
+  <div class="min-h-screen bg-gray-100 px-8 sm:px-16 py-4">
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
       <!-- Header -->
       <div class="p-4 flex flex-col md:flex-row justify-between items-center border-b">
@@ -60,12 +60,11 @@
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="(user, index) in filteredUsers" :key="user.id">
-                <td class="px-6 py-3 whitespace-nowrap">
+              <tr v-for="(user, index) in paginatedUsers" :key="user.id">
+                <td class="px-6 py-2 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" :src="user.avatar || '../../public/user.png'"
-                        :alt="user.name" />
+                      <img class="h-10 w-10 rounded-full" :src="user.avatar" :alt="user.name" />
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
@@ -79,12 +78,15 @@
                   <div class="text-sm text-gray-900">{{ user.role }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <span class="text-gray-900">{{ index + 1 }}</span>
+                  <span class="text-gray-900">{{ (currentPage - 1) * itemsPerPage + index + 1 }}</span>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <Pagination :current-page="currentPage" :total-items="filteredUsers.length" :items-per-page="itemsPerPage"
+          :max-visible-pages="5" @page-change="onPageChange" />
       </div>
     </div>
 
@@ -153,10 +155,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, inject } from 'vue'
+import { ref, computed, onMounted, inject, watch } from 'vue'
 import { AwardIcon, XIcon } from 'lucide-vue-next'
+import Pagination from '../components/Pagnation.vue'
+import { useToast } from 'vue-toastification'
 
 const call = inject('$call')
+const toast = useToast()
 const users = ref([])
 const showModal = ref(false)
 const searchQuery = ref('')
@@ -174,10 +179,22 @@ const errors = ref({
   mobile: ''
 })
 
+const currentPage = ref(1)
+const itemsPerPage = ref(10)
+const totalPages = ref(0) 
+
+
 const filteredUsers = computed(() => {
   return users.value.filter(user =>
     user.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
+})
+
+
+const paginatedUsers = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+  return filteredUsers.value.slice(start, end)
 })
 
 const isFormValid = computed(() => {
@@ -235,6 +252,20 @@ const validateMobile = () => {
 
 const sendInvitation = async () => {
   if (!isFormValid.value) {
+    toast.error('Please fill in all required fields correctly.', {
+      position: "top-right",
+      timeout: 3000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false
+    })
     return
   }
 
@@ -245,24 +276,62 @@ const sendInvitation = async () => {
       mobile_number: newUser.value.mobile,
       designation: newUser.value.designation.name,
     })
-    console.log('Registration successful!', 'success')
+    toast.success('User invitation sent successfully!', {
+      position: "top-right",
+      timeout: 3000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false
+    })
     console.log('Success:', result)
     await fetchUsers()
     closeModal()
   } catch (error) {
     console.error('API Error:', error)
-    alert('An error occurred during registration. Please try again.')
+    toast.error('An error occurred during registration. Please try again.', {
+      position: "top-right",
+      timeout: 3000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false
+    })
   }
 }
 
 const fetchDesignations = async () => {
   try {
     const result = await call('british_asian_trust.api.get_designations')
-    // console.log('Designations:', result);
     designations.value = result
   } catch (error) {
     console.error('Failed to fetch designations:', error)
-    alert('Failed to load designations. Please refresh the page.')
+    toast.error('Failed to load designations. Please refresh the page.', {
+      position: "top-right",
+      timeout: 3000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false
+    })
   }
 }
 
@@ -276,11 +345,33 @@ const fetchUsers = async () => {
       role: user.designation,
       avatar: user.avatar || '../../public/user.png'
     }))
+    totalPages.value = Math.ceil(users.value.length / itemsPerPage.value)
   } catch (error) {
     console.error('Failed to fetch users:', error)
-    alert('Failed to load users. Please refresh the page.')
+    toast.error('Failed to load users. Please refresh the page.', {
+      position: "top-right",
+      timeout: 3000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false
+    })
   }
 }
+
+const onPageChange = (page) => {
+  currentPage.value = page
+}
+
+watch(searchQuery, () => {
+  currentPage.value = 1
+})
 
 onMounted(() => {
   fetchDesignations()
