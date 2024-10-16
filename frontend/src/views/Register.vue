@@ -4,7 +4,7 @@
       <!-- Registration Form Section -->
       <div class="w-full lg:w-1/2 flex items-center justify-center lg:justify-start relative z-10 py-12 lg:py-6">
         <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-          <h2 class="text-center font-semibold font-sans text-[#212529] mb-2">
+          <h2 class="text-center font-semibold font-sans text-[#212529] mb-10 sm:mb-2">
             Welcome to British Asian Trust Portal
           </h2>
           <p class="text-center text-[#212529] mb-6">
