@@ -3,16 +3,19 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="mb-6 bg-[#F2E6D4]  bg-main-img bg-cover bg-center rounded-lg shadow-md overflow-hidden">
         <div class="p-4 sm:p-6 lg:p-8 text-center">
-          <h1 class="text-2xl sm:text-3xl lg:text-4xl mb-4 text-gray-800">Welcome, Abhinav! Ready to make an impact?</h1>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl mb-4 text-gray-800">Welcome, Abhinav! Ready to make an impact?
+          </h1>
           <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <a href="/assessment" class="inline-flex items-center justify-center bg-[#CA2247] hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+            <router-link :to="{ name: 'Assessment' }"
+              class="inline-flex items-center justify-center bg-[#CA2247] hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
               <BellIcon class="h-5 w-5 mr-2" />
               <button class="text-sm">FILL OUT YOUR SURVEY</button>
-            </a>
-            <a href="/myuser" class="inline-flex items-center justify-center bg-transparent text-[#CA2247] font-semibold py-2 px-4 border border-[#CA2247] rounded shadow hover:bg-[#CA2247] hover:text-white transition duration-300 ease-in-out">
+            </router-link>
+            <router-link :to="{ name: 'MyUser' }"
+              class="inline-flex items-center justify-center bg-transparent text-[#CA2247] font-semibold py-2 px-4 border border-[#CA2247] rounded shadow hover:bg-[#CA2247] hover:text-white transition duration-300 ease-in-out">
               <UsersIcon class="h-5 w-5 mr-2" />
               <button class="text-sm">INVITE USERS TO JOIN</button>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -26,7 +29,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div v-for="announcement in announcements" :key="announcement.id"
                 class="border rounded-lg shadow-sm p-2 flex items-start space-x-3 hover:shadow-md transition duration-300 ease-in-out">
-                <img :src="announcement.image" :alt="announcement.title" class="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
+                <img :src="announcement.image" :alt="announcement.title"
+                  class="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
                 <div>
                   <p class="">{{ announcement.title }}</p>
                   <p class="text-xs text-gray-500">{{ announcement.date }}</p>
@@ -40,7 +44,9 @@
         <div class="w-full lg:w-1/4 bg-main-user rounded-xl p-4 shadow-md">
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold">Users</h2>
-            <a href="/myuser" class="text-sm text-gray-600 hover:text-[#CA2247] transition duration-300 ease-in-out">View All</a>
+            <router-link :to="{ name: 'MyUser' }"
+              class="text-sm text-gray-600 hover:text-[#CA2247] transition duration-300 ease-in-out">View
+              All</router-link>
           </div>
 
           <!-- Main User (Crowned User) -->
@@ -129,7 +135,7 @@ const announcements = ref([
     title: "New partnership announcement: We're collaborating with local schools to promote education initiatives.",
     date: 'July 2023'
   },
- 
+
 ])
 
 const users = ref([
@@ -160,5 +166,4 @@ const topUsers = ref([
 
 <style scoped>
 /* Custom scrollbar styles */
-
 </style>
