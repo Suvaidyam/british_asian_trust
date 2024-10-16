@@ -3,9 +3,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[60px]">
         <div class="flex items-center justify-between">
+         <router-link :to="{ name: 'Home' }">
           <div class="flex-shrink-0">
             <img class="h-7 w-auto" src="../../public/logo.png" alt="Logo">
           </div>
+          </router-link>
         </div>
 
         <div class="hidden md:block">
