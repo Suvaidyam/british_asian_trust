@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[60px]">
         <div class="flex items-center justify-between">
-         <router-link :to="{ name: 'Home' }">
-          <div class="flex-shrink-0">
-            <img class="h-7 w-auto" src="../../public/logo.png" alt="Logo">
-          </div>
+          <router-link :to="{ name: 'Home' }">
+            <div class="flex-shrink-0">
+              <img class="h-7 w-auto" src="../../public/logo.png" alt="Logo">
+            </div>
           </router-link>
         </div>
 
@@ -48,7 +48,7 @@
                     class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                     id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" src="../../public/user.png" alt="User avatar">
+                    <img class="h-8 w-8 rounded-full" :src="$auth?.cookie?.user_image" alt="User avatar">
                   </button>
                   <p class="text-sm text-gray-300">{{ $auth?.cookie?.full_name }}</p>
                 </div>
@@ -61,10 +61,7 @@
                   <div v-if="isDropdownOpen"
                     class="origin-top-right absolute right-0 mt-2 w-48 z-50 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
-                      Profile</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem">Settings</a>
+                    <a href="#" @click.prevent="toggleProfileSlider" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
                     <a href="#" @click="$auth.logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem">Log out</a>
                   </div>
@@ -125,7 +122,7 @@
         <div v-if="$auth.isLoggedIn" class="pt-4 pb-3 border-t border-gray-700">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="../../public/user.png" alt="User avatar">
+              <img class="h-10 w-10 rounded-full" :src="$auth?.cookie?.user_image" alt="User avatar">
             </div>
             <div class="ml-3">
               <div class="text-base font-medium leading-none text-white">{{ $auth?.cookie?.full_name }}</div>
@@ -138,7 +135,7 @@
             </button>
           </div>
           <div class="mt-3 px-2 space-y-1">
-            <a href="#" @click="closeMobileMenu"
+            <a href="#" @click="toggleProfileSlider(); closeMobileMenu();"
               class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Your
               Profile</a>
             <a href="#" @click="closeMobileMenu"
@@ -151,15 +148,20 @@
       </div>
     </transition>
   </nav>
+
+  <!-- User Profile Slider -->
+  <UserProfileSlider :is-open="isProfileSliderOpen" @close="closeProfileSlider" />
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { BellIcon, MenuIcon, XIcon } from 'lucide-vue-next'
 import { useRoute, useRouter } from 'vue-router'
+import UserProfileSlider from './UserProfileSlider.vue'
 
 const isDropdownOpen = ref(false)
 const isMobileMenuOpen = ref(false)
+const isProfileSliderOpen = ref(false)
 const currentRoute = ref('')
 
 const route = useRoute()
@@ -184,6 +186,24 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
+
+const toggleProfileSlider = () => {
+  isProfileSliderOpen.value = !isProfileSliderOpen.value
+  isDropdownOpen.value = false
+}
+
+const closeProfileSlider = () => {
+  isProfileSliderOpen.value = false
+}
+
+// const logout = async () => {
+//   try {
+//     await $auth.logout()
+//     router.push({ name: 'Login' })
+//   } catch (error) {
+//     console.error('Logout failed:', error)
+//   }
+// }
 
 defineOptions({
   inject: ['$auth']
