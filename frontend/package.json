@@ -10,6 +10,7 @@
     "copy-html-entry": "cp ../british_asian_trust/public/frontend/index.html ../british_asian_trust/www/bat.html"
   },
   "dependencies": {
+    "firebase": "^10.14.1",
     "lucide-vue-next": "^0.446.0",
     "socket.io-client": "^4.5.1",
     "vue": "^3.4.37",
