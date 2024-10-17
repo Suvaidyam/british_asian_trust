@@ -48,7 +48,8 @@
                     class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                     id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" src="../../public/user.png" alt="User avatar">
+                    <img class="h-8 w-8 rounded-full" :src="$auth?.cookie?.user_image" alt="User avatar">
+                
                   </button>
                   <p class="text-sm text-gray-300">{{ $auth?.cookie?.full_name }}</p>
                 </div>
