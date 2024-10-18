@@ -26,7 +26,7 @@
                                         alt="User avatar" class="h-32 w-32 rounded-full mb-4" />
                                     <h3 class="text-xl font-semibold text-white mb-2">{{ $auth?.cookie?.full_name }}
                                     </h3>
-                                    <p class="text-gray-400 mb-6">{{ $auth?.cookie?.user_id}}</p>
+                                    <p class="text-gray-400 mb-6">{{ $auth}}</p>
                                 </div>
                                 <div class="space-y-6">
                                     <div>
