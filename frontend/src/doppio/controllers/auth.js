@@ -24,6 +24,9 @@ export default class Auth {
 		});
 		if (res) {
 			this.isLoggedIn = true;
+			this.user = await this.getUser(email);
+			this.cookie = {... this.user};
+			sessionStorage.setItem('user', JSON.stringify(this.user));
 			return res;
 		}
 		return false;
@@ -32,6 +35,7 @@ export default class Auth {
 	async logout() {
 		await call('logout');
 		this.isLoggedIn = false;
+		sessionStorage.removeItem('user');
 		window.location.reload();
 	}
 
@@ -39,4 +43,16 @@ export default class Auth {
 		console.log('resetting password');
 		// Implement if you want
 	}
+
+	async getUser( userId ) {
+		const result = await call('british_asian_trust.api.get_user', {	userId: userId });
+		return result;
+	}
+
+	async getUsers() {
+		const usr= sessionStorage.getItem('user');
+		return usr;
+	}
+
+
 }

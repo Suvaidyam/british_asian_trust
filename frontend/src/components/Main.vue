@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-
+      <!-- {{ $auth }} -->
       <!-- Main content -->
       <div class="flex flex-col lg:flex-row gap-6 bg-[#F6F3F2] p-6 rounded-lg">
         <!-- Announcements Section -->
@@ -83,8 +83,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { inject, onMounted, ref } from 'vue'
 import { BellIcon, UsersIcon } from 'lucide-vue-next'
+
+const $auth = inject('$auth')
 
 const announcements = ref([
   {
@@ -162,8 +164,15 @@ const topUsers = ref([
   { id: 2, name: 'Gitesh', score: 5, image: '../public/assessiment.png' },
   { id: 3, name: 'Umesh Sharma', score: 4, image: '../public/assessiment.png' },
 ])
+
+onMounted(async() => {
+  const user = await $auth.getUsers()
+  console.log(user, 'user')
+})
+
 </script>
 
+   
 <style scoped>
 /* Custom scrollbar styles */
 </style>
