@@ -50,7 +50,7 @@ export default class Auth {
 	}
 
 	async getUsers() {
-		const usr= sessionStorage.getItem('user');
+		const usr= JSON.parse(sessionStorage.getItem('user'));
 		return usr;
 	}
 
