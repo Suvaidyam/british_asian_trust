@@ -177,7 +177,7 @@ const checkUserRegistration = async () => {
   try {
     const user = await $auth.getUsers()
     if (user && user.social_logins && user.social_logins.length > 0) {
-      const frappeLogin = user.social_logins.find(login => login.provider === 'frappe')
+      const frappeLogin = user.social_logins.find(login => login.provider === "google")
       if (frappeLogin) {
         userName.value = user.full_name || 'User'
         showRegistrationPopup.value = false
