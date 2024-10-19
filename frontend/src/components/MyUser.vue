@@ -338,6 +338,7 @@ const fetchDesignations = async () => {
 const fetchUsers = async () => {
   try {
     const result = await call('british_asian_trust.api.get_bat_users')
+    // console.log('Users:', result);
     users.value = result.map(user => ({
       id: user.name,
       name: user.full_name,

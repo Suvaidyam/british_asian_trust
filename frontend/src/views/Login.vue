@@ -104,6 +104,7 @@ const errors = reactive({
 	password: ''
 })
 
+const call = inject('$call')
 const $auth = inject('$auth')
 const router = useRouter()
 const route = useRoute()
@@ -133,12 +134,15 @@ const isFormValid = computed(() => {
 })
 
 const login = async () => {
+	
+
 	validateField('email')
 	validateField('password')
 
 	if (isFormValid.value) {
 		try {
 			let res = await $auth.login(email.value, password.value)
+
 			if (res) {
 				toast.success("Login successful!", {
 					position: "top-right",
@@ -156,6 +160,7 @@ const login = async () => {
 				})
 				router.push({ name: 'Home' })
 			}
+
 		} catch (error) {
 			toast.error("Login failed. Please check your credentials and try again.", {
 				position: "top-right",
@@ -173,46 +178,10 @@ const login = async () => {
 			})
 		}
 	}
+;
 }
 
-// const loginWithGoogle = async () => {
-// 	try {
-// 		const result = await signInWithPopup(auth, googleProvider)
-// 		console.log(user,"user");
-// 		const user = result.user
-// 		toast.success(`Welcome ${user.displayName}!`, {
-// 			position: "top-right",
-// 			timeout: 5000,
-// 			closeOnClick: true,
-// 			pauseOnFocusLoss: true,
-// 			pauseOnHover: true,
-// 			draggable: true,
-// 			draggablePercent: 0.6,
-// 			hideProgressBar: true,
-// 			closeButton: "button",
-// 			icon: true
-// 		});
-// 		router.push({ name: 'Home' });
-// 	} catch (error) {
-// 		toast.error("Google login failed. Please try again.", {
-// 			position: "top-right",
-// 			timeout: 5000,
-// 			closeOnClick: true,
-// 			pauseOnFocusLoss: true,
-// 			pauseOnHover: true,
-// 			draggable: true,
-// 			draggablePercent: 0.6,
-// 			hideProgressBar: true,
-// 			closeButton: "button",
-// 			icon: true
-// 		});
-// 	}
-// }
 
-// const loginWithMicrosoft = () => {
-
-
-// }
 
 // Check for redirect route on component mount
 if (route.query.route) {

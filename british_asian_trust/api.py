@@ -96,3 +96,34 @@ def register_invities_user(email_address, full_name, designation, mobile_number)
     except Exception as e:
         frappe.log_error(frappe.get_traceback(), _("Failed to register user"))
         return _("An error occurred during registration: {0}").format(str(e))
+
+
+@frappe.whitelist(allow_guest=True)
+def get_user(userId):
+    if not userId:
+        frappe.throw("User ID is required")
+    
+    try:
+
+        user = frappe.get_doc("User", userId)
+    except frappe.DoesNotExistError:
+        frappe.throw(f"User with ID {userId} not found in 'User' DocType")
+
+    try:
+
+        bat_user = frappe.get_doc("BAT Users", userId)
+    except frappe.DoesNotExistError:
+        frappe.throw(f"User with ID {userId} not found in 'BAT Users' DocType")
+
+    user_fields = ["name", "email","full_name", "user_type", "role_profile_name", "mobile_no",'social_logins',"username"]  
+    bat_user_fields = ["full_name", "designation", "organization"] 
+    combined_user = {}
+    for field in user_fields:
+        combined_user[field] = user.get(field, None)
+
+    for field in bat_user_fields:
+        combined_user[f"bat_{field}"] = bat_user.get(field, None)
+
+    # Return the combined user details
+    return combined_user
+
