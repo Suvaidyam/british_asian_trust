@@ -151,3 +151,9 @@ def get_designations():
 @frappe.whitelist(allow_guest=True)
 def get_bat_users():
     return frappe.get_all("BAT Users", fields=["*"])
+
+from frappe.integrations.oauth2_logins import decoder_compat, login_via_oauth2
+@frappe.whitelist(allow_guest=True)
+def my_login_via_google(code: str, state: str):
+    res = login_via_oauth2("google", code, state, decoder=decoder_compat)
+    print(res, "="*100)
