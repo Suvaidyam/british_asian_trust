@@ -153,7 +153,26 @@ def get_bat_users():
     return frappe.get_all("BAT Users", fields=["*"])
 
 from frappe.integrations.oauth2_logins import decoder_compat, login_via_oauth2
+import frappe
+
 @frappe.whitelist(allow_guest=True)
 def my_login_via_google(code: str, state: str):
+    # Perform OAuth2 login
     res = login_via_oauth2("google", code, state, decoder=decoder_compat)
-    print(res, "="*100)
+    
+    # Check if login is successful
+    if res and res.get("message") == "Logged In":
+        user = frappe.session.user  # Get the logged-in user
+        print(user,"user"*100)
+        
+        # Return the redirect URL after login
+        return {
+            "status": "success",
+            "redirect_url": "/bat"
+        }
+    else:
+        # If login failed, return an error
+        return {
+            "status": "error",
+            "message": "Login failed"
+        }
