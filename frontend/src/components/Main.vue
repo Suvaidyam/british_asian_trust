@@ -3,7 +3,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="mb-6 bg-[#F2E6D4] bg-main-img bg-cover bg-center rounded-lg shadow-md overflow-hidden">
         <div class="p-4 sm:p-6 lg:p-8 text-center">
-          <h1 class="text-2xl sm:text-3xl lg:text-4xl mb-4 text-gray-800">Welcome, {{ userName }}! Ready to make an impact?
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl mb-4 text-gray-800">Welcome, {{ userName }}! Ready to make an
+            impact?
           </h1>
           <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <router-link :to="{ name: 'Assessment' }"
@@ -19,7 +20,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Main content -->
       <div class="flex flex-col lg:flex-row gap-6 bg-[#F6F3F2] p-6 rounded-lg">
         <!-- Announcements Section -->
@@ -79,7 +80,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Registration Popup -->
     <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" />
   </div>
@@ -175,23 +176,26 @@ const topUsers = ref([
 
 const checkUserRegistration = async () => {
   try {
-    const user = await $auth.getUsers()
+    const user = await $auth.getUsers();
+
     if (user && user.social_logins && user.social_logins.length > 0) {
-      const frappeLogin = user.social_logins.find(login => login.provider === 'frappe')
-      if (frappeLogin) {
-        userName.value = user.full_name || 'User'
-        showRegistrationPopup.value = false
+      const googleLogin = user.social_logins.find(login => login.provider === "google");
+      userName.value = user.full_name || 'User';
+
+      if (googleLogin) {
+        showRegistrationPopup.value = true;
       } else {
-        showRegistrationPopup.value = true
+        showRegistrationPopup.value = false;
       }
     } else {
-      showRegistrationPopup.value = true
+      showRegistrationPopup.value = false;
     }
   } catch (error) {
-    console.error('Error checking user registration:', error)
-    showRegistrationPopup.value = true
+    console.error('Error checking user registration:', error);
+    showRegistrationPopup.value = false;
   }
-}
+};
+
 
 const completeRegistration = async () => {
   showRegistrationPopup.value = false
