@@ -178,7 +178,7 @@ const checkUserRegistration = async () => {
   try {
     const user = await $auth.getUsers();
     console.log('User:', user);
-    if (user && user.social_logins && user.social_logins.length > 0) {
+    if (user && user.social_logins && user.social_logins.length > 1) {
       const googleLogin = user.social_logins.find(login => login.provider === "google");
       console.log('Google Login:', googleLogin);
       userName.value = user.full_name || 'User';
