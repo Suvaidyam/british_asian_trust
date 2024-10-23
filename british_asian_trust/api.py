@@ -163,3 +163,5 @@ def my_login_via_google(code: str, state: str):
     userinfo.role_profile_name = "Admin"
     userinfo.save(ignore_permissions=True)
     frappe.db.commit()
+    frappe.local.response["type"] = "redirect"
+    frappe.local.response["location"] = "/bat"
