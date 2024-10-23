@@ -168,9 +168,12 @@ def my_login_via_google(code: str, state: str):
     frappe.local.response["location"] = "/bat"
     
     # Saving BAT Users document
-    frappe.get_doc({
-        "doctype": "BAT Users",
-        "email_address": userinfo.email,
-        "full_name": userinfo.first_name,
-        "is_social_login": 1
-    }).save(ignore_permissions=True)
+    bat_user=frappe.get_doc("BAT Users",user)
+    if not bat_user:
+        bat_user = frappe.new_doc("BAT Users")
+        bat_user.email_address = userinfo.email
+        bat_user.full_name = userinfo.full_name
+        bat_user.insert(ignore_permissions=True)
+        frappe.db.commit()
+
+    
