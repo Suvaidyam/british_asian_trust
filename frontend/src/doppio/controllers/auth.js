@@ -24,7 +24,7 @@ export default class Auth {
 		});
 		if (res) {
 			this.isLoggedIn = true;
-			this.user = await this.getUser(email);
+			this.user = await this.getBatUser(email);
 			this.cookie = {... this.user};
 			sessionStorage.setItem('user', JSON.stringify(this.user));
 			return res;
@@ -44,12 +44,12 @@ export default class Auth {
 		// Implement if you want
 	}
 
-	async getUser( userId ) {
-		const result = await call('british_asian_trust.api.get_user', {	userId: userId });
+	async getBatUser( userId ) {
+		const result = await call('british_asian_trust.api.get_Both_user', {	userId: userId });
 		return result;
 	}
 
-	async getUsers() {
+	async getSessionUser() {
 		const usr= JSON.parse(sessionStorage.getItem('user'));
 		return usr;
 	}

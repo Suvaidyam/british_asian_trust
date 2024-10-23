@@ -112,7 +112,7 @@ def register_invities_user(email_address, full_name, designation, mobile_number)
 
 
 @frappe.whitelist(allow_guest=True)
-def get_user(userId):
+def get_Both_user(userId):
     if not userId:
         frappe.throw("User ID is required")
     
@@ -152,6 +152,7 @@ def get_designations():
 def get_bat_users():
     return frappe.get_all("BAT Users", fields=["*"])
 
+
 from frappe.integrations.oauth2_logins import decoder_compat, login_via_oauth2
 import frappe
 
@@ -165,3 +166,11 @@ def my_login_via_google(code: str, state: str):
     frappe.db.commit()
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = "/bat"
+    
+    # Saving BAT Users document
+    frappe.get_doc({
+        "doctype": "BAT Users",
+        "email_address": userinfo.email,
+        "full_name": userinfo.first_name,
+        "is_social_login": 1
+    }).save(ignore_permissions=True)

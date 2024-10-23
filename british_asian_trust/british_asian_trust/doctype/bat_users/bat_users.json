@@ -11,7 +11,8 @@
   "designation",
   "mobile_number",
   "organization",
-  "is_primary_user"
+  "is_primary_user",
+  "is_social_login"
  ],
  "fields": [
   {
@@ -34,8 +35,8 @@
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
-   "options": "Role Profile",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.is_social_login ==1 ",
+   "options": "Role Profile"
   },
   {
    "fieldname": "mobile_number",
@@ -47,19 +48,25 @@
    "fieldname": "organization",
    "fieldtype": "Link",
    "label": "Organization",
-   "options": "Organization",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.is_social_login ==1 ",
+   "options": "Organization"
   },
   {
    "default": "0",
    "fieldname": "is_primary_user",
    "fieldtype": "Check",
    "label": "Is Primary User"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_social_login",
+   "fieldtype": "Check",
+   "label": "Is Social Login"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-07 16:11:59.449876",
+ "modified": "2024-10-23 16:11:06.626814",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "BAT Users",
