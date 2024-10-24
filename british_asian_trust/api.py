@@ -162,6 +162,7 @@ def my_login_via_google(code: str, state: str):
     user = frappe.session.user
     userinfo = frappe.get_doc("User", user)
     userinfo.role_profile_name = "Admin"
+    print("\nUser Role Profile Name\n",userinfo.role_profile_name)
     userinfo.save(ignore_permissions=True)
     if not frappe.db.exists("BAT Users",user):
         print("\nUser not exists\n")
@@ -173,7 +174,6 @@ def my_login_via_google(code: str, state: str):
         print("\nUser created\n")
     else:
         print("\nUser exists from Else\n")
-    frappe.db.commit()
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = "/bat"
     
