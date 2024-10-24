@@ -169,6 +169,7 @@ def my_login_via_google(code: str, state: str):
         bat_user = frappe.new_doc("BAT Users")
         bat_user.email_address = userinfo.email
         bat_user.full_name = userinfo.full_name
+        bat_user.is_social_login=1
         bat_user.insert(ignore_permissions=True)
         frappe.db.commit()
     frappe.db.commit()
