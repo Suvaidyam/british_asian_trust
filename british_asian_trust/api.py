@@ -163,17 +163,18 @@ def my_login_via_google(code: str, state: str):
     userinfo = frappe.get_doc("User", user)
     userinfo.role_profile_name = "Admin"
     userinfo.save(ignore_permissions=True)
-    frappe.db.commit()
-    frappe.local.response["type"] = "redirect"
-    frappe.local.response["location"] = "/bat"
-    
     # Saving BAT Users document
-    bat_user=frappe.get_doc("BAT Users",user)
-    if not bat_user:
+    bat_users=frappe.get_doc("BAT Users",user)
+    if not bat_users:
         bat_user = frappe.new_doc("BAT Users")
         bat_user.email_address = userinfo.email
         bat_user.full_name = userinfo.full_name
         bat_user.insert(ignore_permissions=True)
         frappe.db.commit()
+    frappe.db.commit()
+    frappe.local.response["type"] = "redirect"
+    frappe.local.response["location"] = "/bat"
+    
+    
 
     
