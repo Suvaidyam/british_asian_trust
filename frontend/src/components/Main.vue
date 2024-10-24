@@ -209,8 +209,10 @@ onMounted(async () => {
 watch(() => router.currentRoute.value, async () => {
   await checkUserRegistration()
 })
-watch(() => $auth.isLoggedIn, async (newValue,oldValue) => {
-  console.log(newValue,oldValue)
+watch(() => $auth.isLoggedIn, async (newValue) => {
+  if (newValue) {
+    await $auth.setUserSession()
+  }
 }, { deep: true, immediate: true })
 </script>
 

@@ -24,9 +24,7 @@ export default class Auth {
 		});
 		if (res) {
 			this.isLoggedIn = true;
-			this.user = await this.getBatUser(email);
-			this.cookie = {... this.user};
-			sessionStorage.setItem('user', JSON.stringify(this.user));
+			await this.setUserSession();
 			return res;
 		}
 		return false;
@@ -53,6 +51,12 @@ export default class Auth {
 	async getSessionUser() {
 		const usr= JSON.parse(sessionStorage.getItem('user'));
 		return usr;
+	}
+
+	async setUserSession() {
+		this.user = await this.getBatUser(email);
+		this.cookie = {... this.user};
+		sessionStorage.setItem('user', JSON.stringify(this.user));
 	}
 
 
