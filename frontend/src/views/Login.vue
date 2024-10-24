@@ -58,7 +58,7 @@
 							Login with Google
 
 						</a>
-						<a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Fbritish_asian_trust.api.my_login_via_office_365&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiZWI2Y2I3ZTVkZDY0N2QwMDVjNzQ5Y2Q3NDc2N2U4OTM3YmJkYmYwZTc5MWQyMGQ1NDUwMjkwYWYiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&response_type=code&scope=openid+email+profile&client_id=c28ed05b-846a-414e-b8df-bbb602316b22"
+						<a href="https://login.live.com/oauth20_authorize.srf?client_id=c28ed05b-846a-414e-b8df-bbb602316b22&scope=openid+email+profile&redirect_uri=https%3a%2f%2fbtasian.suvaidyam.com%2fapi%2fmethod%2fbritish_asian_trust.api.my_login_via_office_365&response_type=code&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiMWI3NDEzMmI1YTcyMDVhYTU1ZjI2YWRjMTFhNWE5MTRmOTM5ZGFkYzY4YmMzYWY5N2UwNGUxMmUiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&uaid=c35885a2c1184f4186654fd596f46435&msproxy=1&issuer=mso&tenant=common&ui_locales=en-US&epct=PAQABDgEAAADW6jl31mB3T7ugrWTT8pFegkih0W8sUO6f7208OAMBvr0o-aKavF-3Om0wE25w4jAYP5hqO5RXvSW79U28PDQSXMLHLVx0xZYuSXwNaXchMROxYyOQk0ID90pm3JYjsRXrZNGuiLsTJKVp3mFaGz4imNGEWNK5svN-r16x1-J1H1a6dvTZxo6BrUXhlHars8gJjOiC58aWZ2fklaBEGrfXKKlEqYueMJE56Ed_-nT_aSAA&jshs=-1&jsh=&jshp="
 							class="w-full flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
 							<svg class="w-5 h-5 mr-2" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
 								<path fill="#f3f3f3" d="M0 0h23v23H0z" />
