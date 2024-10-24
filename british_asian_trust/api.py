@@ -161,21 +161,11 @@ def my_login_via_google(code: str, state: str):
     login_via_oauth2("google", code, state, decoder=decoder_compat)
     user = frappe.session.user
     userinfo = frappe.get_doc("User", user)
-    userinfo.role_profiles.append({'role_profile':"Admin",'parenttype':"User",'parentfield':"role_profiles",'parent':user})
+    userinfo.role_profile_name = "Admin"
     userinfo.save(ignore_permissions=True)
-    # Saving BAT Users document
-    if not frappe.db.exists("BAT Users", user):
-        print("Creating BAT Users",'//////////////////////////////////////////////////')
-        bat_user = frappe.new_doc("BAT Users")
-        bat_user.email_address = userinfo.email
-        bat_user.full_name = userinfo.full_name
-        bat_user.is_social_login = 1
-        bat_user.insert(ignore_permissions=True)
-    else:
-        print("Updating BAT Users",'//////////////////////////////////////////////////')
+    frappe.db.commit()
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = "/bat"
-    
     
 
     
