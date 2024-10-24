@@ -178,6 +178,7 @@ def my_login_via_google(code: str, state: str):
     
 @frappe.whitelist(allow_guest=True)
 def my_login_via_office_365(code: str, state: str):
+    print("my_login_via_office_365", code, state,'*'*100)
     login_via_oauth2_id_token("office_365", code, state, decoder=decoder_compat)
     user = frappe.session.user
     userinfo = frappe.get_doc("User", user)

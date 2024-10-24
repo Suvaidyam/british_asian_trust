@@ -177,10 +177,8 @@ const topUsers = ref([
 const checkUserRegistration = async () => {
   try {
     const user = await $auth.getSessionUser();
-    console.log('User:', user);
     if (user && user.social_logins && user.social_logins.length > 0) {
       const googleLogin = user.social_logins.find(login => login.provider === "google");
-      console.log('Google Login:', googleLogin);
       userName.value = user.full_name || 'User';
       if (googleLogin) {
         showRegistrationPopup.value = true;
@@ -211,7 +209,7 @@ watch(() => router.currentRoute.value, async () => {
 })
 watch(() => $auth.isLoggedIn, async (newValue) => {
   if (newValue) {
-    console.log($auth,'$auth')
+    // console.log($auth,'$auth')
     await $auth.setUserSession($auth?.cookie?.user_id)
   }
 }, { deep: true, immediate: true })
