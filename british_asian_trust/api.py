@@ -160,8 +160,10 @@ import frappe
 def my_login_via_google(code: str, state: str):
     login_via_oauth2("google", code, state, decoder=decoder_compat)
     user = frappe.session.user
+    print("User/////////////////////////////////////////////////////////",user)
     userinfo = frappe.get_doc("User", user)
     userinfo.role_profile_name = "Admin"
+    print("Userinfo/////////////////////////////////////////////////////////",userinfo.role_profile_name)   
     userinfo.save(ignore_permissions=True)
     # Saving BAT Users document
     bat_users=frappe.get_doc("BAT Users",user)
