@@ -161,7 +161,7 @@ def my_login_via_google(code: str, state: str):
     login_via_oauth2("google", code, state, decoder=decoder_compat)
     user = frappe.session.user
     userinfo = frappe.get_doc("User", user)
-    userinfo.role_profiles = [{'role_profile':"Admin",'parenttype':"User",'parentfield':"role_profiles",'parent':user}]
+    userinfo.role_profiles.append({'role_profile':"Admin",'parenttype':"User",'parentfield':"role_profiles",'parent':user})
     userinfo.save(ignore_permissions=True)
     # Saving BAT Users document
     if not frappe.db.exists("BAT Users", user):
