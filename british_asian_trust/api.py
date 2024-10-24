@@ -153,12 +153,32 @@ def get_bat_users():
     return frappe.get_all("BAT Users", fields=["*"])
 
 
-from frappe.integrations.oauth2_logins import decoder_compat, login_via_oauth2
+from frappe.integrations.oauth2_logins import decoder_compat, login_via_oauth2, login_via_oauth2_id_token
 import frappe
 
 @frappe.whitelist(allow_guest=True)
 def my_login_via_google(code: str, state: str):
     login_via_oauth2("google", code, state, decoder=decoder_compat)
+    user = frappe.session.user
+    userinfo = frappe.get_doc("User", user)
+    userinfo.role_profile_name = "Admin"
+    userinfo.save(ignore_permissions=True)
+    frappe.db.commit()
+    if not frappe.db.exists("BAT Users", user):
+        bat_user = frappe.get_doc({
+            "doctype": "BAT Users",
+            "email_address": userinfo.email,
+            "full_name": userinfo.full_name,
+            "is_social_login": 1,
+        })
+        bat_user.insert(ignore_permissions=True)
+        frappe.db.commit()
+    frappe.local.response["type"] = "redirect"
+    frappe.local.response["location"] = "/bat"
+    
+@frappe.whitelist(allow_guest=True)
+def my_login_via_office_365(code: str, state: str):
+    login_via_oauth2_id_token("office_365", code, state, decoder=decoder_compat)
     user = frappe.session.user
     userinfo = frappe.get_doc("User", user)
     userinfo.role_profile_name = "Admin"
