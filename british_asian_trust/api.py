@@ -112,7 +112,7 @@ def register_invities_user(email_address, full_name, designation, mobile_number)
 
 
 @frappe.whitelist(allow_guest=True)
-def get_Both_user(userId):
+def get_both_user(userId):
     if not userId:
         frappe.throw("User ID is required")
     
