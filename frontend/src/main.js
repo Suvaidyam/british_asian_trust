@@ -29,7 +29,7 @@ app.provide("$socket", socket);
 router.beforeEach(async (to, from, next) => {
 	if (to.matched.some((record) => !record.meta.isLoginPage)) {
 		if (!auth.isLoggedIn) {
-			if(to.name !== 'Register') {
+			if(!['Register','Forgot'].includes(to.name)){
 				next({ name: 'Login', query: { route: to.path } });
 			}else{
 				next();
