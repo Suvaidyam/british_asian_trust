@@ -24,7 +24,7 @@ export default class Auth {
 		});
 		if (res) {
 			this.isLoggedIn = true;
-			await this.setUserSession();
+			await this.setUserSession(email);
 			return res;
 		}
 		return false;
@@ -53,7 +53,7 @@ export default class Auth {
 		return usr;
 	}
 
-	async setUserSession() {
+	async setUserSession(email) {
 		this.user = await this.getBatUser(email);
 		this.cookie = {... this.user};
 		sessionStorage.setItem('user', JSON.stringify(this.user));

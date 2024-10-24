@@ -211,7 +211,8 @@ watch(() => router.currentRoute.value, async () => {
 })
 watch(() => $auth.isLoggedIn, async (newValue) => {
   if (newValue) {
-    await $auth.setUserSession()
+    console.log($auth,'$auth')
+    // await $auth.setUserSession()
   }
 }, { deep: true, immediate: true })
 </script>
