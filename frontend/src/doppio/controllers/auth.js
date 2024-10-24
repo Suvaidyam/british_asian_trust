@@ -45,7 +45,8 @@ export default class Auth {
 	}
 
 	async getBatUser( userId ) {
-		const result = await call('british_asian_trust.api.get_Both_user', {	userId: userId });
+		const result = await call('british_asian_trust.api.get_both_user', {	userId: userId });
+		console.log('result:', result);
 		return result;
 	}
 
