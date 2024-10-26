@@ -178,7 +178,7 @@ const checkUserRegistration = async () => {
   try {
     const user = await $auth.getSessionUser();
     if (user && user.social_logins && user.social_logins.length > 0) {
-      const googleLogin = user.social_logins.find(login => login.provider === "google");
+      const googleLogin = user.social_logins.find(login => login.provider === "google" || login.provider === "office_365");
       userName.value = user.full_name || 'User';
       if (googleLogin) {
         showRegistrationPopup.value = true;
