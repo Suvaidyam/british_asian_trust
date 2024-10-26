@@ -25,25 +25,23 @@ app.provide("$call", call);
 app.provide("$socket", socket);
 
 
-// Configure route gaurds
 router.beforeEach(async (to, from, next) => {
-	if (to.matched.some((record) => !record.meta.isLoginPage)) {
-		if (!auth.isLoggedIn) {
-			if(!['Register','Forgot'].includes(to.name)){
-				next({ name: 'Login', query: { route: to.path } });
-			}else{
-				next();
-			}
-		} else {
-			next();
-		}
-	} else {
-		if (auth.isLoggedIn) {
-			next({ name: 'Home' });
-		} else {
-			next();
-		}
-	}
+    if (!auth.isLoggedIn) {
+        // Redirect to Landing page if the user is not logged in and tries to access a protected page
+        if (!['Register', 'Forgot', 'Login', 'Landing'].includes(to.name)) {
+            next({ name: 'Landing', query: { route: to.path } });
+        } else {
+            next();
+        }
+    } else {
+        // If logged in, restrict access to authentication pages and redirect to Home
+        if (['Register', 'Forgot', 'Login'].includes(to.name)) {
+            next({ name: 'Home' });
+        } else {
+            next();
+        }
+    }
 });
+
 
 app.mount("#app");

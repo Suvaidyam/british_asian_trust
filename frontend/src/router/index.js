@@ -5,14 +5,19 @@ import Assessment from "../components/Assessment.vue";
 import Myuser from "../components/MyUser.vue";
 import Forget from "../components/ForgetPassword.vue";
 import authRoutes from './auth';
+import Landing from "../components/Landing.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
   },
-
+{
+  path: "/",
+  name: "Landing",
+  component: Landing,
+},
   {
     path: "/register",
     name: "Register",
