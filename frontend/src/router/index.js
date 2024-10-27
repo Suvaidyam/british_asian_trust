@@ -6,6 +6,7 @@ import Myuser from "../components/MyUser.vue";
 import Forget from "../components/ForgetPassword.vue";
 import authRoutes from './auth';
 import Landing from "../components/Landing.vue";
+import AssessmentTest from "../components/AssessmentTest.vue";
 
 const routes = [
   {
@@ -34,6 +35,12 @@ const routes = [
     path: "/assessment",
     name: "Assessment",
     component: Assessment,
+  },
+
+  {
+    path: "/assessmenttest",
+    name: "AssessmentTest",
+    component: AssessmentTest,
   },
 
   {
