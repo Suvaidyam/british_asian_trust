@@ -9,6 +9,10 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
+fixtures=[
+    "Designation"
+]
+
 # include js, css files in header of desk.html
 # app_include_css = "/assets/british_asian_trust/css/british_asian_trust.css"
 # app_include_js = "/assets/british_asian_trust/js/british_asian_trust.js"

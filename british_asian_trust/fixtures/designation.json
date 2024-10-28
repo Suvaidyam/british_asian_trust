@@ -1,0 +1,44 @@
+[
+ {
+  "designation_name": "Service manager",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-10-28 14:41:58.469010",
+  "name": "Service manager"
+ },
+ {
+  "designation_name": "Chairperson",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-10-28 14:43:43.797430",
+  "name": "Chairperson"
+ },
+ {
+  "designation_name": "President",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-10-28 14:43:59.844347",
+  "name": "President"
+ },
+ {
+  "designation_name": "Executive Director",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-10-28 14:44:20.536870",
+  "name": "Executive Director"
+ },
+ {
+  "designation_name": "CEO",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-10-28 14:45:03.456659",
+  "name": "CEO"
+ },
+ {
+  "designation_name": "Vice-president",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-10-28 14:45:33.207062",
+  "name": "Vice-president"
+ }
+]
