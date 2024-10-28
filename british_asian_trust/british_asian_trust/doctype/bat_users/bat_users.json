@@ -11,6 +11,7 @@
   "designation",
   "mobile_number",
   "organization",
+  "domain",
   "is_primary_user",
   "is_social_login"
  ],
@@ -63,11 +64,17 @@
    "fieldtype": "Check",
    "label": "Is Social Login",
    "read_only": 1
+  },
+  {
+   "fieldname": "domain",
+   "fieldtype": "Data",
+   "label": "Domain",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-23 20:39:05.272680",
+ "modified": "2024-10-28 14:08:51.291464",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "BAT Users",

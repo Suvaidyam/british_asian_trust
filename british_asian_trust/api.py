@@ -146,7 +146,7 @@ def get_both_user(userId):
 @frappe.whitelist(allow_guest=True)
 def get_designations():
     # print("get_designations"*100)
-    return frappe.get_all("Role Profile", fields=["*"] ,filters={"name": ["not in", ["Admin"]]})
+    return frappe.get_all("Designation", fields=["*"])
 
 @frappe.whitelist(allow_guest=True)
 def get_bat_users():
