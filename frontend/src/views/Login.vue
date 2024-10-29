@@ -19,14 +19,15 @@
 			  <div>
 				<label for="email" class="sr-only">Email ID</label>
 				<input id="email" v-model="email" type="email" required
-				  class="w-full px-4 py-2 border border-gray-300 rounded-full" placeholder="Email ID"
+				  class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Email ID"
 				  @input="validateField('email')" />
 				<p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
+				<!-- <p class="text-gray-600 text-xs mt-1">Use only your work email for login. Personal emails are not allowed.</p> -->
 			  </div>
 			  <div class="relative">
 				<label for="password" class="sr-only">Password</label>
 				<input id="password" v-model="password" :type="showPassword ? 'text' : 'password'" required
-				  class="w-full px-4 py-2 border border-gray-300 rounded-full" placeholder="Password"
+				  class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Password"
 				  @input="validateField('password')" />
 				<button type="button" @click="togglePassword"
 				  class="absolute inset-y-0 right-0 pr-3 flex items-center">

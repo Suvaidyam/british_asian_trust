@@ -21,7 +21,7 @@
 
             <template v-if="!$auth.isLoggedIn">
               <button @click="$router.push({ name: 'Login' })"
-                class="px-4 py-2 text-sm text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors duration-200">
+                class="px-6 py-2 text-sm text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors duration-200 w-28">
                 Login
               </button>
             </template>
@@ -73,29 +73,29 @@
       enter-from-class="opacity-0 -translate-y-full" enter-to-class="opacity-100 translate-y-0"
       leave-active-class="transition-all duration-300 ease-in-out" leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-full">
-      <div v-if="isNavigationOpen" class="fixed inset-x-0 top-16 bg-white z-40 overflow-y-auto shadow-md"
+      <div v-if="isNavigationOpen" class="fixed inset-x-0 top-16 bg-blue-600 z-40 overflow-y-auto shadow-md"
         style="max-height: calc(100vh - 4rem);">
         <div class="max-w-[2048px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div class="space-y-4">
             <!-- Navigation Items -->
             <a @click="navigateTo('AboutUs')"
-              class="block py-2 px-4 text-gray-600 hover:text-gray-800 cursor-pointer">About Us</a>
+              class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">About Us</a>
             <a @click="navigateTo('Assignment')"
-              class="block py-2 px-4 text-gray-600 hover:text-gray-800 cursor-pointer">Assignment</a>
+              class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Assignment</a>
             
             <!-- Mobile view: Login/Logout and Profile options -->
             <div class="md:hidden">
               <template v-if="!$auth.isLoggedIn">
                 <a @click="navigateTo('Login')"
-                  class="block py-2 px-4 text-gray-600 hover:text-gray-800 cursor-pointer">Login</a>
+                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Login</a>
               </template>
               <template v-else>
                 <a @click="toggleNotifications"
-                  class="block py-2 px-4 text-gray-600 hover:text-gray-800 cursor-pointer">Notifications</a>
+                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Notifications</a>
                 <a @click="openProfileSlider"
-                  class="block py-2 px-4 text-gray-600 hover:text-gray-800 cursor-pointer">Your Profile</a>
+                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Your Profile</a>
                 <a @click="$auth.logout()"
-                  class="block py-2 px-4 text-gray-600 hover:text-gray-800 cursor-pointer">Log out</a>
+                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Log out</a>
               </template>
             </div>
           </div>

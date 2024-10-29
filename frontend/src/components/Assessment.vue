@@ -3,9 +3,11 @@
     <div class="max-w-[2048px] mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
       <div class="p-6 md:p-8">
         <div class="flex flex-col lg:flex-row gap-8">
-          <div class="lg:w-2/3">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Assessment Sample Test</h1>
-            <div class="mb-4 text-sm text-gray-500">Posted on: September 20, 2024</div>
+          <div class="lg:w-3/4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+              <h1 class="text-3xl md:text-4xl font-bold text-blue-900">Assessment Sample Test</h1>
+              <div class="text-sm text-gray-500 mt-2 sm:mt-0">Posted on: September 20, 2024</div>
+            </div>
             <img src="../../public/assessiment.png" alt="Person writing on paper"
               class="w-full h-64 md:h-auto object-cover rounded-lg mb-4" />
             <div class="space-y-4 text-gray-700">
@@ -41,13 +43,13 @@
               </p>
             </div>
           </div>
-          <div class="lg:w-1/3 mt-8 lg:mt-0">
+          <div class="lg:w-1/4 mt-8 lg:mt-0">
             <div class="bg-blue-900 text-white p-6 rounded-lg mb-6">
               <h2 class="text-xl font-semibold mb-4">Ready to take the survey?</h2>
-              <router-link :to="{ name: 'AssessmentTest' }"
-                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+              <button
+                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-300 w-full">
                 START ASSESSMENT
-              </router-link>
+              </button>
             </div>
             <div class="bg-white border border-gray-200 rounded-lg p-4">
               <div class="flex justify-between items-center mb-4">
@@ -75,7 +77,7 @@
 
     <!-- Popup -->
     <div v-if="isPopupOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
         <div class="flex justify-between items-center border-b p-4">
           <h2 class="text-xl font-semibold">Invite User</h2>
           <button @click="closePopup" class="text-gray-500 hover:text-gray-700">
@@ -88,13 +90,16 @@
         </div>
         <div class="p-4">
           <div class="flex mb-4">
-            <input type="text" placeholder="Invite others by name or email"
+            <input v-model="inviteInput" type="text" placeholder="Invite others by name or email"
               class="flex-grow border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-r-lg hover:bg-gray-300 transition duration-300">
+            <button :class="[
+              'px-4 py-2 rounded-r-lg transition duration-300',
+              inviteInput ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            ]">
               INVITE
             </button>
           </div>
-          <ul class="space-y-3">
+          <ul class="space-y-3 max-h-80 overflow-y-auto">
             <li v-for="user in inviteUsers" :key="user.id" class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <img :src="user.avatar" :alt="user.name" class="w-10 h-10 rounded-full" />
@@ -130,6 +135,7 @@
 import { ref } from 'vue'
 
 const isPopupOpen = ref(false)
+const inviteInput = ref('')
 
 const users = ref([
   { id: 1, name: 'Aayush Kumar', role: 'Associate', avatar: '/placeholder.svg?height=40&width=40', joiningDate: '12/10/2024' },
@@ -150,5 +156,6 @@ const openPopup = () => {
 
 const closePopup = () => {
   isPopupOpen.value = false
+  inviteInput.value = ''
 }
 </script>
