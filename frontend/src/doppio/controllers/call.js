@@ -33,7 +33,11 @@ export default async function call(method, args) {
 		if (data.docs || method === 'login') {
 			return data;
 		}
+		if(data.code == 'SUC_200'){
+			return data;
+		}else{
 		return data.message;
+		}
 	} else {
 		const status_code = ['ERR_001', 'ERR_002', 'ERR_003', 'ERR_004','ERR_005','ERR_006','ERR_007'];
 		let response = await res.text();

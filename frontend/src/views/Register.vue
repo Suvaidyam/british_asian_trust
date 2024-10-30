@@ -199,7 +199,6 @@ const handleSubmit = async () => {
         designation_in_organization: selectedDesignation.value,
         termsAccepted: termsAccepted.value,
       });
-
       if (result.code == 'SUC_200') {
         showModal.value = true;
         toast.success(result.message, { position: "top-right", timeout: 3000 });
