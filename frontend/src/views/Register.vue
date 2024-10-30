@@ -32,7 +32,7 @@
               <p class="text-gray-600 text-xs mt-1">Use only your work email for registration. Personal emails are not
                 allowed.</p>
             </div>
-
+<!-- 
             <div>
               <label for="organization" class="sr-only">Organization</label>
               <input type="text" id="organization" v-model="organization" @input="validateField('organization')"
@@ -50,7 +50,7 @@
                 </option>
               </select>
               <p v-if="errors.designation" class="text-red-500 text-xs mt-1">{{ errors.designation }}</p>
-            </div>
+            </div> -->
             <div class="flex items-center">
               <input id="terms" type="checkbox" v-model="termsAccepted" @change="validateField('termsAccepted')"
                 class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
@@ -135,24 +135,21 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, inject, onMounted } from 'vue'
+import { ref, reactive, computed, inject } from 'vue'
+import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification'
 
-const organization = ref('')
+const router= useRouter()
 const fullName = ref('')
 const email = ref('')
-const designations = ref([])
-const selectedDesignation = ref('')
 const termsAccepted = ref(false)
 const showModal = ref(false)
 const call = inject('$call')
 const toast = useToast()
 
 const errors = reactive({
-  organization: '',
   fullName: '',
   email: '',
-  designation: '',
   termsAccepted: ''
 })
 
@@ -161,18 +158,12 @@ const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 const validateField = (field) => {
   errors[field] = ''
   switch (field) {
-    case 'organization':
-      if (!organization.value) errors.organization = 'Organization name is required'
-      break
     case 'fullName':
       if (!fullName.value) errors.fullName = 'Full name is required'
       break
     case 'email':
       if (!email.value) errors.email = 'Email is required'
       else if (!validateEmail(email.value)) errors.email = 'Invalid email format'
-      break
-    case 'designation':
-      if (!selectedDesignation.value) errors.designation = 'Designation is required'
       break
     case 'termsAccepted':
       if (!termsAccepted.value) errors.termsAccepted = 'You must accept the terms and conditions'
@@ -181,10 +172,9 @@ const validateField = (field) => {
 }
 
 const isFormValid = computed(() => {
-  return organization.value && fullName.value &&
-    email.value && selectedDesignation.value && termsAccepted.value &&
-    !errors.organization && !errors.fullName &&
-    !errors.email && !errors.designation && !errors.termsAccepted
+  return fullName.value &&
+    email.value && termsAccepted.value && !errors.fullName &&
+    !errors.email && !errors.termsAccepted
 })
 
 const handleSubmit = async () => {
@@ -192,16 +182,16 @@ const handleSubmit = async () => {
 
   if (isFormValid.value) {
     try {
-      let result = await call('british_asian_trust.api.register_organization', {
-        organization_name: organization.value,
+      let result = await call('british_asian_trust.api.register_user', {
         full_name: fullName.value,
         email: email.value,
-        designation_in_organization: selectedDesignation.value,
         termsAccepted: termsAccepted.value,
       });
       if (result.code == 'SUC_200') {
         showModal.value = true;
-        toast.success(result.message, { position: "top-right", timeout: 3000 });
+        setTimeout(()=>{
+          router.push( { name: 'Login' })
+        },3000)
       } else {
         toast.error(result.message, { position: "top-right", timeout: 3000 });
       }
@@ -210,16 +200,6 @@ const handleSubmit = async () => {
     }
   } else {
     toast.error('Please fill in all required fields correctly.', { position: "top-right", timeout: 3000 })
-  }
-}
-
-const fetchDesignations = async () => {
-  try {
-    const result = await call('british_asian_trust.api.get_designations')
-    designations.value = result
-  } catch (error) {
-    console.error('Failed to fetch designations:', error)
-    toast.error('Failed to load designations. Please refresh the page.', { position: "top-right", timeout: 3000 })
   }
 }
 
@@ -236,8 +216,4 @@ const handleMicrosoftLogin = () => {
 const closeModal = () => {
   showModal.value = false
 }
-
-onMounted(async () => {
-  await fetchDesignations()
-})
 </script>
