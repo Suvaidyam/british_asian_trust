@@ -21,7 +21,7 @@ def register_organization(email, organization_name, designation_in_organization,
     domain = email.split('@')[1]
 
     # Validate if the organization already exists
-    if frappe.db.exists("Organization", {"domain_name": domain}):
+    if frappe.db.exists("Organization", {"domain_name": domain}) and frappe.db.exists("BAT Users", {"email_address": email}):
         new_response.bad_request('ERR_002', 'Organization with this Domain already exists.')
     else:
         try:
@@ -30,21 +30,14 @@ def register_organization(email, organization_name, designation_in_organization,
                 "doctype": "Organization",
                 "organization_name": organization_name,
                 "domain_name": domain,
-                # Removed any reference to `email_address`
-            })
-            
-            # Create a user with Admin role
-            bat_user = frappe.get_doc({
-                "doctype": "BAT Users",
-                "full_name": full_name,
-                "email_address": email,
+                "full_name":full_name,
+                "email": email,
                 "designation": designation_in_organization,
                 "organization": domain,
                 "concent_check": termsAccepted
             })
 
             organization.insert(ignore_permissions=True)
-            bat_user.insert(ignore_permissions=True)
             frappe.db.commit()
 
             new_response.ok('SUC_200', None, 'Organization registered successfully.')
