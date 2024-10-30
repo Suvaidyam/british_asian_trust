@@ -19,13 +19,13 @@
               </svg>
             </button>
 
-            <template v-if="!$auth.isLoggedIn">
+            <template v-if="!$auth?.isLoggedIn && currentRoute == '/'">
               <button @click="$router.push({ name: 'Login' })"
                 class="px-6 py-2 text-sm text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors duration-200 w-28">
                 Login
               </button>
             </template>
-            <template v-else>
+            <template v-if="$auth?.isLoggedIn">
               <button @click="toggleNotifications" class="text-gray-600 hover:text-gray-800 focus:outline-none relative">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -179,8 +179,11 @@ const navigateTo = (routeName) => {
 }
 
 watch(() => router.currentRoute.value.path, (newRoute) => {
-  console.log(newRoute, 'newRoute')
+  // console.log(newRoute, 'newRoute')
   currentRoute.value = newRoute
+},{
+  immediate: true,
+  deep: true
 })
 
 defineOptions({
