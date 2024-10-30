@@ -29,7 +29,8 @@
               <input type="email" id="email" v-model="email" @input="validateField('email')"
                 class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Email Address">
               <p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
-              <p class="text-gray-600 text-xs mt-1">Use only your work email for registration. Personal emails are not allowed.</p>
+              <p class="text-gray-600 text-xs mt-1">Use only your work email for registration. Personal emails are not
+                allowed.</p>
             </div>
 
             <div>
@@ -155,22 +156,13 @@ const errors = reactive({
   termsAccepted: ''
 })
 
-const validatePAN = (value) => /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value)
 const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-const validatePhone = (value) => /^[6-9]\d{9}$/.test(value)
 
 const validateField = (field) => {
   errors[field] = ''
   switch (field) {
-    case 'pan':
-      if (!pan.value) errors.pan = 'PAN is required'
-      else if (!validatePAN(pan.value)) errors.pan = 'Invalid PAN format'
-      break
     case 'organization':
       if (!organization.value) errors.organization = 'Organization name is required'
-      break
-    case 'address':
-      if (!address.value) errors.address = 'Address is required'
       break
     case 'fullName':
       if (!fullName.value) errors.fullName = 'Full name is required'
@@ -178,9 +170,6 @@ const validateField = (field) => {
     case 'email':
       if (!email.value) errors.email = 'Email is required'
       else if (!validateEmail(email.value)) errors.email = 'Invalid email format'
-      break
-    case 'phone':
-      if (phone.value && !validatePhone(phone.value)) errors.phone = 'Invalid phone number'
       break
     case 'designation':
       if (!selectedDesignation.value) errors.designation = 'Designation is required'
@@ -192,10 +181,10 @@ const validateField = (field) => {
 }
 
 const isFormValid = computed(() => {
-  return  organization.value &&  fullName.value &&
+  return organization.value && fullName.value &&
     email.value && selectedDesignation.value && termsAccepted.value &&
-     !errors.organization &&  !errors.fullName &&
-    !errors.email && !errors.phone && !errors.designation && !errors.termsAccepted
+    !errors.organization && !errors.fullName &&
+    !errors.email && !errors.designation && !errors.termsAccepted
 })
 
 const handleSubmit = async () => {
@@ -203,20 +192,22 @@ const handleSubmit = async () => {
 
   if (isFormValid.value) {
     try {
-      const result = await call('british_asian_trust.api.register_organization', {
+      let result = await call('british_asian_trust.api.register_organization', {
         organization_name: organization.value,
         full_name: fullName.value,
         email: email.value,
-        organization_phone: phone.value,
-        role_in_organization: selectedDesignation.value,
+        designation_in_organization: selectedDesignation.value,
         termsAccepted: termsAccepted.value,
-      })
-      showModal.value = true
-      toast.success('Registration successful!', { position: "top-right", timeout: 3000 })
-      console.log('Success:', result)
+      });
+
+      if (result.code == 'SUC_200') {
+        showModal.value = true;
+        toast.success(result.message, { position: "top-right", timeout: 3000 });
+      } else {
+        toast.error(result.message, { position: "top-right", timeout: 3000 });
+      }
     } catch (error) {
-      console.error('API Error:', error)
-      toast.error('An error occurred during registration. Please try again.', { position: "top-right", timeout: 3000 })
+      console.error('API Error:', error);
     }
   } else {
     toast.error('Please fill in all required fields correctly.', { position: "top-right", timeout: 3000 })
@@ -234,7 +225,7 @@ const fetchDesignations = async () => {
 }
 
 const handleGoogleLogin = () => {
-  window.location.href = 
+  window.location.href =
     "https://accounts.google.com/o/oauth2/auth?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Fbritish_asian_trust.api.my_login_via_google&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiMjg1YjVhYmQ1YTY2Y2RiNGU3NTZkZmFmNmZiNWNhODc0ZDI3ZTY4M2U3NzU4NTQwZTgwMmRmZjkiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=720319117261-1kuhqoutuq2j8ud0b8dsp1oen4glmruq.apps.googleusercontent.com"
 }
 

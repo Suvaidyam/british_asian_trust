@@ -9,11 +9,10 @@
   "full_name",
   "email_address",
   "designation",
-  "mobile_number",
   "organization",
-  "domain",
-  "is_primary_user",
-  "is_social_login"
+  "is_social_login",
+  "concent_check",
+  "column_break_khco"
  ],
  "fields": [
   {
@@ -37,13 +36,7 @@
    "fieldtype": "Link",
    "label": "Designation",
    "mandatory_depends_on": "eval:doc.is_social_login ==0 ",
-   "options": "Role Profile"
-  },
-  {
-   "fieldname": "mobile_number",
-   "fieldtype": "Data",
-   "label": "Mobile Number",
-   "length": 10
+   "options": "Designation"
   },
   {
    "fieldname": "organization",
@@ -54,27 +47,26 @@
   },
   {
    "default": "0",
-   "fieldname": "is_primary_user",
+   "fieldname": "is_social_login",
    "fieldtype": "Check",
-   "label": "Is Primary User"
+   "label": "Is Social User",
+   "read_only": 1
   },
   {
    "default": "0",
-   "fieldname": "is_social_login",
+   "fieldname": "concent_check",
    "fieldtype": "Check",
-   "label": "Is Social Login",
+   "label": "Concent Check",
    "read_only": 1
   },
   {
-   "fieldname": "domain",
-   "fieldtype": "Data",
-   "label": "Domain",
-   "read_only": 1
+   "fieldname": "column_break_khco",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-28 14:08:51.291464",
+ "modified": "2024-10-30 11:30:37.692253",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "BAT Users",
