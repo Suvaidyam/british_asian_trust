@@ -4,13 +4,9 @@ from british_asian_trust.Services.response import Response
 new_response = Response()
 
 @frappe.whitelist(allow_guest=True)
-def register_organization(email, organization_name, designation_in_organization, full_name, termsAccepted):
+def register_user(email, full_name, termsAccepted):
     if not email:
         new_response.bad_request('ERR_001', 'Email is required.')
-    if not organization_name:
-        new_response.bad_request('ERR_001', 'Organization name is required.')
-    if not designation_in_organization:
-        new_response.bad_request('ERR_001', 'Role in organization is required.')
     if not full_name:
         new_response.bad_request('ERR_001', 'Full name is required.')
     if not termsAccepted:
@@ -21,29 +17,24 @@ def register_organization(email, organization_name, designation_in_organization,
     domain = email.split('@')[1]
 
     # Validate if the organization already exists
-    if frappe.db.exists("Organization", {"domain_name": domain}) and frappe.db.exists("BAT Users", {"email_address": email}):
+    if frappe.db.exists("Organization", {"domain_name": domain}) or frappe.db.exists("BAT Users", {"email_address": email}):
         new_response.bad_request('ERR_002', 'Organization with this Domain already exists.')
     else:
         try:
-            # Create a new Organization document
-            organization = frappe.get_doc({
-                "doctype": "Organization",
-                "organization_name": organization_name,
-                "domain_name": domain,
+            bar_user = frappe.get_doc({
+                "doctype": "BAT Users",
                 "full_name":full_name,
-                "email": email,
-                "designation": designation_in_organization,
-                "organization": domain,
+                "email_address": email,
                 "concent_check": termsAccepted
             })
 
-            organization.insert(ignore_permissions=True)
+            bar_user.insert(ignore_permissions=True)
             frappe.db.commit()
 
-            new_response.ok('SUC_200', None, 'Organization registered successfully.')
+            new_response.ok('SUC_200', None, 'User Created')
 
         except Exception as e:
-            frappe.log_error(frappe.get_traceback(), _("Failed to register organization"))
+            frappe.log_error(frappe.get_traceback(), _("An error occurred during registration"))
             new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
 
 
