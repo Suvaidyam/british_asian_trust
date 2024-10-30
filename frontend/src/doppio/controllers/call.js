@@ -1,6 +1,8 @@
 // Author: Gavin D'souza <gavin@frappe.io>
 
 import router from '@/router';
+import { useToast } from 'vue-toastification'
+const toast = useToast()
 
 export default async function call(method, args) {
 	if (!args) {
@@ -33,10 +35,14 @@ export default async function call(method, args) {
 		}
 		return data.message;
 	} else {
+		const status_code = ['ERR_001', 'ERR_002', 'ERR_003', 'ERR_004','ERR_005','ERR_006','ERR_007'];
 		let response = await res.text();
 		let error, exception;
 		try {
 			error = JSON.parse(response);
+			if (status_code.includes(error.code)) {
+				toast.error(error.message, { position: "top-right", timeout: 3000 });
+			}
 			// eslint-disable-next-line no-empty
 		} catch (e) {}
 		let errorParts = [

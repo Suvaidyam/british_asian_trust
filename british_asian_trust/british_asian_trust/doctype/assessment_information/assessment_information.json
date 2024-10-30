@@ -1,0 +1,46 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-29 18:10:26.399654",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "information",
+  "image"
+ ],
+ "fields": [
+  {
+   "fieldname": "information",
+   "fieldtype": "HTML Editor",
+   "label": "Information"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-10-29 18:14:25.924919",
+ "modified_by": "Administrator",
+ "module": "British Asian Trust",
+ "name": "Assessment Information",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

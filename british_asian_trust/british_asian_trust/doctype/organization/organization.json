@@ -1,90 +1,38 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:pan_number",
+ "autoname": "field:domain_name",
  "creation": "2024-09-25 15:41:03.144618",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "organization_tab",
-  "pan_number",
-  "name1",
-  "address",
-  "tab_2_tab",
-  "full_name",
-  "email_address",
-  "phone_number",
-  "role_in_organization",
-  "concent_check"
+  "organization_name",
+  "domain_name"
  ],
  "fields": [
-  {
-   "fieldname": "pan_number",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "PAN Number",
-   "no_copy": 1,
-   "reqd": 1,
-   "unique": 1
-  },
-  {
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "label": "Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "address",
-   "fieldtype": "Small Text",
-   "label": "Address",
-   "reqd": 1
-  },
   {
    "fieldname": "organization_tab",
    "fieldtype": "Tab Break",
    "label": "Organization"
   },
   {
-   "fieldname": "tab_2_tab",
-   "fieldtype": "Tab Break",
-   "label": "Admin Information"
-  },
-  {
-   "fieldname": "full_name",
+   "fieldname": "organization_name",
    "fieldtype": "Data",
-   "label": "Full Name",
+   "in_list_view": 1,
+   "label": "Organization Name",
    "reqd": 1
   },
   {
-   "fieldname": "email_address",
+   "fieldname": "domain_name",
    "fieldtype": "Data",
-   "label": "Email Address",
-   "options": "Email",
-   "reqd": 1
-  },
-  {
-   "fieldname": "phone_number",
-   "fieldtype": "Data",
-   "label": "Phone Number",
-   "length": 10
-  },
-  {
-   "fieldname": "role_in_organization",
-   "fieldtype": "Link",
-   "label": "Role In Organization",
-   "options": "Role Profile",
-   "reqd": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "concent_check",
-   "fieldtype": "Check",
-   "label": "Concent Check"
+   "label": "Domain Name",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-07 11:37:52.582683",
+ "modified": "2024-10-29 16:26:55.407135",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "Organization",
@@ -108,5 +56,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "name1"
+ "title_field": "organization_name"
 }

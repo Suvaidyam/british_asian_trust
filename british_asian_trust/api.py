@@ -1,65 +1,57 @@
 import frappe
 from frappe import _
+from british_asian_trust.Services.response import Response
+new_response = Response()
 
 @frappe.whitelist(allow_guest=True)
-def register_organization(pan, email, organization_name, role_in_organization, organization_address, organization_phone, full_name, termsAccepted):
-    # Validate each mandatory field with specific error messages
-    if not pan:
-        return _("PAN is required.")
+def register_organization(email, organization_name, designation_in_organization, full_name, termsAccepted):
     if not email:
-        return _("Email is required.")
+        new_response.bad_request('ERR_001', 'Email is required.')
     if not organization_name:
-        return _("Organization name is required.")
-    if not role_in_organization:
-        return _("Role in organization is required.")
-    if not organization_address:
-        return _("Organization address is required.")
-    if not organization_phone:
-        return _("Organization phone number is required.")
+        new_response.bad_request('ERR_001', 'Organization name is required.')
+    if not designation_in_organization:
+        new_response.bad_request('ERR_001', 'Role in organization is required.')
     if not full_name:
-        return _("Full name is required.")
+        new_response.bad_request('ERR_001', 'Full name is required.')
     if not termsAccepted:
-        return _("You must accept the terms to proceed.")
+        new_response.bad_request('ERR_001', 'You must accept the terms to proceed.')
+    if not frappe.utils.validate_email_address(email):
+        new_response.bad_request('ERR_006', 'Invalid email address.')
+
+    domain = email.split('@')[1]
 
     # Validate if the organization already exists
-    if frappe.db.exists("Organization", {"pan_number": pan}):
-        return _("Organization with this PAN already exists.")
+    if frappe.db.exists("Organization", {"domain_name": domain}):
+        new_response.bad_request('ERR_002', 'Organization with this Domain already exists.')
+    else:
+        try:
+            # Create a new Organization document
+            organization = frappe.get_doc({
+                "doctype": "Organization",
+                "organization_name": organization_name,
+                "domain_name": domain,
+                # Removed any reference to `email_address`
+            })
+            
+            # Create a user with Admin role
+            bat_user = frappe.get_doc({
+                "doctype": "BAT Users",
+                "full_name": full_name,
+                "email_address": email,
+                "designation": designation_in_organization,
+                "organization": domain,
+                "concent_check": termsAccepted
+            })
 
-    # Validate email format
-    if not frappe.utils.validate_email_address(email):
-        return _("Invalid email address: {0}").format(email)
+            organization.insert(ignore_permissions=True)
+            bat_user.insert(ignore_permissions=True)
+            frappe.db.commit()
 
-    try:
-        # Create a new Organization document
-        organization = frappe.get_doc({
-            "doctype": "Organization",
-            "pan_number": pan,
-            "name1": organization_name,
-            "address": organization_address,
-            "full_name": full_name,
-            "email_address": email,
-            "phone_number": organization_phone,
-            "role_in_organization": role_in_organization,
-            "concent_check": termsAccepted
-        })
-        organization.insert(ignore_permissions=True)
-        frappe.db.commit()
+            new_response.ok('SUC_200', None, 'Organization registered successfully.')
 
-        # Create a user with Admin role
-        user = frappe.get_doc({
-            "doctype": "BAT Users",
-            "email": email,
-            "first_name": organization_name,
-        })
-        user.insert(ignore_permissions=True)
-        frappe.db.commit()
-
-        return _("Organization registered successfully.")
-
-    except Exception as e:
-        frappe.log_error(frappe.get_traceback(), _("Failed to register organization"))
-        return _("An error occurred during registration: {0}").format(str(e))
-
+        except Exception as e:
+            frappe.log_error(frappe.get_traceback(), _("Failed to register organization"))
+            new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
 
 
 @frappe.whitelist(allow_guest=False)  # Restricted to logged-in users
