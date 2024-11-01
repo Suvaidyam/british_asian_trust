@@ -220,4 +220,4 @@ const faqs = ref([
 const toggleFaq = (index) => {
   faqs.value[index].isOpen = !faqs.value[index].isOpen
 }
-</script>
+</script> 

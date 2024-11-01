@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // sans: ['Poppins', 'sans-serif'], // Make Poppins the default sans font
+        poppins: ['Poppins', 'sans-serif'], // Add a custom 'poppins' font option
+      },
+    },
   },
   plugins: [
 
