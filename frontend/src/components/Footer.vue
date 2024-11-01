@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-blue-900 text-white py-4 px-6 flex flex-col sm:flex-row justify-between items-center max-w-[2048px] mx-auto w-full">
+    <footer class="bg-[#0D4688] text-white py-4 px-6 flex flex-col sm:flex-row justify-between items-center max-w-[2048px] mx-auto w-full">
       <div class="text-sm mb-2 sm:mb-0">
         © {{ currentYear }} All Rights Reserved
       </div>

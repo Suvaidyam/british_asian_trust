@@ -1,17 +1,17 @@
 <template>
 	<div>
-		<Main/>
-		
+		<DashBoard/>
+
 
 	</div>
 </template>
 
 <script>
-import Main from '../components/Main.vue';
+import DashBoard from './DashBoard.vue';
 export default {
 
 	components: {
-		Main,
+		DashBoard,
 	},
 	resources: {
 

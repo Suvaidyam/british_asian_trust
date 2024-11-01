@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
     <!-- Fixed Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-      <div class="max-w-[2048px] mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="fixed top-0 left-0 right-0 bg-white z-50">
+      <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <div class="flex items-center">
             <img src="/logo.png" alt="ISDM Logo" class="h-8 w-auto" />
@@ -21,7 +21,7 @@
 
             <template v-if="!$auth?.isLoggedIn && currentRoute == '/'">
               <button @click="$router.push({ name: 'Login' })"
-                class="px-6 py-2 text-sm text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors duration-200 w-28">
+                class="px-6 py-2 text-[14px] text-white bg-[#FF8A00] hover:bg-[#FF8A00] rounded-full transition-colors duration-200 w-28">
                 Login
               </button>
             </template>
@@ -31,7 +31,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
-                <span v-if="unreadNotificationsCount > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                <span v-if="unreadNotificationsCount > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
                   {{ unreadNotificationsCount }}
                 </span>
               </button>
@@ -39,14 +39,14 @@
                 <button @click="toggleUserMenu"
                   class="flex items-center text-gray-600 hover:text-gray-800 focus:outline-none">
                   <img class="h-8 w-8 rounded-full" :src="$auth?.cookie?.user_image" alt="User avatar" />
-                  <span class="ml-2 text-sm text-gray-700">{{ $auth?.cookie?.full_name }}</span>
+                  <span class="ml-2 text-[14px] text-gray-700">{{ $auth?.cookie?.full_name }}</span>
                 </button>
                 <div v-if="isUserMenuOpen"
                   class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
                   <a href="#" @click.prevent="openProfileSlider"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                    class="block px-4 py-2 text-[14px] text-gray-700 hover:bg-gray-100">Your Profile</a>
                   <a href="#" @click="$auth.logout()"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Log out</a>
+                    class="block px-4 py-2 text-[14px] text-gray-700 hover:bg-gray-100">Log out</a>
                 </div>
               </div>
             </template>
@@ -73,29 +73,29 @@
       enter-from-class="opacity-0 -translate-y-full" enter-to-class="opacity-100 translate-y-0"
       leave-active-class="transition-all duration-300 ease-in-out" leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-full">
-      <div v-if="isNavigationOpen" class="fixed inset-x-0 top-16 bg-blue-600 z-40 overflow-y-auto shadow-md"
+      <div v-if="isNavigationOpen" class="fixed inset-x-0 top-16 bg-[#0D4688] z-40 overflow-y-auto shadow-md"
         style="max-height: calc(100vh - 4rem);">
-        <div class="max-w-[2048px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div class="space-y-4">
             <!-- Navigation Items -->
             <a @click="navigateTo('AboutUs')"
-              class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">About Us</a>
+              class="block py-2 px-4 text-[16px] text-white hover:text-gray-200 cursor-pointer">About Us</a>
             <a @click="navigateTo('Assignment')"
-              class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Assignment</a>
+              class="block py-2 px-4 text-[16px] text-white hover:text-gray-200 cursor-pointer">Assignment</a>
             
             <!-- Mobile view: Login/Logout and Profile options -->
             <div class="md:hidden">
               <template v-if="!$auth.isLoggedIn">
                 <a @click="navigateTo('Login')"
-                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Login</a>
+                  class="block py-2 px-4 text-[16px] text-white hover:text-gray-200 cursor-pointer">Login</a>
               </template>
               <template v-else>
                 <a @click="toggleNotifications"
-                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Notifications</a>
+                  class="block py-2 px-4 text-[16px] text-white hover:text-gray-200 cursor-pointer">Notifications</a>
                 <a @click="openProfileSlider"
-                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Your Profile</a>
+                  class="block py-2 px-4 text-[16px] text-white hover:text-gray-200 cursor-pointer">Your Profile</a>
                 <a @click="$auth.logout()"
-                  class="block py-2 px-4 text-white hover:text-gray-200 cursor-pointer">Log out</a>
+                  class="block py-2 px-4 text-[16px] text-white hover:text-gray-200 cursor-pointer">Log out</a>
               </template>
             </div>
           </div>
@@ -104,7 +104,7 @@
     </transition>
 
     <!-- Main Content Area (adjust top padding to account for fixed navbar) -->
-    <main class="pt-16 max-w-[2048px] mx-auto">
+    <main class="pt-16 max-w-[1920px] mx-auto">
       <!-- Your main content goes here -->
     </main>
 
@@ -119,8 +119,8 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import UserProfileSlider from './UserProfileSlider.vue'
-import NotificationSlider from './NotificationSlider.vue'
+import UserProfileSlider from '../views/UserProfileSlider.vue'
+import NotificationSlider from '../views/NotificationSlider.vue'
 
 const router = useRouter()
 const isNavigationOpen = ref(false)
@@ -179,7 +179,6 @@ const navigateTo = (routeName) => {
 }
 
 watch(() => router.currentRoute.value.path, (newRoute) => {
-  // console.log(newRoute, 'newRoute')
   currentRoute.value = newRoute
 },{
   immediate: true,

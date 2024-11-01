@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
-import Assessment from "../components/Assessment.vue";
-import Myuser from "../components/MyUser.vue";
-import Forget from "../components/ForgetPassword.vue";
+import Forgot from "../components/ForgotPassword.vue";
 import authRoutes from './auth';
-import Landing from "../components/Landing.vue";
-import AssessmentTest from "../components/AssessmentTest.vue";
+import Landing from "../views/Landing.vue";
+import AssessmentTest from "../views/AssessmentTest.vue";
+import DashBoard from "../views/DashBoard.vue";
 
 const routes = [
   {
@@ -14,11 +13,11 @@ const routes = [
     name: "Home",
     component: Home,
   },
-{
-  path: "/",
-  name: "Landing",
-  component: Landing,
-},
+  {
+    path: "/",
+    name: "Landing",
+    component: Landing,
+  },
   {
     path: "/register",
     name: "Register",
@@ -27,27 +26,19 @@ const routes = [
   {
     path: "/forgot",
     name: "Forgot",
-    component: Forget,
+    component: Forgot,
   },
   ...authRoutes,
-
   {
-    path: "/assessment",
-    name: "Assessment",
-    component: Assessment,
+    path: "/dashboard",
+    name: "DashBoard",
+    component: DashBoard,
   },
 
   {
     path: "/assessmenttest",
     name: "AssessmentTest",
     component: AssessmentTest,
-  },
-
-  {
-
-    path: "/myuser",
-    name: "MyUser",
-    component: Myuser,
   },
 ];
 
