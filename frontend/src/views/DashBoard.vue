@@ -32,12 +32,14 @@
             </ul>
             <p class="text-base sm:text-lg text-gray-700">
               Consider asking team members from various departments (e.g., finance, program, HR, etc.) to
-              provide their inputs. Include input from multiple departments to capture a holistic view of the organization's capabilities.
+              provide their inputs. Include input from multiple departments to capture a holistic view of the
+              organization's capabilities.
               Engage senior leaders for strategic questions and operational teams for implementation-level
               insights.
             </p>
             <p class="text-base sm:text-lg text-gray-700">
-              If any questions seem unclear, or if you need further clarification, please reach out to us for guidance before completing the survey.
+              If any questions seem unclear, or if you need further clarification, please reach out to us for guidance
+              before completing the survey.
             </p>
           </div>
         </div>
@@ -55,7 +57,8 @@
           <div class="bg-white rounded-lg shadow-sm p-6">
             <div class="flex items-center justify-between mb-6">
               <h2 class="text-lg font-semibold">Users</h2>
-              <button @click="showModal = true" class="p-2 hover:bg-gray-100 rounded-full text-blue-600 transition-colors duration-300">
+              <button @click="showModal = true"
+                class="p-2 hover:bg-gray-100 rounded-full text-blue-600 transition-colors duration-300">
                 <Plus class="w-5 h-5" />
               </button>
             </div>
@@ -83,7 +86,8 @@
             <div class="p-6">
               <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-semibold">Invite User</h2>
-                <button @click="showModal = false" class="text-gray-500 hover:text-gray-700 transition-colors duration-300">
+                <button @click="showModal = false"
+                  class="text-gray-500 hover:text-gray-700 transition-colors duration-300">
                   <X class="w-5 h-5" />
                 </button>
               </div>
@@ -92,11 +96,10 @@
                 <div class="flex gap-2">
                   <input v-model="inviteEmail" type="email" placeholder="Invite others by name or email"
                     class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                  <button @click="inviteUser" :disabled="!isValidEmail"
-                    :class="[
-                      'px-4 py-2 rounded-lg transition duration-300',
-                      isValidEmail ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 cursor-not-allowed'
-                    ]">
+                  <button @click="inviteUser" :disabled="!isValidEmail" :class="[
+                    'px-4 py-2 rounded-lg transition duration-300',
+                    isValidEmail ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 cursor-not-allowed'
+                  ]">
                     INVITE
                   </button>
                 </div>
@@ -117,7 +120,8 @@
                         <option value="Support">Support</option>
                         <option value="Primary">Primary</option>
                       </select>
-                      <button @click="removeMember(member.id)" class="text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                      <button @click="removeMember(member.id)"
+                        class="text-gray-400 hover:text-gray-600 transition-colors duration-300">
                         <Trash2 class="w-4 h-4" />
                       </button>
                     </div>
@@ -216,13 +220,13 @@ const removeMember = (id) => {
 const checkUserRegistration = async () => {
   try {
     const user = await $auth.getSessionUser()
+    console.log(user, 'user')
     if (user && user.social_logins && user.social_logins.length > 0) {
-      const googleLogin = user.social_logins.find(login => login.provider === "google" || login.provider === "office_365")
       userName.value = user.full_name || 'User'
-      if (googleLogin) {
-        showRegistrationPopup.value = true
-      } else {
+      if (user?.bat_designation != null || user?.bat_organization != null) {
         showRegistrationPopup.value = false
+      } else {
+        showRegistrationPopup.value = true
       }
     } else {
       showRegistrationPopup.value = false

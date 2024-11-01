@@ -38,6 +38,33 @@ def register_user(email, full_name, termsAccepted):
             new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
 
 
+@frappe.whitelist(allow_guest=True)
+def complate_registration(organization,designation):
+    if not organization or not designation:
+        new_response.bad_request('ERR_001', 'Organization and Designation are required.')
+    else:
+        try:
+            domain = frappe.session.user.split('@')[1]
+            bat_user = frappe.get_doc("BAT Users", frappe.session.user)
+            bat_user.organization = domain
+            bat_user.designation = designation
+            organization = frappe.get_doc({
+                "doctype": "Organization",
+                "domain_name": domain,
+                "organization_name": organization
+            })
+            organization.insert(ignore_permissions=True)
+            bat_user.save(ignore_permissions=True)
+            frappe.db.commit()
+            new_response.ok('SUC_200', None, 'Organization Created')
+        except Exception as e:
+            frappe.log_error(frappe.get_traceback(), _("An error occurred during registration"))
+            new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
+    
+    
+
+
+
 @frappe.whitelist(allow_guest=False)  # Restricted to logged-in users
 def register_invities_user(email_address, full_name, designation, mobile_number):
     # Validate each mandatory field with specific error messages
@@ -104,7 +131,7 @@ def get_both_user(userId):
     except frappe.DoesNotExistError:
         frappe.throw(f"User with ID {userId} not found in 'BAT Users' DocType")
 
-    user_fields = ["name", "email","full_name", "user_type", "role_profile_name", "mobile_no",'social_logins',"username"]  
+    user_fields = ["name", "email","full_name", "user_type", "role_profile_name" ,'social_logins',"username"]  
     bat_user_fields = ["full_name", "designation", "organization"] 
     combined_user = {}
     for field in user_fields:
@@ -137,7 +164,7 @@ def my_login_via_google(code: str, state: str):
     login_via_oauth2("google", code, state, decoder=decoder_compat)
     user = frappe.session.user
     userinfo = frappe.get_doc("User", user)
-    userinfo.role_profile_name = "Admin"
+    userinfo.role_profile_name = "Primary"
     userinfo.save(ignore_permissions=True)
     frappe.db.commit()
     if not frappe.db.exists("BAT Users", user):
@@ -157,7 +184,7 @@ def my_login_via_office_365(code: str, state: str):
     login_via_oauth2_id_token("office_365", code, state, decoder=decoder_compat)
     user = frappe.session.user
     userinfo = frappe.get_doc("User", user)
-    userinfo.role_profile_name = "Admin"
+    userinfo.role_profile_name = "Primary"
     userinfo.save(ignore_permissions=True)
     frappe.db.commit()
     if not frappe.db.exists("BAT Users", user):
