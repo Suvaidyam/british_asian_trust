@@ -1,31 +1,37 @@
 <template>
-  <div class="min-h-screen bg-white font-sans">
+  <div class="min-h-screen bg-white">
     <!-- Hero Section -->
     <section class="relative py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div class="absolute bg-effect w-3/4 h-3/4">
         <img src="/effect.png" alt="Background effect">
       </div>
-      <div class="max-w-[1920px] mx-auto relative responsive-container">
-        <h1 class="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-[1.1] font-bold text-[#0D4688] text-center mb-4">
-          Empowering NGOs to Drive Impact
-        </h1>
-        <p class="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[19px] text-gray-700 text-center mb-8 max-w-2xl mx-auto">
-          Register and complete your assessment to unlock resources and support for your cause.
-        </p>
-        <div class="relative rounded-lg overflow-hidden shadow-xl">
-          <img src="/login1.png" alt="Family using laptop"
-            class="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover">
+      <div class="max-w-[1512px] mx-auto relative">
+        <div class="mx-6 sm:mx-12 lg:mx-16">
+          <h1
+            class="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-[1.1] font-bold text-[#0D4688] text-center mb-4">
+            Empowering NGOs to Drive Impact
+          </h1>
+          <p
+            class="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[19px] text-gray-700 text-center mb-8 max-w-2xl mx-auto">
+            Register and complete your assessment to unlock resources and support for your cause.
+          </p>
+          <div class="relative rounded-lg overflow-hidden shadow-xl">
+            <img src="/login1.png" alt="Family using laptop"
+              class="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[400px] xl:h-[500px] object-cover">
+          </div>
         </div>
       </div>
     </section>
 
     <!-- About Us Section -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div class="max-w-[1920px] mx-auto responsive-container">
+      <div class="max-w-[1512px] mx-auto">
         <div class="lg:flex lg:items-start lg:justify-between mb-12 lg:mb-16">
           <div class="relative flex-shrink-0 mb-8 lg:mb-0 lg:mr-12">
             <div class="absolute inset-0 bg-blue-100 rounded-full h-16 w-16 sm:h-20 sm:w-20"></div>
-            <h2 class="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold text-[#0D4688] relative z-10 p-4">About Us</h2>
+            <h2
+              class="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold text-[#0D4688] relative z-10 p-4">
+              About Us</h2>
           </div>
           <p class="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[19px] text-gray-700 max-w-2xl lg:max-w-3xl">
             Our portal is designed to streamline the process for NGOs to register, assess their impact,
@@ -36,24 +42,25 @@
         </div>
         <div class="lg:flex lg:space-x-8">
           <!-- Steps Section -->
-          <div class="space-y-8 lg:space-y-12 w-full lg:w-1/2 relative mb-8 lg:mb-0">
-            <div class="absolute top-0 left-4 sm:left-7 bottom-0 border-l-2 border-dotted border-gray-300"></div>
+          <div class="space-y-12 lg:space-y-16 w-full lg:w-1/2 relative mb-8 lg:mb-0">
+            <div
+              class="absolute top-[calc(3.5rem+1.75rem)] left-7 sm:left-10 bottom-[calc(3.5rem+1.75rem)] border-l-2 border-dotted border-orange-400">
+            </div>
             <div v-for="(step, index) in steps" :key="index"
-              class="relative flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <div
-                class="relative bg-white h-12 w-12 sm:h-14 sm:w-14 rounded-full flex items-center justify-center border-2 border-gray-300 z-10">
-                <component :is="step.icon" class="w-6 h-6 sm:w-8 sm:h-8 text-[#0D4688]"></component>
+                class="relative bg-white h-14 w-14 sm:h-20 sm:w-20 flex items-center justify-center z-10 rounded-full shadow-md">
+                <component :is="step.icon" class="w-8 h-8 sm:w-10 sm:h-10 text-[#0D4688]"></component>
               </div>
               <div class="sm:ml-4">
                 <h4 class="text-[18px] sm:text-[20px] lg:text-[22px] font-semibold mb-1 sm:mb-2">{{ step.title }}</h4>
-                <p class="text-[14px] sm:text-[15px] lg:text-[16px] text-gray-600">{{ step.description }}</p>
+                <p class="text-[14px] sm:text-[15px] lg:text-[16px]  text-gray-600">{{ step.description }}</p>
               </div>
             </div>
           </div>
           <!-- Image and Button Section -->
           <div class="lg:w-1/2 relative">
-            <img src="/login1.png" alt="Children benefiting from NGO work"
-              class="w-full rounded-lg shadow-lg">
+            <img src="/login1.png" alt="Children benefiting from NGO work" class="w-full rounded-lg shadow-lg">
             <button
               class="absolute top-4 right-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition duration-300 text-[14px] sm:text-[16px]">
               How It Works
@@ -68,7 +75,7 @@
       <div class="absolute bg-effect1 w-1/4 h-1/2 ">
         <img src="/effect.png" alt="Background effect">
       </div>
-      <div class="max-w-[1920px] mx-auto relative responsive-container">
+      <div class="max-w-[1512px] mx-auto relative">
         <h2 class="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold text-[#0D4688] text-center mb-12">
           What people say about us
         </h2>
@@ -110,12 +117,14 @@
 
     <!-- FAQ Section -->
     <section class="py-16 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-[1920px] mx-auto responsive-container">
-        <h2 class="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold text-[#0D4688] text-center mb-12">FAQs</h2>
+      <div class="max-w-[1512px] mx-auto">
+        <h2 class="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold text-[#0D4688] text-center mb-12">
+          FAQs</h2>
         <div class="space-y-4 max-w-3xl mx-auto">
           <div v-for="(faq, index) in faqs" :key="index" class="border border-gray-200 rounded-lg">
             <button @click="toggleFaq(index)" class="flex justify-between items-center w-full p-4 text-left">
-              <span class="text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-gray-800">{{ faq.question }}</span>
+              <span class="text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-gray-800">{{ faq.question
+                }}</span>
               <PlusIcon v-if="!faq.isOpen" class="w-6 h-6 text-[#0D4688] flex-shrink-0 ml-4" />
               <MinusIcon v-else class="w-6 h-6 text-[#0D4688] flex-shrink-0 ml-4" />
             </button>
@@ -215,7 +224,7 @@ const faqs = ref([
     isOpen: false
   }
 ])
-  
+
 const toggleFaq = (index) => {
   faqs.value[index].isOpen = !faqs.value[index].isOpen
 }

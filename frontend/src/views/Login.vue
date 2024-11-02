@@ -1,17 +1,17 @@
 <template>
 	<div class="flex justify-center min-h-screen bg-gray-100 p-4 sm:p-0">
-	  <div class="w-full max-w-[2048px] flex flex-col lg:flex-row shadow-2xl">
+	  <div class="w-full max-w-[1512px] flex flex-col lg:flex-row shadow-2xl">
 		<!-- Image Section -->
 		<div class="lg:w-1/2 h-64 lg:h-auto">
-		  <img src="../../public/login1.png" alt="Family using laptop" class="object-cover w-full h-full" />
+		  <img src="/login1.png" alt="Family using laptop" class="object-cover w-full h-full" />
 		</div>
 		<!-- Login Form Section -->
 		<div class="lg:w-1/2 p-4 sm:p-8 flex flex-col justify-center items-center bg-white">
 		  <div class="w-full max-w-md">
-			<h1 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 sm:mb-6 text-center">
+			<h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-4 sm:mb-6 text-center">
 			  Welcome to Outcome Readiness
 			</h1>
-			<p class="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 text-center">
+			<p class="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8 text-center">
 			  Login to empower your organization and gain access to surveys,
 			  personalized recommendations, and tools to drive impact.
 			</p>
@@ -19,15 +19,14 @@
 			  <div>
 				<label for="email" class="sr-only">Email ID</label>
 				<input id="email" v-model="email" type="email" required
-				  class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Email ID"
+				  class="w-full px-4 py-2 border border-gray-300 rounded-md text-sm sm:text-base" placeholder="Email ID"
 				  @input="validateField('email')" />
-				<p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
-				<!-- <p class="text-gray-600 text-xs mt-1">Use only your work email for login. Personal emails are not allowed.</p> -->
+				<p v-if="errors.email" class="text-red-500 text-xs sm:text-sm mt-1">{{ errors.email }}</p>
 			  </div>
 			  <div class="relative">
 				<label for="password" class="sr-only">Password</label>
 				<input id="password" v-model="password" :type="showPassword ? 'text' : 'password'" required
-				  class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Password"
+				  class="w-full px-4 py-2 border border-gray-300 rounded-md text-sm sm:text-base" placeholder="Password"
 				  @input="validateField('password')" />
 				<button type="button" @click="togglePassword"
 				  class="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -40,32 +39,32 @@
 					</path>
 				  </svg>
 				</button>
-				<p v-if="errors.password" class="text-red-500 text-xs mt-1">{{ errors.password }}</p>
+				<p v-if="errors.password" class="text-red-500 text-xs sm:text-sm mt-1">{{ errors.password }}</p>
 			  </div>
 			  <div class="flex justify-end mb-2">
-				<router-link to="/forgot" class="text-sm text-blue-600 hover:underline">
+				<router-link to="/forgot" class="text-sm sm:text-base text-blue-600 hover:underline">
 				  Forgot Password?
 				</router-link>
 			  </div>
 			  <button type="submit" :disabled="!isFormValid"
-				class="w-full bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+				class="w-full bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base">
 				LOGIN
 			  </button>
 			</form>
 			<div class="mt-4 text-center">
-			  <router-link to="/register" class="text-sm text-blue-600 hover:underline">
+			  <router-link to="/register" class="text-sm sm:text-base text-blue-600 hover:underline">
 				Don't have an account? Sign up
 			  </router-link>
 			</div>
 			<div class="mt-6 flex items-center">
 			  <div class="flex-grow border-t border-gray-300"></div>
-			  <span class="flex-shrink mx-4 text-gray-600">OR</span>
+			  <span class="flex-shrink mx-4 text-gray-600 text-sm sm:text-base">OR</span>
 			  <div class="flex-grow border-t border-gray-300"></div>
 			</div>
 			<div class="mt-6">
-			  <a href="https://accounts.google.com/o/oauth2/auth?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Fbritish_asian_trust.api.my_login_via_google&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiMjg1YjVhYmQ1YTY2Y2RiNGU3NTZkZmFmNmZiNWNhODc0ZDI3ZTY4M2U3NzU4NTQwZTgwMmRmZjkiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=720319117261-1kuhqoutuq2j8ud0b8dsp1oen4glmruq.apps.googleusercontent.com"
+			  <a :href="googleAuthUrl"
 				class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-full mb-2
-				hover:bg-gray-50 transition duration-300 flex items-center justify-center"
+				hover:bg-gray-50 transition duration-300 flex items-center justify-center text-sm sm:text-base"
 			  >
 				<svg class="h-5 w-5 mr-2" viewBox="0 0 24 24">
 				  <path fill="#4285F4"
@@ -80,9 +79,9 @@
 				</svg>
 				Continue with Google
 			  </a>
-			  <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Ffrappe.integrations.oauth2_logins.login_via_office365&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiZWI2Y2I3ZTVkZDY0N2QwMDVjNzQ5Y2Q3NDc2N2U4OTM3YmJkYmYwZTc5MWQyMGQ1NDUwMjkwYWYiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&response_type=code&scope=openid+email+profile&client_id=c28ed05b-846a-414e-b8df-bbb602316b22"
+			  <a :href="microsoftAuthUrl"
 				class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-50
-				transition duration-300 flex items-center justify-center">
+				transition duration-300 flex items-center justify-center text-sm sm:text-base">
 				<svg class="h-5 w-5 mr-2" viewBox="0 0 23 23">
 				  <path fill="#f3f3f3" d="M0 0h23v23H0z" />
 				  <path fill="#f35325" d="M1 1h10v10H1z" />
@@ -118,6 +117,10 @@
   const router = useRouter()
   const route = useRoute()
   const toast = useToast()
+  
+  const googleAuthUrl = "https://accounts.google.com/o/oauth2/auth?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Fbritish_asian_trust.api.my_login_via_google&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiMjg1YjVhYmQ1YTY2Y2RiNGU3NTZkZmFmNmZiNWNhODc0ZDI3ZTY4M2U3NzU4NTQwZTgwMmRmZjkiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=720319117261-1kuhqoutuq2j8ud0b8dsp1oen4glmruq.apps.googleusercontent.com"
+  
+  const microsoftAuthUrl = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Ffrappe.integrations.oauth2_logins.login_via_office365&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiZWI2Y2I3ZTVkZDY0N2QwMDVjNzQ5Y2Q3NDc2N2U4OTM3YmJkYmYwZTc5MWQyMGQ1NDUwMjkwYWYiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&response_type=code&scope=openid+email+profile&client_id=c28ed05b-846a-414e-b8df-bbb602316b22"
   
   const validateEmail = (value) => {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/

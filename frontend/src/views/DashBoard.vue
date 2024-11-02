@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 font-sans">
     <!-- Main Content -->
-    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-[1512px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="grid lg:grid-cols-[1fr_350px] gap-8">
         <!-- Left Content -->
         <div class="space-y-6">
