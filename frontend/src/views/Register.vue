@@ -1,9 +1,9 @@
 <template>
   <div class="flex justify-center min-h-screen bg-gray-100 p-4 sm:p-0">
-    <div class="w-full max-w-[2048px] flex flex-col lg:flex-row shadow-2xl">
+    <div class="w-full max-w-[1512px] flex flex-col lg:flex-row shadow-2xl">
       <!-- Image Section -->
       <div class="lg:w-1/2 h-64 lg:h-auto">
-        <img src="../../public/login1.png" alt="Two women in traditional attire" class="object-cover w-full h-full" />
+        <img src="/login1.png" alt="Two women in traditional attire" class="object-cover w-full h-full" />
       </div>
       <!-- Registration Form Section -->
       <div class="lg:w-1/2 p-4 sm:p-8 flex flex-col justify-center items-center bg-white">
@@ -32,25 +32,6 @@
               <p class="text-gray-600 text-xs mt-1">Use only your work email for registration. Personal emails are not
                 allowed.</p>
             </div>
-<!-- 
-            <div>
-              <label for="organization" class="sr-only">Organization</label>
-              <input type="text" id="organization" v-model="organization" @input="validateField('organization')"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Organization Name">
-              <p v-if="errors.organization" class="text-red-500 text-xs mt-1">{{ errors.organization }}</p>
-            </div>
-
-            <div>
-              <label for="designation" class="sr-only">Designation</label>
-              <select v-model="selectedDesignation" id="designation" @change="validateField('designation')"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md appearance-none bg-white">
-                <option value="" disabled selected>Select a designation</option>
-                <option v-for="d in designations" :key="d.name" :value="d.name">
-                  {{ d.name }}
-                </option>
-              </select>
-              <p v-if="errors.designation" class="text-red-500 text-xs mt-1">{{ errors.designation }}</p>
-            </div> -->
             <div class="flex items-center">
               <input id="terms" type="checkbox" v-model="termsAccepted" @change="validateField('termsAccepted')"
                 class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
