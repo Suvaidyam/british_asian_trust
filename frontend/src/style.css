@@ -7,6 +7,7 @@
 
 
 
+
 /* Scrollbar Styling */
 /* Hide scrollbars initially */
 .master::-webkit-scrollbar {
@@ -116,8 +117,10 @@
 
 @media (min-width: 1441px) and (max-width: 2048px) {
   .bg-effect {
-    top: -110%;
-    width: 90%;
+    top: -50%;
+    transform: rotate(425deg);
+    width: 40%;
+    left: 35%;
   }
 
   .bg-effect1 {

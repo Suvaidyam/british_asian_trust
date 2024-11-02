@@ -7,13 +7,12 @@
       </div>
       <!-- Registration Form Section -->
       <div class="lg:w-1/2 p-4 sm:p-8 flex flex-col justify-center items-center bg-white">
-        <div class="w-full max-w-md">
-          <h1 class="text-xl sm:text-2xl font-bold text-blue-900 mb-4 sm:mb-6 text-center">
+        <div class="w-full max-w-lg">
+          <h1 class="font-poppins text-[24px] font-semibold leading-[28px] lg:text-[34px] lg:leading-[37.4px] text-[#0D4688] mb-4 sm:mb-6 text-center">
             Join Outcome Readiness
           </h1>
-          <p class="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 text-center">
-            Sign up to empower your organization. Register today and gain access to surveys,
-            personalized recommendations, and tools to drive impact.
+          <p class="font-poppins text-[14px] font-normal leading-[18.34px] tracking-[0.0025em] text-[#2F2F2F] lg:text-[14px] lg:leading-[18.34px] mb-6 sm:mb-8 text-center">
+            Sign up to empower your organization. Register today and gain access to surveys, personalized recommendations, and tools to drive impact.
           </p>
 
           <!-- Form -->
@@ -21,45 +20,44 @@
             <div>
               <label for="full-name" class="sr-only">Full Name</label>
               <input type="text" id="full-name" v-model="fullName" @input="validateField('fullName')"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Full Name">
-              <p v-if="errors.fullName" class="text-red-500 text-xs mt-1">{{ errors.fullName }}</p>
+                class="w-full px-4 h-12 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-[#2F2F2F]" placeholder="Full Name">
+              <p v-if="errors.fullName" class="text-red-500 text-xs mt-1 font-poppins">{{ errors.fullName }}</p>
             </div>
             <div>
               <label for="email" class="sr-only">Email Address</label>
               <input type="email" id="email" v-model="email" @input="validateField('email')"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Email Address">
-              <p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
-              <p class="text-gray-600 text-xs mt-1">Use only your work email for registration. Personal emails are not
-                allowed.</p>
+                class="w-full px-4 h-12 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-[#2F2F2F]" placeholder="Email Address">
+              <p v-if="errors.email" class="text-red-500 text-xs mt-1 font-poppins">{{ errors.email }}</p>
+              <p class="text-gray-600 text-xs mt-1 font-poppins">Use only your work email for registration. Personal emails are not allowed.</p>
             </div>
             <div class="flex items-center">
               <input id="terms" type="checkbox" v-model="termsAccepted" @change="validateField('termsAccepted')"
                 class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
-              <label for="terms" class="ml-2 block text-sm text-gray-900">
+              <label for="terms" class="ml-2 block text-sm text-gray-900 font-poppins">
                 I agree with <a href="#" class="text-orange-600 hover:text-orange-500">terms & conditions</a>
               </label>
             </div>
-            <p v-if="errors.termsAccepted" class="text-red-500 text-xs mt-1">{{ errors.termsAccepted }}</p>
+            <p v-if="errors.termsAccepted" class="text-red-500 text-xs mt-1 font-poppins">{{ errors.termsAccepted }}</p>
 
             <button type="submit"
-              class="w-full bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full bg-orange-500 text-white h-12 px-4 rounded-full hover:bg-orange-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em]"
               :disabled="!isFormValid">
               Sign Up
             </button>
           </form>
           <div class="mt-4 text-center">
-            <router-link to="/login" class="text-sm text-blue-600 hover:underline">
+            <router-link to="/login" class="font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-blue-600 hover:underline">
               Already have an account? Log in
             </router-link>
           </div>
           <div class="mt-6 flex items-center">
             <div class="flex-grow border-t border-gray-300"></div>
-            <span class="flex-shrink mx-4 text-gray-600">OR</span>
+            <span class="flex-shrink mx-4 text-gray-600 font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em]">OR</span>
             <div class="flex-grow border-t border-gray-300"></div>
           </div>
           <div class="mt-6 space-y-2">
             <button @click="handleGoogleLogin"
-              class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-50 transition duration-300 flex items-center justify-center">
+              class="w-full border border-gray-300 text-gray-700 h-12 px-4 rounded-full hover:bg-gray-50 transition duration-300 flex items-center justify-center font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em]">
               <svg class="h-5 w-5 mr-2" viewBox="0 0 24 24">
                 <path fill="#4285F4"
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -74,7 +72,7 @@
               Continue with Google
             </button>
             <button @click="handleMicrosoftLogin"
-              class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-50 transition duration-300 flex items-center justify-center">
+              class="w-full border border-gray-300 text-gray-700 h-12 px-4 rounded-full hover:bg-gray-50 transition duration-300 flex items-center justify-center font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em]">
               <svg class="h-5 w-5 mr-2" viewBox="0 0 23 23">
                 <path fill="#f3f3f3" d="M0 0h23v23H0z" />
                 <path fill="#f35325" d="M1 1h10v10H1z" />
@@ -102,13 +100,13 @@
           </svg>
         </div>
       </div>
-      <h3 class="text-xl font-semibold mb-2">Thank you for submitting your details!</h3>
-      <p class="text-gray-600 text-sm mb-6">
+      <h3 class="text-xl font-semibold mb-2 font-poppins">Thank you for submitting your details!</h3>
+      <p class="text-gray-600 text-sm mb-6 font-poppins">
         We've sent a verification email to your registered address. Please check your inbox and
         follow the link to verify your email. Once verified, you'll be able to set your password and
         complete your registration.
       </p>
-      <button @click="closeModal" class="w-full bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-orange-600">
+      <button @click="closeModal" class="w-full bg-orange-500 text-white h-12 px-4 rounded-full hover:bg-orange-600 font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em]">
         Close
       </button>
     </div>
@@ -120,7 +118,7 @@ import { ref, reactive, computed, inject } from 'vue'
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification'
 
-const router= useRouter()
+const router = useRouter()
 const fullName = ref('')
 const email = ref('')
 const termsAccepted = ref(false)
@@ -170,14 +168,15 @@ const handleSubmit = async () => {
       });
       if (result.code == 'SUC_200') {
         showModal.value = true;
-        setTimeout(()=>{
-          router.push( { name: 'Login' })
-        },3000)
+        setTimeout(() => {
+          router.push({ name: 'Login' })
+        }, 3000)
       } else {
         toast.error(result.message, { position: "top-right", timeout: 3000 });
       }
     } catch (error) {
       console.error('API Error:', error);
+      toast.error('An error occurred. Please try again later.', { position: "top-right", timeout: 3000 });
     }
   } else {
     toast.error('Please fill in all required fields correctly.', { position: "top-right", timeout: 3000 })
@@ -191,10 +190,20 @@ const handleGoogleLogin = () => {
 
 const handleMicrosoftLogin = () => {
   window.location.href =
+    
     "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Ffrappe.integrations.oauth2_logins.login_via_office365&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiZWI2Y2I3ZTVkZDY0N2QwMDVjNzQ5Y2Q3NDc2N2U4OTM3YmJkYmYwZTc5MWQyMGQ1NDUwMjkwYWYiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&response_type=code&scope=openid+email+profile&client_id=c28ed05b-846a-414e-b8df-bbb602316b22"
 }
 
 const closeModal = () => {
   showModal.value = false
+  router.push({ name: 'Login' })
 }
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+</style>
