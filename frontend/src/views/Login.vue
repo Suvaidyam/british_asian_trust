@@ -46,7 +46,7 @@
 						</div>
 						<div class="flex justify-end mb-2">
 							<router-link to="/forgot"
-								class="font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-blue-600 hover:underline">
+								class="font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#0D4688] hover:underline">
 								Forgot Password?
 							</router-link>
 						</div>
@@ -57,7 +57,7 @@
 					</form>
 					<div class="mt-4 text-center">
 						<router-link to="/register"
-							class="font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-blue-600 hover:underline">
+							class="font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#0D4688] hover:underline">
 							Don't have an account? Sign up
 						</router-link>
 					</div>
