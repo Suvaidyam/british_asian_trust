@@ -3,9 +3,9 @@
     <!-- Fixed Navigation Bar -->
     <nav class="fixed top-0 left-0 right-0 bg-white z-50">
       <div class="max-w-[1512px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
+        <div class="flex justify-between items-center h-20">
           <div class="flex items-center">
-            <img src="/logo.png" alt="ISDM Logo" class="h-8 w-auto" />
+            <img src="/logo.png" alt="ISDM Logo" class="h-12 w-auto" />
           </div>
 
           <!-- Desktop Navigation -->
@@ -14,19 +14,19 @@
 
               <button @click="toggleNavigation" class="text-[#0D4688] hover:text-[#0D4688] focus:outline-none">
                 <span class="sr-only">Toggle navigation</span>
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path v-if="!isNavigationOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M4 6h16M4 12h16m-7 6h7" />
                   <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <span class="text-[#0D4688] font-bold text-xs mb-1">MENU</span>
+              <span class="text-[#0D4688] font-poppins text-[12px] md:text-sm font-bold leading-[13.2px] tracking-[0.004em] mb-1">MENU</span>
             </div>
 
             <template v-if="!$auth?.isLoggedIn && currentRoute == '/'">
               <button @click="$router.push({ name: 'Login' })"
-                class="px-6 py-2 text-[14px] sm:text-[15px] md:text-[16px] text-white bg-[#FF8A00] hover:bg-[#FF8A00] rounded-full transition-colors duration-200 w-36">
+                class="px-6 py-3 font-poppins text-[14px] md:text-base font-semibold leading-[15.4px] tracking-[0.0125em] text-white bg-[#FF8A00] hover:bg-[#FF8A00] rounded-full transition-colors duration-200 w-40">
                 Login
               </button>
             </template>
@@ -74,7 +74,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <span class="text-[#0D4688] font-bold text-xs mb-1">MENU</span>
+            <span class="text-[#0D4688] font-poppins text-[12px] md:text-sm font-bold leading-[13.2px] tracking-[0.004em] mb-1">MENU</span>
           </div>
         </div>
       </div>
