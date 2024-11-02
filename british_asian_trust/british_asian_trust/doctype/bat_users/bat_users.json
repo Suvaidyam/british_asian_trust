@@ -12,6 +12,7 @@
   "organization",
   "is_social_login",
   "concent_check",
+  "role_profile",
   "column_break_khco"
  ],
  "fields": [
@@ -49,8 +50,7 @@
    "default": "0",
    "fieldname": "is_social_login",
    "fieldtype": "Check",
-   "label": "Is Social User",
-   "read_only": 1
+   "label": "Is Social User"
   },
   {
    "default": "0",
@@ -62,11 +62,16 @@
   {
    "fieldname": "column_break_khco",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "role_profile",
+   "fieldtype": "Data",
+   "label": "Role Profile"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-30 11:30:37.692253",
+ "modified": "2024-11-02 14:51:58.086472",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "BAT Users",

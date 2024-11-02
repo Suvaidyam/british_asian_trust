@@ -25,6 +25,7 @@ def register_user(email, full_name, termsAccepted):
                 "doctype": "BAT Users",
                 "full_name":full_name,
                 "email_address": email,
+                "role_profile": "Primary",
                 "concent_check": termsAccepted
             })
 
@@ -62,56 +63,61 @@ def complate_registration(organization,designation):
             new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
     
     
-
-
-
 @frappe.whitelist(allow_guest=False)  # Restricted to logged-in users
-def register_invities_user(email_address, full_name, designation, mobile_number):
+def register_invities_user(email,role_profile="Support"):
     # Validate each mandatory field with specific error messages
-    if not email_address:
-        return _("Email address is required.")
-    if not full_name:
-        return _("Full name is required.")
-    if not designation:
-        return _("Designation is required.")
-    if not mobile_number:
-        return _("Mobile number is required.")
+    if not email:
+        return _("Email is required.")
+    
+    if not email.split('@')[1] == frappe.session.user.split('@')[1]:
+        new_response.bad_request('ERR_001', 'You can only invite users from your organization.')
+    
+    count = frappe.db.count("BAT Users", filters={"owner": frappe.session.user})
+    if count > 1:
+        new_response.bad_request('ERR_003', 'You have reached the maximum limit of users you can invite.')
+    else:
+        if frappe.db.exists("BAT Users", {"email_address": email}):
+            new_response.bad_request('ERR_002', 'User with this email already exists.')
+        else:
+            if not frappe.utils.validate_email_address(email):
+                return _("Invalid email address: {0}").format(email)
+            else:
+                name = ' '.join(email.split('@')[0].split('.'))
+                organization = email.split('@')[1]
+                try:
+                    bat_user = frappe.get_doc({
+                        "doctype": "BAT Users",
+                        "full_name": name,
+                        "email_address": email,
+                        "organization": organization,
+                        "role_profile": role_profile
+                    })
 
-    # Get the organization of the logged-in user
-    logind_user = frappe.get_doc("BAT Users", frappe.session.user)
-    if not logind_user.organization:
-        return _("User is not associated with any organization")
+                    bat_user.insert(ignore_permissions=True)
+                    frappe.db.commit()
+                    new_response.ok('SUC_200', None, 'User Created')
+                except Exception as e:
+                    frappe.log_error(frappe.get_traceback(), _("An error occurred during registration"))
+                    new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
 
-    # Validate if the user already exists
-    if frappe.db.exists("BAT Users", {"email_address": email_address}):
-        return _("User with this email already exists.")
 
-    # Validate email format
-    if not frappe.utils.validate_email_address(email_address):
-        return _("Invalid email address: {0}").format(email_address)
-
-    try:
-        # Create a new BAT Users document with the organization of the logged-in user
-        user = frappe.get_doc({
-            "doctype": "BAT Users",
-            "email_address": email_address,
-            "full_name": full_name,
-            "designation": designation,
-            "mobile_number": mobile_number,
-            "organization": logind_user.organization    
-        })
-        user.insert(ignore_permissions=True)
-        frappe.db.commit()
-
-        # Log the action for audit
-        frappe.logger().info(f"User {frappe.session.user} invited {email_address} to organization {logind_user.organization}")
-
-        return _("User registered successfully.")
-
-    except Exception as e:
-        frappe.log_error(frappe.get_traceback(), _("Failed to register user"))
-        return _("An error occurred during registration: {0}").format(str(e))
-
+@frappe.whitelist(allow_guest=True)
+def update_team_member(email,role_profile):
+    if not email or not role_profile:
+        new_response.bad_request('ERR_001', 'Email and Role Profile are required.')
+    else:
+        try:
+            bat_user = frappe.get_doc("BAT Users", email)
+            bat_user.role_profile = role_profile
+            session_user = frappe.get_doc("BAT Users", frappe.session.user)
+            session_user.role_profile = "Primary" if role_profile == "Support" else "Support"
+            session_user.save(ignore_permissions=True)
+            bat_user.save(ignore_permissions=True)
+            frappe.db.commit()
+            new_response.ok('SUC_200', None, 'User Updated')
+        except Exception as e:
+            frappe.log_error(frappe.get_traceback(), _("An error occurred during registration"))
+            new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
 
 
 @frappe.whitelist(allow_guest=True)
@@ -131,8 +137,8 @@ def get_both_user(userId):
     except frappe.DoesNotExistError:
         frappe.throw(f"User with ID {userId} not found in 'BAT Users' DocType")
 
-    user_fields = ["name", "email","full_name", "user_type", "role_profile_name" ,'social_logins',"username"]  
-    bat_user_fields = ["full_name", "designation", "organization"] 
+    user_fields = ["name", "email","full_name", "user_type", "role_profile_name" ,'social_logins',"username",'user_image']  
+    bat_user_fields = ["full_name", "designation", "organization",'role_profile'] 
     combined_user = {}
     for field in user_fields:
         combined_user[field] = user.get(field, None)
@@ -143,7 +149,14 @@ def get_both_user(userId):
     # Return the combined user details
     return combined_user
 
-
+@frappe.whitelist(allow_guest=True)
+def get_team_members():
+    user = frappe.get_doc("BAT Users", frappe.session.user)
+    if not user.organization:
+        return []
+    teamMember= frappe.get_all("BAT Users", filters={"organization": user.organization}, fields=["*"])
+    return teamMember
+    
 
 
 @frappe.whitelist(allow_guest=True)
