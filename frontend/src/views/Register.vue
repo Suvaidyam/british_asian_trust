@@ -46,7 +46,7 @@
             </button>
           </form>
           <div class="mt-4 text-center">
-            <router-link to="/login" class="font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-blue-600 hover:underline">
+            <router-link to="/login" class="font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-[#0D4688] hover:underline">
               Already have an account? Log in
             </router-link>
           </div>
