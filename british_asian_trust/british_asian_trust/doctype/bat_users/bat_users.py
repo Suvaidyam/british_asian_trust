@@ -10,7 +10,7 @@ class BATUsers(Document):
 		if not frappe.db.exists("User", self.email_address):
 			new_user = frappe.new_doc("User")
 			new_user.email = self.email_address
-			new_user.role_profile_name = "Primary" 
+			new_user.role_profile_name = self.role_profile or "Primary" 
 			if len(self.full_name.split(" ")) > 2:
 				new_user.first_name = self.full_name.split(" ")[0]
 				new_user.middle_name = self.full_name.split(" ")[1]
@@ -23,6 +23,7 @@ class BATUsers(Document):
 			new_user.insert(ignore_permissions=True)
 		else:
 			existing_user = frappe.get_doc("User", self.email_address)
+			existing_user.role_profiles = [frappe.get_doc({"doctype":"User Role Profile","role_profile": self.role_profile or "Primary","parent": self.email_address,"parenttype":"User",'parentfield':'role_profiles'}).save(ignore_permissions=True)]
 			if len(self.full_name.split(" ")) > 2:
 				existing_user.first_name = self.full_name.split(" ")[0]
 				existing_user.middle_name = self.full_name.split(" ")[1]

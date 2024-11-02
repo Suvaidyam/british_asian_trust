@@ -64,14 +64,16 @@
             </div>
 
             <div class="space-y-4">
-              <div v-for="user in users" :key="user.id" class="flex items-center gap-3">
-                <img :src="user.avatar" :alt="user.name" class="w-8 h-8 rounded-full" />
+              <div v-for="user in teamMembers" :key="user.name" class="flex items-center gap-3">
+                <img :src="user.user_image" :alt="user.name" class="w-8 h-8 rounded-full" />
                 <div>
-                  <h3 class="text-sm font-medium">{{ user.name }}</h3>
-                  <p class="text-xs text-gray-500">{{ user.role }}</p>
+                  <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
+                  <p class="text-xs text-gray-500">{{ user.role_profile }}</p>
                 </div>
-                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ user.joinDate }}</span>
+                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ new
+                  Date(user.creation).toLocaleDateString("en-GB").replace(/\//g, '-') }}</span>
               </div>
+
             </div>
           </div>
         </div>
@@ -105,22 +107,22 @@
                 </div>
 
                 <div class="space-y-3">
-                  <div v-for="member in teamMembers" :key="member.id"
+                  <div v-for="member in teamMembers" :key="member.name"
                     class="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg">
                     <div class="flex items-center gap-3">
-                      <img :src="member.avatar" :alt="member.name" class="w-8 h-8 rounded-full" />
+                      <img :src="member?.user_image" :alt="member.name" class="w-8 h-8 rounded-full" />
                       <div>
-                        <h3 class="text-sm font-medium">{{ member.name }}</h3>
-                        <p class="text-xs text-gray-500">{{ member.email }}</p>
+                        <h3 class="text-sm font-medium">{{ member.full_name }}</h3>
+                        <p class="text-xs text-gray-500">{{ member.name }}</p>
                       </div>
                     </div>
                     <div class="flex items-center gap-2">
-                      <select v-model="member.role"
+                      <select v-model="member.role_profile" @change="handleRoleChange(member)"
                         class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="Support">Support</option>
                         <option value="Primary">Primary</option>
                       </select>
-                      <button @click="removeMember(member.id)"
+                      <button @click="removeMember(member.name)"
                         class="text-gray-400 hover:text-gray-600 transition-colors duration-300">
                         <Trash2 class="w-4 h-4" />
                       </button>
@@ -142,88 +144,91 @@
 <script setup>
 import { ref, computed, onMounted, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 import { Bell, Menu, Plus, X, Trash2 } from 'lucide-vue-next'
 import RegistrationPopup from './RegistrationPopup.vue'
+const call = inject('$call')
 
 const $auth = inject('$auth')
 const router = useRouter()
+const toast = useToast()
 
 const showModal = ref(false)
 const inviteEmail = ref('')
 const showRegistrationPopup = ref(false)
 const userName = ref('User')
-
-const users = ref([
-  {
-    id: 1,
-    name: 'Aayush Kumar',
-    role: 'Associate',
-    joinDate: '12/10/2024',
-    avatar: '/placeholder.svg?height=32&width=32'
-  },
-  {
-    id: 2,
-    name: 'Gitesh',
-    role: 'Associate',
-    joinDate: '12/10/2024',
-    avatar: '/placeholder.svg?height=32&width=32'
-  },
-  {
-    id: 3,
-    name: 'Umesh Sharma',
-    role: 'Associate',
-    joinDate: '12/10/2024',
-    avatar: '/placeholder.svg?height=32&width=32'
+const teamMembers = ref([])
+const fetchTeamMember = async () => {
+  try {
+    let response = await call('british_asian_trust.api.get_team_members')
+    teamMembers.value = response
+  } catch (error) {
+    console.error('Failed to fetch designations:', error)
+    toast.error('Failed to fetch designations. Please try again.')
   }
-])
+}
 
-const teamMembers = ref([
-  {
-    id: 1,
-    name: 'Aayush Kumar',
-    email: 'aayush.kumar@xyz.com',
-    role: 'Support',
-    avatar: '/placeholder.svg?height=32&width=32'
-  },
-  {
-    id: 2,
-    name: 'Abhinav',
-    email: 'abhinav.tyagi@xyz.com',
-    role: 'Primary',
-    avatar: '/placeholder.svg?height=32&width=32'
-  }
-])
 
 const isValidEmail = computed(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(inviteEmail.value)
 })
 
-const inviteUser = () => {
-  if (isValidEmail.value) {
-    const newMember = {
-      id: teamMembers.value.length + 1,
-      name: inviteEmail.value.split('@')[0],
-      email: inviteEmail.value,
-      role: 'Support',
-      avatar: '/placeholder.svg?height=32&width=32'
+
+const inviteUser = async () => {
+  if (isValidEmail.value && inviteEmail.value.split('@')[1] === $auth?.user?.bat_organization) {
+    try {
+      let response = await call('british_asian_trust.api.register_invities_user', {
+        email: inviteEmail.value,
+        role_profile: 'Support'
+      })
+      if (response.code == 'SUC_200') {
+        toast.success(response.message, { position: "top-right", timeout: 3000 })
+        await fetchTeamMember()
+        inviteEmail.value = ''
+      } else {
+        toast.error(response.message, { position: "top-right", timeout: 3000 });
+        inviteEmail.value = ''
+      }
+
+    } catch (error) {
+      inviteEmail.value = ''
+      console.error('Registration error:', error)
     }
-    teamMembers.value.push(newMember)
-    inviteEmail.value = ''
+  }
+  else {
+    toast.error('This email has not exists in your organization', { position: "top-right", timeout: 3000 })
+  }
+}
+
+const handleRoleChange = async (member) => {
+  try {
+    let response = await call('british_asian_trust.api.update_team_member', {
+      email: member.name,
+      role_profile: member.role_profile
+    })
+    if (response.code == 'SUC_200') {
+      toast.success(response.message, { position: "top-right", timeout: 3000 })
+      await fetchTeamMember()
+    } else {
+      toast.error(response.message, { position: "top-right", timeout: 3000 });
+    }
+  } catch (error) {
+    console.error('Registration error:', error)
+    toast.error('Faild to update role. Please try again.')
   }
 }
 
 const removeMember = (id) => {
-  teamMembers.value = teamMembers.value.filter(member => member.id !== id)
+  teamMembers.value = teamMembers.value.filter(member => member.name !== id)
 }
 
 const checkUserRegistration = async () => {
   try {
     const user = await $auth.getSessionUser()
-    console.log(user, 'user')
     if (user && user.social_logins && user.social_logins.length > 0) {
       userName.value = user.full_name || 'User'
-      if (user?.bat_designation != null || user?.bat_organization != null) {
+      if (user?.bat_designation || user?.bat_organization) {
         showRegistrationPopup.value = false
       } else {
         showRegistrationPopup.value = true
@@ -238,12 +243,14 @@ const checkUserRegistration = async () => {
 }
 
 const completeRegistration = async () => {
+  $auth.setUserSession($auth?.cookie?.user_id)
   showRegistrationPopup.value = false
   await checkUserRegistration()
 }
 
 onMounted(async () => {
   await checkUserRegistration()
+  await fetchTeamMember()
 })
 
 watch(() => router.currentRoute.value, async () => {
