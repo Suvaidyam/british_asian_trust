@@ -21,19 +21,37 @@
           </div>
 
           <div class="prose max-w-none flex flex-col gap-4">
-            <p class="font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              The survey is divided into two sections - organizational level and program level. The first addresses overarching organizational practices and systems that cover all aspects of your work. The second section focuses specifically on one of your chosen program areas, delving deeper into its operations and implementation.
+            <p
+              class="font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
+              The survey is divided into two sections - organizationalerganisational level and program level. The first
+              addresses overarching organizational practices and systems that cover all aspects of your work. The second
+              section focuses specifically on one of your chosen program areas, delving deeper into its operations and
+              implementation. s key aspects that apply broadly across all areas of your work and the second dives deeper
+              into understanding one of your chosen program areas.
             </p>
-            <ul class="list-disc pl-5 space-y-2 font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              <li>Provide accurate and candid responses. The survey aims to assess the organization's current capacity and identify areas for improvement, so honesty will yield the most valuable insights.</li>
-              <li>Focus on your organization's current status, not what you aspire to achieve (unless otherwise asked in the question). Answer questions based on existing practices and systems in place, not future aspirations, unless otherwise specified in the question.</li>
+            <ul
+              class="list-disc pl-5 space-y-2 font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
+              <li>Provide accurate and candid responses. The survey aims to assess the organization's current capacity
+                and identify areas for improvement, so honesty will yield the most valuable insights.</li>
+              <li>Focus on your organization's current status, not what you aspire to achieve (unless otherwise asked in
+                the question). Answer questions based on existing practices and systems in place, not future
+                aspirations, unless otherwise specified in the question.</li>
               <li>We strongly encourage you to conduct an internal exercise before filling this survey.</li>
             </ul>
-            <p class="font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              Consider asking different team members from various departments (e.g., finance, program, HR, etc.) to provide their inputs. Include input from multiple departments to capture a holistic view of the organization's capabilities. Engage senior leaders for strategic questions and operational teams for implementation-level insights.
+            <p
+              class="font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
+              Consider asking different-team members from various departments ((e.g., finance, program, HR, etc.) to
+              provide their inputs. fill out-the survey independently. Include input fr rom multiple departments (e.g.,
+              finance. program, M&E, HR, ete.) to capture a holistic view of the organization's capabilities. Engage
+              senior leaders for strategic questions and operational teams for implementation-focusseslevel questions
+              insights.
             </p>
-            <ul class="list-disc pl-5 space-y-2 font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              <li>If any questions seem unclear, or if you need further clarification, please reach out to us for guidance before completing the survey.</li>
+            <ul
+              class="list-disc pl-5 space-y-2 font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
+              <li>Focus on your organization's current status, not what you aspire to achieve (unless otherwise asked in
+                the question). Answer questions based on existing practices and systems, in place. not future
+                aspirations, unless otherwise specified in the question.  If any questions seem unclear, or if you need
+                further clarification, please reach out to us. For guidance before completing the survey.</li>
             </ul>
           </div>
         </div>
@@ -42,7 +60,9 @@
         <div class="space-y-6">
           <div
             class="bg-gradient-to-r from-[#0D4688] to-[#406EA3] bg-[length:200%] bg-[99.63deg] w-full sm:w-[376px] md:w-[350px] lg:w-[400px] h-auto sm:h-[114px] rounded-lg p-6 text-white">
-            <h2 class="font-poppins text-lg sm:text-xl md:text-[20px] lg:text-[20px] font-semibold leading-tight sm:leading-[22px] lg:leading-[22px] tracking-[0.0015em] text-left mb-4">Ready to take the survey?</h2>
+            <h2
+              class="font-poppins text-lg sm:text-xl md:text-[20px] lg:text-[20px] font-semibold leading-tight sm:leading-[22px] lg:leading-[22px] tracking-[0.0015em] text-left mb-4">
+              Ready to take the survey?</h2>
             <router-link to="/assessmenttest"
               class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300">
               START ASSESSMENT
@@ -65,7 +85,8 @@
                   <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
                   <p class="text-xs text-gray-500">{{ user.role_profile }}</p>
                 </div>
-                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ formatDate(new Date(user.creation)) }}</span>
+                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ formatDate(new Date(user.creation))
+                  }}</span>
               </div>
             </div>
           </div>
@@ -132,6 +153,7 @@
     <!-- Registration Popup -->
     <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" />
   </div>
+  <Footer />
 </template>
 
 <script setup>
@@ -140,6 +162,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import { Bell, Menu, Plus, X, Trash2 } from 'lucide-vue-next'
 import RegistrationPopup from './RegistrationPopup.vue'
+import Footer from '../components/Footer.vue'
 
 const call = inject('$call')
 const $auth = inject('$auth')
