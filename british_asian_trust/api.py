@@ -49,12 +49,16 @@ def complate_registration(organization,designation):
             bat_user = frappe.get_doc("BAT Users", frappe.session.user)
             bat_user.organization = domain
             bat_user.designation = designation
-            organization = frappe.get_doc({
-                "doctype": "Organization",
-                "domain_name": domain,
-                "organization_name": organization
-            })
-            organization.insert(ignore_permissions=True)
+            # organization = frappe.get_doc({
+            #     "doctype": "Organization",
+            #     "domain_name": domain,
+            #     "organization_name": organization
+            # })
+            organizations = frappe.get_doc("Organization",domain)
+            if not organizations.organization_name = organization:
+                organizations.domain_name=domain
+                organizations.organization_name=organization
+                organizations.insert(ignore_permissions=True)
             bat_user.save(ignore_permissions=True)
             frappe.db.commit()
             new_response.ok('SUC_200', None, 'Organization Created')
@@ -82,7 +86,7 @@ def register_invities_user(email,role_profile="Support"):
             if not frappe.utils.validate_email_address(email):
                 return _("Invalid email address: {0}").format(email)
             else:
-                name = ' '.join(email.split('@')[0].split('.'))
+                name = ' '.join(email.split('@')[0].split('.')).title()
                 organization = email.split('@')[1]
                 try:
                     bat_user = frappe.get_doc({
@@ -144,8 +148,15 @@ def get_both_user(userId):
         combined_user[field] = user.get(field, None)
 
     for field in bat_user_fields:
-        combined_user[f"bat_{field}"] = bat_user.get(field, None)
-
+        if field == "organization":
+            organization_id = bat_user.get("organization")
+            if organization_id:
+                organization_doc = frappe.get_doc("Organization", organization_id)
+                combined_user["bat_organization"] = organization_doc.get("organization_name", None)
+            else:
+                combined_user["bat_organization"] = None
+        else:
+            combined_user[f"bat_{field}"] = bat_user.get(field, None)
     # Return the combined user details
     return combined_user
 

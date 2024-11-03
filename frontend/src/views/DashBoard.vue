@@ -12,7 +12,7 @@
             </h1>
             <p
               class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
-              Posted on: <span class="font-source-sans">{{ formatDate(new Date()) }}</span>
+              <!-- Posted on: <span class="font-source-sans">{{ formatDate(new Date()) }}</span> -->
             </p>
           </div>
 
@@ -50,7 +50,7 @@
               class="list-disc pl-5 space-y-2 font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
               <li>Focus on your organization's current status, not what you aspire to achieve (unless otherwise asked in
                 the question). Answer questions based on existing practices and systems, in place. not future
-                aspirations, unless otherwise specified in the question.  If any questions seem unclear, or if you need
+                aspirations, unless otherwise specified in the question. If any questions seem unclear, or if you need
                 further clarification, please reach out to us. For guidance before completing the survey.</li>
             </ul>
           </div>
@@ -72,8 +72,7 @@
           <div class="bg-white rounded-lg shadow-sm p-6 w-full sm:w-[376px] md:w-[350px] lg:w-[400px]">
             <div class="flex items-center justify-between mb-6">
               <h2 class="text-lg font-semibold">Users</h2>
-              <button v-if="$auth?.user?.bat_role_profile !== 'support'" @click="showModal = true"
-                class="p-2 hover:bg-gray-100 rounded-full text-blue-600 transition-colors duration-300">
+              <button @click="user_popup" :class="[ user?.bat_role_profile != 'Primary' ? 'hidden' : '']" class="p-2 hover:bg-gray-100 rounded-full text-blue-600 transition-colors duration-300">
                 <Plus class="w-5 h-5" />
               </button>
             </div>
@@ -85,8 +84,8 @@
                   <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
                   <p class="text-xs text-gray-500">{{ user.role_profile }}</p>
                 </div>
-                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ formatDate(new Date(user.creation))
-                  }}</span>
+                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ new
+                  Date(user.creation).toLocaleDateString("en-GB").replace(/\//g, '-') }}</span>
               </div>
             </div>
           </div>
@@ -102,7 +101,7 @@
             <div class="p-6">
               <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-semibold">Invite User</h2>
-                <button @click="showModal = false"
+                <button @click="user_popup"
                   class="text-gray-500 hover:text-gray-700 transition-colors duration-300">
                   <X class="w-5 h-5" />
                 </button>
@@ -150,8 +149,7 @@
       </Transition>
     </Teleport>
 
-    <!-- Registration Popup -->
-    <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" />
+    <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" :user="user"/>
   </div>
   <Footer />
 </template>
@@ -168,36 +166,43 @@ const call = inject('$call')
 const $auth = inject('$auth')
 const router = useRouter()
 const toast = useToast()
-
 const showModal = ref(false)
 const inviteEmail = ref('')
 const showRegistrationPopup = ref(false)
-const userName = ref('User')
+const user = ref(null)
 const teamMembers = ref([])
+
+
+const user_popup = async () =>  {
+  user.value = await $auth.getSessionUser()
+  showModal.value = !showModal.value
+}
 
 const fetchTeamMember = async () => {
   try {
     let response = await call('british_asian_trust.api.get_team_members')
     teamMembers.value = response
   } catch (error) {
-    console.error('Failed to fetch team members:', error)
-    toast.error('Failed to fetch team members. Please try again.')
+    console.error('Failed to fetch designations:', error)
+    toast.error('Failed to fetch designations. Please try again.')
   }
 }
+
 
 const isValidEmail = computed(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(inviteEmail.value)
 })
 
+
 const inviteUser = async () => {
-  if (isValidEmail.value && inviteEmail.value.split('@')[1] === $auth?.user?.bat_organization) {
+  if (isValidEmail.value && inviteEmail.value.split('@')[1] === $auth?.user?.name.split('@')[1]) {
     try {
       let response = await call('british_asian_trust.api.register_invities_user', {
         email: inviteEmail.value,
         role_profile: 'Support'
       })
-      if (response.code === 'SUC_200') {
+      if (response.code == 'SUC_200') {
         toast.success(response.message, { position: "top-right", timeout: 3000 })
         await fetchTeamMember()
         inviteEmail.value = ''
@@ -205,13 +210,14 @@ const inviteUser = async () => {
         toast.error(response.message, { position: "top-right", timeout: 3000 });
         inviteEmail.value = ''
       }
+
     } catch (error) {
       inviteEmail.value = ''
       console.error('Registration error:', error)
-      toast.error('Failed to invite user. Please try again.')
     }
-  } else {
-    toast.error('This email does not exist in your organization', { position: "top-right", timeout: 3000 })
+  }
+  else {
+    toast.error('This email has not exists in your organization', { position: "top-right", timeout: 3000 })
   }
 }
 
@@ -221,41 +227,34 @@ const handleRoleChange = async (member) => {
       email: member.name,
       role_profile: member.role_profile
     })
-    if (response.code === 'SUC_200') {
+    if (response.code == 'SUC_200') {
+      await $auth.setUserSession($auth?.user?.name)
+      if(member.role_profile === 'Primary'){
+        user_popup()
+      }
       toast.success(response.message, { position: "top-right", timeout: 3000 })
       await fetchTeamMember()
     } else {
       toast.error(response.message, { position: "top-right", timeout: 3000 });
     }
   } catch (error) {
-    console.error('Role update error:', error)
-    toast.error('Failed to update role. Please try again.')
+    console.error('Registration error:', error)
+    toast.error('Faild to update role. Please try again.')
   }
 }
 
-const removeMember = async (id) => {
-  try {
-    let response = await call('british_asian_trust.api.remove_team_member', { email: id })
-    if (response.code === 'SUC_200') {
-      toast.success(response.message, { position: "top-right", timeout: 3000 })
-      await fetchTeamMember()
-    } else {
-      toast.error(response.message, { position: "top-right", timeout: 3000 });
-    }
-  } catch (error) {
-    console.error('Member removal error:', error)
-    toast.error('Failed to remove team member. Please try again.')
-  }
+const removeMember = (id) => {
+  teamMembers.value = teamMembers.value.filter(member => member.name !== id)
 }
 
 const checkUserRegistration = async () => {
   try {
-    const user = await $auth.getSessionUser()
-    if (user && user.social_logins && user.social_logins.length > 0) {
-      userName.value = user.full_name || 'User'
-      showRegistrationPopup.value = !(user?.bat_designation && user?.bat_organization)
-    } else {
+    user.value = await $auth.getSessionUser()
+    fetchTeamMember()
+    if (user.value?.bat_designation && user.value?.bat_organization) {
       showRegistrationPopup.value = false
+    } else {
+      showRegistrationPopup.value = true
     }
   } catch (error) {
     console.error('Error checking user registration:', error)
@@ -264,17 +263,24 @@ const checkUserRegistration = async () => {
 }
 
 const completeRegistration = async () => {
-  await $auth.setUserSession($auth?.cookie?.user_id)
+  await $auth.setUserSession($auth?.user?.name)
   showRegistrationPopup.value = false
   await checkUserRegistration()
 }
 
-const formatDate = (date) => {
-  return date.toLocaleDateString("en-GB", { day: '2-digit', month: '2-digit', year: 'numeric' })
-}
-
-onMounted(() => {
-  fetchTeamMember()
-  checkUserRegistration()
+onMounted(async () => {
+  user.value = await $auth.getSessionUser()
+  await checkUserRegistration()
+  await fetchTeamMember()
 })
+
+watch(() => router.currentRoute.value, async () => {
+  await checkUserRegistration()
+})
+
+watch(() => $auth.isLoggedIn, async (newValue) => {
+  if (newValue) {
+    await $auth.setUserSession($auth?.cookie?.user_id)
+  }
+}, { deep: true, immediate: true })
 </script>
