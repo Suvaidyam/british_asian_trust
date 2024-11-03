@@ -7,7 +7,7 @@
         </div>
         <!-- Forgot Password Form Section -->
         <div class="lg:w-1/2 p-4 sm:p-8 flex flex-col justify-center items-center bg-white">
-          <div class="w-full max-w-md">
+          <div class="w-full max-w-lg">
             <h2 class="font-poppins text-[24px] font-semibold leading-[28px] lg:text-[34px] lg:leading-[37.4px] text-[#0D4688] mb-4 sm:mb-6 text-center">
               Forgot Password
             </h2>
