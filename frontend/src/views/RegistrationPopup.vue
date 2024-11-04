@@ -8,35 +8,32 @@
       <!-- Registration Completion Form Section -->
       <div class="lg:w-1/2 p-4 sm:p-8 flex flex-col justify-center items-center bg-white">
         <div class="w-full max-w-lg">
-          <h2 class="font-poppins text-[24px] font-semibold leading-[28px] lg:text-[34px] lg:leading-[37.4px] text-[#0D4688] mb-4 sm:mb-6 text-center">
+          <h2
+            class="font-poppins text-[24px] font-semibold leading-[28px] lg:text-[34px] lg:leading-[37.4px] text-[#0D4688] mb-4 sm:mb-6 text-center">
             Complete Your Registration
           </h2>
           <form @submit.prevent="submitRegistration" class="space-y-4">
             <div>
-              <label for="organization" class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1">Organization</label>
+              <label for="organization"
+                class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1">Organization</label>
               <div class="relative">
-                <input
-                  type="text"
-                  id="organization"
-                  v-model="formData.organization"
-                  required
+                <input type="text" id="organization"
+                   v-model="formData.organization"
+                  :readonly="props.user.bat_organization"
                   class="w-full px-4 h-12 pl-10 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#2F2F2F] focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688]"
-                  placeholder="Enter your organization"
-                >
+                  placeholder="Enter your organization" />
+
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <BuildingIcon class="h-5 w-5 text-gray-400" />
                 </div>
               </div>
             </div>
             <div>
-              <label for="designation" class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1">Designation</label>
+              <label for="designation"
+                class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1">Designation</label>
               <div class="relative">
-                <select
-                  id="designation"
-                  v-model="formData.designation"
-                  required
-                  class="w-full px-4 h-12 pl-10 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#2F2F2F] focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688] appearance-none"
-                >
+                <select id="designation" v-model="formData.designation" required
+                  class="w-full px-4 h-12 pl-10 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#2F2F2F] focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688] appearance-none">
                   <option value="">Select a designation</option>
                   <option v-for="designation in designations" :key="designation?.name" :value="designation?.name">
                     {{ designation?.name }}
@@ -51,10 +48,8 @@
               </div>
             </div>
             <div>
-              <button
-                type="submit"
-                class="w-full bg-orange-500 text-white h-12 px-4 rounded-full hover:bg-orange-600 transition duration-300 font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-              >
+              <button type="submit"
+                class="w-full bg-orange-500 text-white h-12 px-4 rounded-full hover:bg-orange-600 transition duration-300 font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
                 Complete Sign Up
               </button>
             </div>
@@ -72,11 +67,12 @@ import { BuildingIcon, UserIcon, ChevronDownIcon } from 'lucide-vue-next'
 
 const call = inject('$call')
 
-const emit = defineEmits(['registration-complete', 'close-popup'])
+const emit = defineEmits(['registration-complete'])
+const props = defineProps(['user'])
 const toast = useToast()
 
 const formData = ref({
-  organization: '',
+  organization: props.user.bat_organization || '',
   designation: '',
 })
 
@@ -90,17 +86,7 @@ const fetchDesignations = async () => {
     console.error('Failed to fetch designations:', error)
     toast.error('Failed to fetch designations. Please try again.', {
       position: "top-right",
-      timeout: 5000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false
+      timeout: 5000
     })
   }
 }
@@ -115,50 +101,20 @@ const submitRegistration = async () => {
       emit('registration-complete')
       toast.success(response.message, {
         position: "top-right",
-        timeout: 3000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false
+        timeout: 3000
       })
       emit('close-popup')
     } else {
       toast.error(response.message, {
         position: "top-right",
-        timeout: 3000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false
+        timeout: 3000
       })
     }
   } catch (error) {
     console.error('Registration error:', error)
     toast.error('Failed to complete registration. Please try again.', {
       position: "top-right",
-      timeout: 5000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false
+      timeout: 5000
     })
   }
 }
