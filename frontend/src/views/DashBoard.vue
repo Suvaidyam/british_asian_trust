@@ -8,52 +8,19 @@
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <h1
               class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
-              Assessment Sample Test
+              {{ assessmentInfo?.assessment_information }}
             </h1>
             <p
               class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
-              <!-- Posted on: <span class="font-source-sans">{{ formatDate(new Date()) }}</span> -->
+              Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo?.modified) }}</span>
             </p>
           </div>
 
           <div class="relative h-48 sm:h-64 md:h-[264px] lg:h-[300px] w-full rounded-lg overflow-hidden">
-            <img src="/assessiment.png" alt="Assessment" class="w-full h-full object-cover" />
+            <img :src="assessmentInfo.image" :alt="assessmentInfo.name" class="w-full h-full object-cover" />
           </div>
 
-          <div class="prose max-w-none flex flex-col gap-4">
-            <p
-              class="font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              The survey is divided into two sections - organizationalerganisational level and program level. The first
-              addresses overarching organizational practices and systems that cover all aspects of your work. The second
-              section focuses specifically on one of your chosen program areas, delving deeper into its operations and
-              implementation. s key aspects that apply broadly across all areas of your work and the second dives deeper
-              into understanding one of your chosen program areas.
-            </p>
-            <ul
-              class="list-disc pl-5 space-y-2 font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              <li>Provide accurate and candid responses. The survey aims to assess the organization's current capacity
-                and identify areas for improvement, so honesty will yield the most valuable insights.</li>
-              <li>Focus on your organization's current status, not what you aspire to achieve (unless otherwise asked in
-                the question). Answer questions based on existing practices and systems in place, not future
-                aspirations, unless otherwise specified in the question.</li>
-              <li>We strongly encourage you to conduct an internal exercise before filling this survey.</li>
-            </ul>
-            <p
-              class="font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              Consider asking different-team members from various departments ((e.g., finance, program, HR, etc.) to
-              provide their inputs. fill out-the survey independently. Include input fr rom multiple departments (e.g.,
-              finance. program, M&E, HR, ete.) to capture a holistic view of the organization's capabilities. Engage
-              senior leaders for strategic questions and operational teams for implementation-focusseslevel questions
-              insights.
-            </p>
-            <ul
-              class="list-disc pl-5 space-y-2 font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529]">
-              <li>Focus on your organization's current status, not what you aspire to achieve (unless otherwise asked in
-                the question). Answer questions based on existing practices and systems, in place. not future
-                aspirations, unless otherwise specified in the question. If any questions seem unclear, or if you need
-                further clarification, please reach out to us. For guidance before completing the survey.</li>
-            </ul>
-          </div>
+          <div class="prose max-w-none flex flex-col gap-4 dynamic-content" v-html="assessmentInfo?.information"></div>
         </div>
 
         <!-- Right Sidebar -->
@@ -72,7 +39,7 @@
           <div class="bg-white rounded-lg shadow-sm p-6 w-full sm:w-[376px] md:w-[350px] lg:w-[400px]">
             <div class="flex items-center justify-between mb-6">
               <h2 class="text-lg font-semibold">Users</h2>
-              <button @click="user_popup" :class="[ user?.bat_role_profile != 'Primary' ? 'hidden' : '']" class="p-2 hover:bg-gray-100 rounded-full text-blue-600 transition-colors duration-300">
+              <button @click="user_popup" :class="[ user?.bat_role_profile != 'Primary' ? 'hidden' : '']" class="p-2 hover:bg-gray-100 rounded-full text-[#0D4688] transition-colors duration-300">
                 <Plus class="w-5 h-5" />
               </button>
             </div>
@@ -84,8 +51,7 @@
                   <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
                   <p class="text-xs text-gray-500">{{ user.role_profile }}</p>
                 </div>
-                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ new
-                  Date(user.creation).toLocaleDateString("en-GB").replace(/\//g, '-') }}</span>
+                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ formatDate(user.creation) }}</span>
               </div>
             </div>
           </div>
@@ -97,7 +63,7 @@
     <Teleport to="body">
       <Transition name="fade">
         <div v-if="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div class="bg-white rounded-lg w-full max-w-lg">
+          <div class="bg-white rounded-lg w-full max-w-2xl">
             <div class="p-6">
               <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-semibold">Invite User</h2>
@@ -110,12 +76,13 @@
               <div class="space-y-4">
                 <div class="flex gap-2">
                   <input v-model="inviteEmail" type="email" placeholder="Invite others by name or email"
-                    class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                  <button @click="inviteUser" :disabled="!isValidEmail" :class="[
-                    'px-4 py-2 rounded-lg transition duration-300',
-                    isValidEmail ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 cursor-not-allowed'
+                    class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D4688]" />
+                  <button @click="inviteUser" :disabled="!isValidEmail || !isBusinessEmail || isInviting" :class="[
+                    'px-4 py-2 rounded-lg transition duration-300 flex items-center justify-center',
+                    isValidEmail && isBusinessEmail && !isInviting ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 cursor-not-allowed'
                   ]">
-                    INVITE
+                    <span v-if="!isInviting">INVITE</span>
+                    <span v-else class="loader"></span>
                   </button>
                 </div>
 
@@ -131,7 +98,7 @@
                     </div>
                     <div class="flex items-center gap-2">
                       <select v-model="member.role_profile" @change="handleRoleChange(member)" :disabled="member.name === user?.name"
-                        class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#0D4688]">
                         <option value="Support">Support</option>
                         <option value="Primary">Primary</option>
                       </select>
@@ -171,7 +138,26 @@ const inviteEmail = ref('')
 const showRegistrationPopup = ref(false)
 const user = ref(null)
 const teamMembers = ref([])
+const assessmentInfo = ref({})
+const isInviting = ref(false)
 
+const fetchAssessmentInfo = async () => {
+  try {
+    const response = await call('british_asian_trust.api.get_assessment_information')
+    assessmentInfo.value = response
+  } catch (error) {
+    console.error('Failed to fetch assessment information:', error)
+    toast.error('Failed to fetch assessment information. Please try again.')
+  }
+}
+
+const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
 
 const user_popup = async () =>  {
   user.value = await $auth.getSessionUser()
@@ -188,16 +174,26 @@ const fetchTeamMember = async () => {
   }
 }
 
-
 const isValidEmail = computed(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(inviteEmail.value)
 })
 
+const isBusinessEmail = computed(() => {
+  if (!isValidEmail.value) return false
+  const domain = inviteEmail.value.split('@')[1].toLowerCase()
+  const restrictedDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com']
+  return !restrictedDomains.includes(domain)
+})
 
 const inviteUser = async () => {
+  if (!isBusinessEmail.value) {
+    toast.error('Please use a business email address. Personal email domains are not allowed.', { position: "top-right", timeout: 3000 })
+    return
+  }
   if (isValidEmail.value && inviteEmail.value.split('@')[1] === $auth?.user?.name.split('@')[1]) {
     try {
+      isInviting.value = true
       let response = await call('british_asian_trust.api.register_invities_user', {
         email: inviteEmail.value,
         role_profile: 'Support'
@@ -210,10 +206,11 @@ const inviteUser = async () => {
         toast.error(response.message, { position: "top-right", timeout: 3000 });
         inviteEmail.value = ''
       }
-
     } catch (error) {
       inviteEmail.value = ''
       console.error('Registration error:', error)
+    } finally {
+      isInviting.value = false
     }
   }
   else {
@@ -239,7 +236,7 @@ const handleRoleChange = async (member) => {
     }
   } catch (error) {
     console.error('Registration error:', error)
-    toast.error('Faild to update role. Please try again.')
+    toast.error('Failed to update role. Please try again.')
   }
 }
 
@@ -272,6 +269,7 @@ onMounted(async () => {
   user.value = await $auth.getSessionUser()
   await checkUserRegistration()
   await fetchTeamMember()
+  await fetchAssessmentInfo()
 })
 
 watch(() => router.currentRoute.value, async () => {
@@ -284,3 +282,35 @@ watch(() => $auth.isLoggedIn, async (newValue) => {
   }
 }, { deep: true, immediate: true })
 </script>
+
+<style scoped>
+.dynamic-content {
+  font-family: 'Poppins', sans-serif;
+}
+
+.dynamic-content :deep(p) {
+  @apply font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529];
+}
+
+.dynamic-content :deep(ul) {
+  @apply list-disc pl-5 space-y-2;
+}
+
+.dynamic-content :deep(li) {
+  @apply font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529];
+}
+
+.loader {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #0D4688;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform:  rotate(360deg); }
+}
+</style>

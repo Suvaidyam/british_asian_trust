@@ -1,51 +1,54 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-10-29 18:10:26.399654",
+ "autoname": "Q.###",
+ "creation": "2024-11-04 11:54:14.529792",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "assessment_information",
-  "information",
-  "image"
+  "question",
+  "answer",
+  "is_open"
  ],
  "fields": [
   {
-   "fieldname": "information",
-   "fieldtype": "HTML Editor",
+   "fieldname": "question",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Information",
+   "label": "Question",
    "reqd": 1
   },
   {
-   "fieldname": "image",
-   "fieldtype": "Attach Image",
-   "label": "Image",
+   "fieldname": "answer",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Answer",
    "reqd": 1
   },
   {
-   "fieldname": "assessment_information",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Assessment Information",
-   "reqd": 1
+   "default": "0",
+   "fieldname": "is_open",
+   "fieldtype": "Check",
+   "label": "Is Open"
   }
  ],
  "index_web_pages_for_search": 1,
- "issingle": 1,
  "links": [],
- "modified": "2024-11-04 15:40:15.581241",
+ "modified": "2024-11-04 12:17:54.970198",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
- "name": "Assessment Information",
+ "name": "FAQs",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
    "delete": 1,
    "email": 1,
+   "export": 1,
    "print": 1,
    "read": 1,
+   "report": 1,
    "role": "System Manager",
    "share": 1,
    "write": 1

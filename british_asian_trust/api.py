@@ -241,3 +241,12 @@ def my_login_via_office_365(code: str, state: str):
         frappe.db.commit()
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = "/bat/home"
+
+@frappe.whitelist(allow_guest=True)
+def get_faqs():
+    # Fetch all FAQs
+    return frappe.get_all("FAQs", fields=["*"])
+
+@frappe.whitelist(allow_guest=True)
+def get_assessment_information():
+    return frappe.get_single("Assessment Information")
