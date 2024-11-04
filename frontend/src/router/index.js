@@ -6,6 +6,7 @@ import authRoutes from './auth';
 import Landing from "../views/Landing.vue";
 import AssessmentTest from "../views/AssessmentTest.vue";
 import DashBoard from "../views/DashBoard.vue";
+import UpdatePassword from "../components/ UpdatePassword.vue";
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+  },
+  {
+    path: "/updatepassword",
+    name: "UpdatePassword",
+    component: UpdatePassword,
   },
   {
     path: "/forgot",
