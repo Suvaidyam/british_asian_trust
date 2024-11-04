@@ -130,7 +130,7 @@
                       </div>
                     </div>
                     <div class="flex items-center gap-2">
-                      <select v-model="member.role_profile" @change="handleRoleChange(member)"
+                      <select v-model="member.role_profile" @change="handleRoleChange(member)" :disabled="member.name === user?.name"
                         class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="Support">Support</option>
                         <option value="Primary">Primary</option>

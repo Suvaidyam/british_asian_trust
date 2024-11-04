@@ -17,9 +17,9 @@
               <label for="organization"
                 class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1">Organization</label>
               <div class="relative">
-                <input type="text" id="organization" v-model="formData.organization"
+                <input type="text" id="organization"
+                   v-model="formData.organization"
                   :readonly="props.user.bat_organization"
-                  :value="props.user.bat_organization"
                   class="w-full px-4 h-12 pl-10 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#2F2F2F] focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688]"
                   placeholder="Enter your organization" />
 
@@ -67,12 +67,12 @@ import { BuildingIcon, UserIcon, ChevronDownIcon } from 'lucide-vue-next'
 
 const call = inject('$call')
 
-const emit = defineEmits(['registration-complete', 'close-popup'])
+const emit = defineEmits(['registration-complete'])
 const props = defineProps(['user'])
 const toast = useToast()
 
 const formData = ref({
-  organization: '',
+  organization: props.user.bat_organization || '',
   designation: '',
 })
 
@@ -86,17 +86,7 @@ const fetchDesignations = async () => {
     console.error('Failed to fetch designations:', error)
     toast.error('Failed to fetch designations. Please try again.', {
       position: "top-right",
-      timeout: 5000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false
+      timeout: 5000
     })
   }
 }
@@ -104,57 +94,27 @@ const fetchDesignations = async () => {
 const submitRegistration = async () => {
   try {
     let response = await call('british_asian_trust.api.complate_registration', {
-      organization: props.user.bat_organization || formData.value.organization,
+      organization: formData.value.organization,
       designation: formData.value.designation,
     })
     if (response.code === 'SUC_200') {
       emit('registration-complete')
       toast.success(response.message, {
         position: "top-right",
-        timeout: 3000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false
+        timeout: 3000
       })
       emit('close-popup')
     } else {
       toast.error(response.message, {
         position: "top-right",
-        timeout: 3000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false
+        timeout: 3000
       })
     }
   } catch (error) {
     console.error('Registration error:', error)
     toast.error('Failed to complete registration. Please try again.', {
       position: "top-right",
-      timeout: 5000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false
+      timeout: 5000
     })
   }
 }
