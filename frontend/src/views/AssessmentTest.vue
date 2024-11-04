@@ -11,13 +11,13 @@
           </button>
         </div>
         <nav :class="{ 'hidden': !sidebarOpen, 'block': sidebarOpen, 'lg:block': true }">
-          <ul>
+          <ul class="overflow-y-auto max-h-[calc(100vh-64px)]">
             <li v-for="(section, index) in sections" :key="index">
               <button
                 @click="changeSection(index)"
                 :class="[
-                  'w-full text-left px-4 py-3 flex items-center',
-                  currentSection === index ? 'bg-blue-100 text-[#0D4688]' : 'text-[#596C8C]',
+                  'w-full text-left px-4 py-3 h-[36px] flex items-center',
+                  currentSection === index ? 'bg-blue-100 text-[#0D4688] rounded-full' : 'text-[#596C8C] ',
                   section.isLocked ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
                 ]"
                 :disabled="section.isLocked"
@@ -84,8 +84,37 @@
                 <label class="cursor-pointer">
                   <span class="text-orange-500 font-semibold">Click to upload</span> or drag and drop<br>
                   <span class="text-sm text-[#596C8C]">SVG, PNG, JPG or GIF (max. 3MB)</span>
-                  <input type="file" class="hidden" @change="handleFileUpload($event, question)">
+                  <input type="file" class="hidden" @change="handleFileUpload($event, question)" accept="image/*">
                 </label>
+                <div v-if="question.answer" class="mt-2">
+                  <img :src="question.answer" alt="Uploaded file" class="max-w-full h-auto max-h-40 mx-auto">
+                </div>
+              </div>
+
+              <!-- Matrix question -->
+              <div v-else-if="question.type === 'matrix'" class="mt-2 overflow-x-auto">
+                <table class="w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th class="border p-2"></th>
+                      <th v-for="option in question.options" :key="option" class="border p-2 text-[#0D4688]">{{ option }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="row in question.rows" :key="row">
+                      <td class="border p-2 text-[#212529]">{{ row }}</td>
+                      <td v-for="option in question.options" :key="option" class="border p-2">
+                        <input 
+                          type="radio" 
+                          :name="`${question.id}-${row}`" 
+                          :value="option" 
+                          v-model="question.answer[row]" 
+                          class="text-[#0D4688] focus:ring-[#0D4688]"
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -94,7 +123,7 @@
                 <input type="checkbox" v-model="agreeToTerms" class="mr-2 text-[#0D4688] focus:ring-[#0D4688]">
                 <span class="text-sm text-[#212529]">I agree with <a href="#" class="text-[#0D4688] hover:underline">Data Sharing</a> and <a href="#" class="text-[#0D4688] hover:underline">Privacy Policy</a> agreement</span>
               </label>
-              <button @click="submitSection" class="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50" :disabled="!canSubmit">
+              <button @click="submitSection" class="h-[40px] w-[160px] rounded-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50" :disabled="!canSubmit">
                 {{ isLastSection ? 'SUBMIT' : 'NEXT' }}
               </button>
             </div>
@@ -119,7 +148,16 @@ const sections = ref([
       { type: 'radio', text: 'Select the option that suits the best', options: ['This is option 1', 'This is option 2', 'This is option 3', 'This is option 4'], answer: '', hasInfo: true },
       { type: 'text', text: 'Lorem Ipsum', answer: '', placeholder: 'Enter' },
       { type: 'checkbox', text: 'Select all the options that suit the best', options: ['This is option 1', 'This is option 2', 'This is option 3', 'This is option 4'], answer: [], hasInfo: true },
-      { type: 'file', text: 'Lorem Ipsum', answer: null }
+      { type: 'file', text: 'Lorem Ipsum', answer: null },
+      // { 
+      //   id: 'matrix1',
+      //   type: 'matrix', 
+      //   text: 'Rate the following aspects', 
+      //   options: ['Poor', 'Fair', 'Good', 'Excellent'],
+      //   rows: ['Quality', 'Price', 'Service', 'Overall'],
+      //   answer: {},
+      //   hasInfo: true
+      // }
     ]
   },
   { name: 'Section B', isCompleted: false, isLocked: true, questions: [] },
@@ -136,7 +174,6 @@ const sections = ref([
   { name: 'Section M', isCompleted: false, isLocked: true, questions: [] },
   { name: 'Section N', isCompleted: false, isLocked: true, questions: [] },
   { name: 'Section O', isCompleted: false, isLocked: true, questions: [] },
-
 ])
 
 const currentSection = ref(0)
@@ -147,10 +184,11 @@ const isLastSection = computed(() => currentSection.value === sections.value.len
 
 const canSubmit = computed(() => {
   const currentQuestions = sections.value[currentSection.value].questions
-  const allQuestionsAnswered = currentQuestions.every(q => 
-    (q.type === 'checkbox' && q.answer.length > 0) || 
-    (q.type !== 'checkbox' && q.answer)
-  )
+  const allQuestionsAnswered = currentQuestions.every(q => {
+    if (q.type === 'checkbox') return q.answer.length > 0
+    if (q.type === 'matrix') return Object.keys(q.answer).length === q.rows.length
+    return !!q.answer
+  })
   return allQuestionsAnswered && agreeToTerms.value
 })
 
@@ -164,9 +202,15 @@ const changeSection = (index) => {
 const handleFileUpload = (event, question) => {
   const file = event.target.files[0]
   if (file) {
-    // Here you would typically upload the file to a server
-    // For this example, we'll just store the file name
-    question.answer = file.name
+    if (file.size > 3 * 1024 * 1024) {
+      alert('File size exceeds 3MB limit.')
+      return
+    }
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      question.answer = e.target.result
+    }
+    reader.readAsDataURL(file)
   }
 }
 
@@ -198,4 +242,9 @@ sections.value.forEach((section, index) => {
 
 <style scoped>
 /* Add any component-specific styles here */
+@media (max-width: 640px) {
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
 </style>

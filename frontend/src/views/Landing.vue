@@ -143,7 +143,7 @@
               <PlusIcon v-if="!faq.isOpen" class="w-6 h-6 text-[#0D4688] flex-shrink-0 ml-4" />
               <MinusIcon v-else class="w-6 h-6 text-[#0D4688] flex-shrink-0 ml-4" />
             </button>
-            <div v-show="faq.isOpen" class="p-4 pt-0">
+            <div v-show="faq.is_open" class="p-4 pt-0">
               <p
                 class="font-poppins text-sm font-normal leading-[18.12px] tracking-[0.004em] text-justify text-gray-700">
                 {{ faq.answer }}</p>
@@ -157,10 +157,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref , inject,onMounted} from 'vue'
 import { ClipboardIcon, ClipboardCheckIcon, FileTextIcon, PlusIcon, MinusIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-vue-next'
 import Footer from '../components/Footer.vue'
 
+
+const call = inject('$call')
 const steps = [
   {
     icon: ClipboardIcon,
@@ -217,33 +219,20 @@ const goToSlide = (index) => {
   currentSlide.value = index
 }
 
-const faqs = ref([
-  {
-    question: 'How can I register my NGO on this platform?',
-    answer: 'To register your NGO, simply click on the "Register" button at the top of the page and follow the step-by-step process. You\'ll need to provide basic information about your organization and complete a brief assessment.',
-    isOpen: false
-  },
-  {
-    question: 'What kind of resources are available after registration?',
-    answer: 'After registration and assessment, you\'ll have access to a variety of resources including funding opportunities, capacity building workshops, networking events, and tools to help measure and report your impact.',
-    isOpen: false
-  },
-  {
-    question: 'Is there a fee for using this platform?',
-    answer: 'No, our platform is completely free for NGOs. We believe in providing equal access to resources and support for all organizations working towards positive social change.',
-    isOpen: false
-  },
-  {
-    question: 'How often should I update my NGO\'s information?',
-    answer: 'We recommend updating your information at least once a year or whenever there are significant changes in your organization\'s structure, programs, or impact. Regular updates help ensure that you receive the most relevant resources and opportunities.',
-    isOpen: false
-  },
-  {
-    question: 'Can I connect with other NGOs through this platform?',
-    answer: 'Yes! Our platform includes features for networking and collaboration. You can search for other NGOs working in similar areas or regions, join discussion forums, and even initiate partnerships through our messaging system.',
-    isOpen: false
+const faqs = ref([])
+
+const getFaqs = async () => {
+  try {
+    const response = await call( 'british_asian_trust.api.get_faqs')
+    faqs.value = response
+  } catch (error) {
+    console.error(error)
   }
-])
+}
+
+onMounted(() => {
+  getFaqs()
+})
 
 const toggleFaq = (index) => {
   faqs.value[index].isOpen = !faqs.value[index].isOpen
