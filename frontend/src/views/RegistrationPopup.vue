@@ -1,6 +1,6 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4">
-    <div class="w-full max-w-[1512px] flex flex-col lg:flex-row bg-white  shadow-2xl overflow-hidden">
+    <div class="w-full max-w-[1512px] flex flex-col lg:flex-row bg-white shadow-2xl overflow-hidden">
       <!-- Image Section -->
       <div class="lg:w-1/2 h-64 lg:h-screen relative">
         <img src="/login1.png" alt="Two women in traditional attire" class="object-cover w-full h-full" />
@@ -8,29 +8,25 @@
       <!-- Registration Completion Form Section -->
       <div class="lg:w-1/2 p-4 sm:p-8 flex flex-col justify-center items-center bg-white">
         <div class="w-full max-w-lg">
-          <h2
-            class="font-poppins text-[24px] font-semibold leading-[28px] lg:text-[34px] lg:leading-[37.4px] text-[#0D4688] mb-4 sm:mb-6 text-center">
+          <h2 class="font-poppins text-[24px] font-semibold leading-[28px] lg:text-[34px] lg:leading-[37.4px] text-[#0D4688] mb-4 sm:mb-6 text-center">
             Complete Your Registration
           </h2>
           <form @submit.prevent="submitRegistration" class="space-y-4">
             <div>
-              <label for="organization"
-                class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1">Organization</label>
+              <label for="organization" class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1 focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688]">Organization</label>
               <div class="relative">
                 <input type="text" id="organization"
-                   v-model="formData.organization"
+                  v-model="formData.organization"
                   :readonly="props.user.bat_organization"
                   class="w-full px-4 h-12 pl-10 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#2F2F2F] focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688]"
                   placeholder="Enter your organization" />
-
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <BuildingIcon class="h-5 w-5 text-gray-400" />
                 </div>
               </div>
             </div>
             <div>
-              <label for="designation"
-                class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1">Designation</label>
+              <label for="designation" class="block font-poppins text-[14px] font-normal leading-[18.34px] text-[#2F2F2F] mb-1 focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688]">Designation</label>
               <div class="relative">
                 <select id="designation" v-model="formData.designation" required
                   class="w-full px-4 h-12 pl-10 border border-gray-300 rounded-md font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] text-left text-[#2F2F2F] focus:outline-none focus:ring-2 focus:ring-[#0D4688] focus:border-[#0D4688] appearance-none">
@@ -49,8 +45,13 @@
             </div>
             <div>
               <button type="submit"
-                class="w-full bg-orange-500 text-white h-12 px-4 rounded-full hover:bg-orange-600 transition duration-300 font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                Complete Sign Up
+                :disabled="isLoading"
+                class="w-full bg-orange-500 text-white h-12 px-4 rounded-full hover:bg-orange-600 transition duration-300 font-poppins text-[16px] font-normal leading-[20.96px] tracking-[0.0025em] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center">
+                <span v-if="!isLoading">Complete Sign Up</span>
+                <span v-else class="flex items-center">
+                  <LoaderIcon class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+                  Processing...
+                </span>
               </button>
             </div>
           </form>
@@ -63,11 +64,11 @@
 <script setup>
 import { ref, onMounted, inject } from 'vue'
 import { useToast } from 'vue-toastification'
-import { BuildingIcon, UserIcon, ChevronDownIcon } from 'lucide-vue-next'
+import { BuildingIcon, UserIcon, ChevronDownIcon, LoaderIcon } from 'lucide-vue-next'
 
 const call = inject('$call')
 
-const emit = defineEmits(['registration-complete'])
+const emit = defineEmits(['registration-complete', 'close-popup'])
 const props = defineProps(['user'])
 const toast = useToast()
 
@@ -77,6 +78,7 @@ const formData = ref({
 })
 
 const designations = ref([])
+const isLoading = ref(false)
 
 const fetchDesignations = async () => {
   try {
@@ -92,6 +94,7 @@ const fetchDesignations = async () => {
 }
 
 const submitRegistration = async () => {
+  isLoading.value = true
   try {
     let response = await call('british_asian_trust.api.complate_registration', {
       organization: formData.value.organization,
@@ -116,6 +119,8 @@ const submitRegistration = async () => {
       position: "top-right",
       timeout: 5000
     })
+  } finally {
+    isLoading.value = false
   }
 }
 

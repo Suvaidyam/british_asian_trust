@@ -82,7 +82,10 @@
                     isValidEmail && isBusinessEmail && !isInviting ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 cursor-not-allowed'
                   ]">
                     <span v-if="!isInviting">INVITE</span>
-                    <span v-else class="loader"></span>
+                    <span v-else class="flex items-center">
+                      <LoaderIcon class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+                      Processing...
+                    </span>
                   </button>
                 </div>
 
@@ -125,7 +128,7 @@
 import { ref, computed, onMounted, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-import { Bell, Menu, Plus, X, Trash2 } from 'lucide-vue-next'
+import { Bell, Menu, Plus, X, Trash2, LoaderIcon } from 'lucide-vue-next'
 import RegistrationPopup from './RegistrationPopup.vue'
 import Footer from '../components/Footer.vue'
 
@@ -289,7 +292,7 @@ watch(() => $auth.isLoggedIn, async (newValue) => {
 }
 
 .dynamic-content :deep(p) {
-  @apply font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529];
+  @apply font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed  sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529];
 }
 
 .dynamic-content :deep(ul) {
@@ -298,19 +301,5 @@ watch(() => $auth.isLoggedIn, async (newValue) => {
 
 .dynamic-content :deep(li) {
   @apply font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529];
-}
-
-.loader {
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #0D4688;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform:  rotate(360deg); }
 }
 </style>
