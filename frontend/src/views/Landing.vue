@@ -1,7 +1,8 @@
 <template>
   <div class="min-h-screen bg-white">
     <!-- Hero Section -->
-    <section class="relative py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section class="relative  pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <NavBar />
       <div class="absolute bg-effect w-3/4 h-3/4">
         <img src="/effect.png" alt="Background effect">
       </div>
@@ -24,7 +25,7 @@
     </section>
 
     <!-- About Us Section -->
-    <section class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[#F4F4F4]">
+    <section class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-[1512px] mx-auto bg-[#F4F4F4]">
       <div class="max-w-[1512px] mx-auto">
         <div class="md:flex md:items-start md:justify-between mb-8 md:mb-12 lg:mb-16">
           <div class="relative flex-shrink-0 mb-6 md:mb-0 md:mr-8 lg:mr-12">
@@ -69,7 +70,7 @@
             </div>
           </div>
           <!-- Image and Button Section -->
-          <div class="md:w-1/2 relative mt-8 md:mt-0">
+          <div class="md:w-1/2 relative mt-8 md:mt-0 max-w-[1512px] mx-auto">
             <img src="/about.png" alt="Children benefiting from NGO work"
               class="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover rounded-lg shadow-lg">
             <button
@@ -118,7 +119,7 @@
 import { ref, inject, onMounted } from 'vue'
 import { ClipboardIcon, ClipboardCheckIcon, FileTextIcon, PlusIcon, MinusIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-vue-next'
 import Footer from '../components/Footer.vue'
-
+import NavBar from '../components/NavBar.vue'
 const call = inject('$call')
 const steps = [
   {

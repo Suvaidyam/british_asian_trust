@@ -1,7 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-50 font-sans">
     <!-- Main Content -->
-    <main class="max-w-[1512px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8">
+    <main class=" relative max-w-[1512px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-8 overflow-hidden">
+      <NavBar />
+      <div class="absolute bg-effect w-3/4 h-3/4">
+        <img src="/effect.png" alt="Background effect">
+      </div>
       <div class="grid md:grid-cols-[1fr_350px] lg:grid-cols-[1fr_400px] gap-8">
         <!-- Left Content -->
         <div class="space-y-6">
@@ -137,6 +141,7 @@ import { useToast } from 'vue-toastification'
 import { Bell, Menu, Plus, X, Trash2, LoaderIcon } from 'lucide-vue-next'
 import RegistrationPopup from './RegistrationPopup.vue'
 import Footer from '../components/Footer.vue'
+import NavBar from '../components/NavBar.vue'
 
 const call = inject('$call')
 const $auth = inject('$auth')

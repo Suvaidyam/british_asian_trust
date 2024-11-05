@@ -1,5 +1,9 @@
 <template>
-  <div class="min-h-screen bg-gray-100 font-poppins">
+  <div class=" relative min-h-screen bg-gray-100 font-poppins">
+    <NavBar/>
+    <div class="absolute bg-effect w-3/4 h-3/4">
+        <img src="/effect.png" alt="Background effect">
+      </div>
     <div class="max-w-[1512px] mx-auto bg-white shadow-lg pt-4 flex flex-col lg:flex-row">
       <!-- Sidebar -->
       <div class="lg:w-64 bg-white border-b lg:border-r border-gray-200 lg:h-screen">
@@ -137,6 +141,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { MenuIcon, CheckIcon, LockIcon, InfoIcon } from 'lucide-vue-next'
+import NavBar from '../components/NavBar.vue';
 
 const sections = ref([
   {
