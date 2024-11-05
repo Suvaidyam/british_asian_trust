@@ -1,28 +1,28 @@
 <template>
   <footer class="bg-[#0D4688] text-white py-4 px-6">
-    <div class="flex flex-col sm:flex-row justify-between items-center max-w-[1512px] mx-auto w-full">
+    <div class="flex flex-col sm:flex-row justify-between items-center max-w-[1920px] mx-auto w-full">
       <div class="font-poppins text-[14px] font-normal leading-[18.34px] tracking-[0.0025em] mb-2 sm:mb-0">
         © {{ currentYear }} All Rights Reserved
       </div>
       <div class="flex flex-col sm:flex-row items-center">
         <div class="font-poppins text-[14px] font-normal leading-[18.34px] tracking-[0.0025em] mb-2 sm:mb-0 sm:mr-4">
-          <a href="#" class="hover:underline">Data Privacy Policy</a>
+          <router-link to="/data-privacy-policy" class="hover:underline">Data Privacy Policy</router-link>
           <span class="mx-2">•</span>
-          <a href="#" class="hover:underline">Copyright Policy</a>
+          <router-link to="/copyright-policy" class="hover:underline">Copyright Policy</router-link>
         </div>
         <div class="flex space-x-4">
-          <a href="#" class="hover:text-gray-300 bg-white rounded-full p-1">
+          <router-link to="/facebook" class="hover:text-gray-300 bg-white rounded-full p-1">
             <FacebookIcon class="w-5 h-5 text-[#0D4688]" />
-          </a>
-          <a href="#" class="hover:text-gray-300 bg-white rounded-full p-1">
+          </router-link>
+          <router-link to="/twitter" class="hover:text-gray-300 bg-white rounded-full p-1">
             <TwitterIcon class="w-5 h-5 text-[#0D4688]" />
-          </a>
-          <a href="#" class="hover:text-gray-300 bg-white rounded-full p-1">
+          </router-link>
+          <router-link to="/linkedin" class="hover:text-gray-300 bg-white rounded-full p-1">
             <LinkedinIcon class="w-5 h-5 text-[#0D4688]" />
-          </a>
-          <a href="#" class="hover:text-gray-300 bg-white rounded-full p-1">
+          </router-link>
+          <router-link to="/youtube" class="hover:text-gray-300 bg-white rounded-full p-1">
             <YoutubeIcon class="w-5 h-5 text-[#0D4688]" />
-          </a>
+          </router-link>
         </div>
       </div>
     </div>

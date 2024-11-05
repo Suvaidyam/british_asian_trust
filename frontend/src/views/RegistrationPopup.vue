@@ -1,6 +1,6 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4">
-    <div class="w-full max-w-[1512px] flex flex-col lg:flex-row bg-white shadow-2xl overflow-hidden">
+    <div class="w-full max-w-[1920px] flex flex-col lg:flex-row bg-white shadow-2xl overflow-hidden">
       <!-- Image Section -->
       <div class="lg:w-1/2 h-64 lg:h-screen relative">
         <img src="/login1.png" alt="Two women in traditional attire" class="object-cover w-full h-full" />

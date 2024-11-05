@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 font-sans">
     <!-- Main Content -->
-    <main class=" relative max-w-[1512px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-8 overflow-hidden">
+    <main class="relative max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-8 overflow-hidden">
       <NavBar />
       <div class="absolute bg-effect w-3/4 h-3/4">
         <img src="/effect.png" alt="Background effect">
@@ -10,12 +10,10 @@
         <!-- Left Content -->
         <div class="space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <h1
-              class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
+            <h1 class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
               {{ assessmentInfo?.assessment_information }}
             </h1>
-            <p
-              class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
+            <p class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
               Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo?.modified) }}</span>
             </p>
           </div>
@@ -29,36 +27,31 @@
 
         <!-- Right Sidebar -->
         <div class="space-y-6">
-          <div
-            class="bg-gradient-to-r from-[#0D4688] to-[#406EA3] bg-[length:200%] bg-[99.63deg] w-full sm:w-[376px] md:w-[350px] lg:w-[400px] h-auto sm:h-[114px] rounded-lg p-6 text-white">
-            <h2
-              class="font-poppins text-lg sm:text-xl md:text-[20px] lg:text-[20px] font-semibold leading-tight sm:leading-[22px] lg:leading-[22px] tracking-[0.0015em] text-left mb-4">
-              Ready to take the survey?</h2>
-            <router-link to="/assessmenttest"
-              class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300">
+          <div class="bg-gradient-to-r from-[#0D4688] to-[#406EA3] bg-[length:200%] bg-[99.63deg] w-full sm:w-[376px] md:w-[350px] lg:w-[400px] h-auto sm:h-[114px] rounded-lg p-6 text-white">
+            <h2 class="font-poppins text-lg sm:text-xl md:text-[20px] lg:text-[20px] font-semibold leading-tight sm:leading-[22px] lg:leading-[22px] tracking-[0.0015em] text-left mb-4">
+              Ready to take the survey?
+            </h2>
+            <router-link to="/assessmenttest" class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300">
               START ASSESSMENT
             </router-link>
           </div>
 
           <div class="flex items-center justify-between mb-6">
-            <h2
-              class="font-poppins text-[18px] sm:text-[19px] md:text-[20px] font-medium leading-[20px] sm:leading-[21px] md:leading-[22px] text-left lg:text-[20px] lg:leading-[22px] text-[#0D4688]">
-              Users</h2>
-            <button @click="user_popup" :class="[user?.bat_role_profile != 'Primary' ? 'hidden' : '']"
-              class=" p-1  text-white bg-[#0D4688] transition-colors duration-300">
+            <h2 class="font-poppins text-[18px] sm:text-[19px] md:text-[20px] font-medium leading-[20px] sm:leading-[21px] md:leading-[22px] text-left lg:text-[20px] lg:leading-[22px] text-[#0D4688]">
+              Users
+            </h2>
+            <button @click="user_popup" :class="[user?.bat_role_profile != 'Primary' ? 'hidden' : '']" class="p-1 text-white bg-[#0D4688] transition-colors duration-300">
               <Plus class="w-[15px] h-[15px]" />
             </button>
           </div>
           <div class="bg-white rounded-lg shadow-sm p-6 w-full sm:w-[376px] md:w-[350px] lg:w-[400px] border">
-
-            <div class="space-y-4 ">
+            <div class="space-y-4">
               <div v-for="user in teamMembers" :key="user.name" class="flex items-center gap-3 border-b pb-1">
                 <img :src="user.user_image" :alt="user.name" class="w-8 h-8 rounded-full" />
                 <div>
                   <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
                   <p class="text-xs text-gray-500">{{ user.role_profile }}</p>
                 </div>
-                <!-- <span class="ml-auto text-xs text-gray-500">Joining Date: {{ formatDate(user.creation) }}</span> -->
               </div>
             </div>
           </div>
@@ -73,9 +66,9 @@
           <div class="bg-white rounded-lg w-full max-w-2xl">
             <div class="p-6">
               <div class="flex items-center justify-between mb-6">
-                <h2
-                  class="font-poppins text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-[24px] sm:leading-[25.2px] md:leading-[26.4px] text-left lg:text-[24px] lg:leading-[26.4px]">
-                  Invite User</h2>
+                <h2 class="font-poppins text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-[24px] sm:leading-[25.2px] md:leading-[26.4px] text-left lg:text-[24px] lg:leading-[26.4px]">
+                  Invite User
+                </h2>
                 <button @click="user_popup" class="text-gray-500 hover:text-gray-700 transition-colors duration-300">
                   <X class="w-5 h-5" />
                 </button>
@@ -84,6 +77,7 @@
               <div class="space-y-4">
                 <div class="flex gap-2">
                   <input v-model="inviteEmail" type="email" placeholder="Invite others by name or email"
+                    @input="validateEmail"
                     class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D4688]" />
                   <button @click="inviteUser" :disabled="!isValidEmail || !isBusinessEmail || isInviting" :class="[
                     'w-[140px] h-[40px] px-4 py-2 rounded-full transition duration-300 flex items-center justify-center font-poppins text-[14px] sm:text-[15px] md:text-[16px] font-semibold leading-[20px] sm:leading-[20.5px] md:leading-[20.96px] tracking-[0.0025em] text-left lg:text-[16px] lg:leading-[20.96px]',
@@ -96,7 +90,7 @@
                     </span>
                   </button>
                 </div>
-
+                <p v-if="emailError" class="text-red-500 text-xs mt-1">{{ emailError }}</p>
 
                 <div class="space-y-3">
                   <div v-for="member in teamMembers" :key="member.name"
@@ -149,6 +143,7 @@ const router = useRouter()
 const toast = useToast()
 const showModal = ref(false)
 const inviteEmail = ref('')
+const emailError = ref('')
 const showRegistrationPopup = ref(false)
 const user = ref(null)
 const teamMembers = ref([])
@@ -200,12 +195,21 @@ const isBusinessEmail = computed(() => {
   return !restrictedDomains.includes(domain)
 })
 
+const validateEmail = () => {
+  emailError.value = ''
+  if (!isValidEmail.value) {
+    emailError.value = 'Please enter a valid email address.'
+  } else if (!isBusinessEmail.value) {
+    emailError.value = 'Please use a business email address. Personal email domains are not allowed.'
+  }
+}
+
 const inviteUser = async () => {
-  if (!isBusinessEmail.value) {
-    toast.error('Please use a business email address. Personal email domains are not allowed.', { position: "top-right", timeout: 3000 })
+  if (!isValidEmail.value || !isBusinessEmail.value) {
+    validateEmail()
     return
   }
-  if (isValidEmail.value && inviteEmail.value.split('@')[1] === $auth?.user?.name.split('@')[1]) {
+  if (inviteEmail.value.split('@')[1] === $auth?.user?.name.split('@')[1]) {
     try {
       isInviting.value = true
       let response = await call('british_asian_trust.api.register_invities_user', {
@@ -226,9 +230,8 @@ const inviteUser = async () => {
     } finally {
       isInviting.value = false
     }
-  }
-  else {
-    toast.error('This email has not exists in your organization', { position: "top-right", timeout: 3000 })
+  } else {
+    emailError.value = 'This email does not exist in your organization'
   }
 }
 
@@ -262,7 +265,7 @@ const checkUserRegistration = async () => {
   try {
     user.value = await $auth.getSessionUser()
     fetchTeamMember()
-    if (user.value?.bat_designation && user.value?.bat_organization) {
+    if  (user.value?.bat_designation && user.value?.bat_organization) {
       showRegistrationPopup.value = false
     } else {
       showRegistrationPopup.value = true
