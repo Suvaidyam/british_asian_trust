@@ -21,7 +21,8 @@
                     d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <span class="text-[#0D4688] font-poppins text-[12px] md:text-sm font-bold leading-[13.2px] tracking-[0.004em] mb-1">MENU</span>
+              <span
+                class="text-[#0D4688] font-poppins text-[12px] md:text-sm font-bold leading-[13.2px] tracking-[0.004em] mb-1">MENU</span>
             </div>
 
             <template v-if="!$auth?.isLoggedIn && currentRoute == '/'">
@@ -74,7 +75,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <span class="text-[#0D4688] font-poppins text-[12px] md:text-sm font-bold leading-[13.2px] tracking-[0.004em] mb-1">MENU</span>
+            <span
+              class="text-[#0D4688] font-poppins text-[12px] md:text-sm font-bold leading-[13.2px] tracking-[0.004em] mb-1">MENU</span>
           </div>
         </div>
       </div>
@@ -90,27 +92,36 @@
         <div class="max-w-[1512px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div class="space-y-4">
             <!-- Navigation Items -->
-            <a @click="navigateTo('AboutUs')"
-              class="block py-2 px-4 text-[16px] sm:text-[17px] md:text-[18px] text-white hover:text-gray-200 cursor-pointer">About
-              Us</a>
-            <a @click="navigateTo('Assignment')"
-              class="block py-2 px-4 text-[16px] sm:text-[17px] md:text-[18px] text-white hover:text-gray-200 cursor-pointer">Assignment</a>
+            <router-link :to='{ name: "Home" }'
+              class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">
+              Home</router-link>
+            <router-link :to='{ name: "AssessmentTest" }'
+              class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">
+              Assignment</router-link>
+            <router-link :to='{ name: "Home" }'
+              class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">
+              Compendium
+              of Resources</router-link>
+            <router-link :to='{ name: "Home" }'
+              class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">
+              Contact
+              Us</router-link>
 
             <!-- Mobile view: Login/Logout and Profile options -->
             <div class="md:hidden">
               <template v-if="!$auth.isLoggedIn">
-                <a @click="navigateTo('Login')"
-                  class="block py-2 px-4 text-[16px] sm:text-[17px] md:text-[18px] text-white hover:text-gray-200 cursor-pointer">Login</a>
+                <router-link :to='{ name: "Login" }'
+                  class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">Login</router-link>
               </template>
               <template v-else>
-                <a @click="toggleNotifications"
-                  class="block py-2 px-4 text-[16px] sm:text-[17px] md:text-[18px] text-white hover:text-gray-200 cursor-pointer">Notifications</a>
-                <a @click="openProfileSlider"
-                  class="block py-2 px-4 text-[16px] sm:text-[17px] md:text-[18px] text-white hover:text-gray-200 cursor-pointer">Your
-                  Profile</a>
-                <a @click="$auth.logout()"
-                  class="block py-2 px-4 text-[16px] sm:text-[17px] md:text-[18px] text-white hover:text-gray-200 cursor-pointer">Log
-                  out</a>
+                <button @click="toggleNotifications"
+                  class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">Notifications</button>
+                <button @click="openProfileSlider"
+                  class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">Your
+                  Profile</button>
+                <button @click="$auth.logout()"
+                  class="block py-2 px-4 font-poppins text-[21px] sm:text-[22px] md:text-[23px] font-medium leading-[24px] sm:leading-[25px] md:leading-[25.3px] text-left lg:text-[23px] lg:leading-[25.3px] text-white hover:text-gray-200 cursor-pointer">Log
+                  out</button>
               </template>
             </div>
           </div>
@@ -189,10 +200,10 @@ const closeNotificationSlider = () => {
   isNotificationSliderOpen.value = false
 }
 
-const navigateTo = (routeName) => {
-  router.push({ name: routeName })
-  closeNavigation()
-}
+// const navigateTo = (routeName) => {
+//   router.push({ name: routeName })
+//   closeNavigation()
+// }
 
 watch(() => router.currentRoute.value.path, (newRoute) => {
   currentRoute.value = newRoute

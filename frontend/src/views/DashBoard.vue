@@ -36,22 +36,25 @@
             </router-link>
           </div>
 
-          <div class="bg-white rounded-lg shadow-sm p-6 w-full sm:w-[376px] md:w-[350px] lg:w-[400px]">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="text-lg font-semibold">Users</h2>
-              <button @click="user_popup" :class="[ user?.bat_role_profile != 'Primary' ? 'hidden' : '']" class="p-2 hover:bg-gray-100 rounded-full text-[#0D4688] transition-colors duration-300">
-                <Plus class="w-5 h-5" />
-              </button>
-            </div>
+          <div class="flex items-center justify-between mb-6">
+            <h2
+              class="font-poppins text-[18px] sm:text-[19px] md:text-[20px] font-medium leading-[20px] sm:leading-[21px] md:leading-[22px] text-left lg:text-[20px] lg:leading-[22px] text-[#0D4688]">
+              Users</h2>
+            <button @click="user_popup" :class="[user?.bat_role_profile != 'Primary' ? 'hidden' : '']"
+              class=" p-1  text-white bg-[#0D4688] transition-colors duration-300">
+              <Plus class="w-[15px] h-[15px]" />
+            </button>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm p-6 w-full sm:w-[376px] md:w-[350px] lg:w-[400px] border">
 
-            <div class="space-y-4">
-              <div v-for="user in teamMembers" :key="user.name" class="flex items-center gap-3">
+            <div class="space-y-4 ">
+              <div v-for="user in teamMembers" :key="user.name" class="flex items-center gap-3 border-b pb-1">
                 <img :src="user.user_image" :alt="user.name" class="w-8 h-8 rounded-full" />
                 <div>
                   <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
                   <p class="text-xs text-gray-500">{{ user.role_profile }}</p>
                 </div>
-                <span class="ml-auto text-xs text-gray-500">Joining Date: {{ formatDate(user.creation) }}</span>
+                <!-- <span class="ml-auto text-xs text-gray-500">Joining Date: {{ formatDate(user.creation) }}</span> -->
               </div>
             </div>
           </div>
@@ -66,9 +69,10 @@
           <div class="bg-white rounded-lg w-full max-w-2xl">
             <div class="p-6">
               <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-semibold">Invite User</h2>
-                <button @click="user_popup"
-                  class="text-gray-500 hover:text-gray-700 transition-colors duration-300">
+                <h2
+                  class="font-poppins text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-[24px] sm:leading-[25.2px] md:leading-[26.4px] text-left lg:text-[24px] lg:leading-[26.4px]">
+                  Invite User</h2>
+                <button @click="user_popup" class="text-gray-500 hover:text-gray-700 transition-colors duration-300">
                   <X class="w-5 h-5" />
                 </button>
               </div>
@@ -78,7 +82,7 @@
                   <input v-model="inviteEmail" type="email" placeholder="Invite others by name or email"
                     class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D4688]" />
                   <button @click="inviteUser" :disabled="!isValidEmail || !isBusinessEmail || isInviting" :class="[
-                    'px-4 py-2 rounded-lg transition duration-300 flex items-center justify-center',
+                    'w-[140px] h-[40px] px-4 py-2 rounded-full transition duration-300 flex items-center justify-center font-poppins text-[14px] sm:text-[15px] md:text-[16px] font-semibold leading-[20px] sm:leading-[20.5px] md:leading-[20.96px] tracking-[0.0025em] text-left lg:text-[16px] lg:leading-[20.96px]',
                     isValidEmail && isBusinessEmail && !isInviting ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 cursor-not-allowed'
                   ]">
                     <span v-if="!isInviting">INVITE</span>
@@ -88,6 +92,7 @@
                     </span>
                   </button>
                 </div>
+
 
                 <div class="space-y-3">
                   <div v-for="member in teamMembers" :key="member.name"
@@ -100,7 +105,8 @@
                       </div>
                     </div>
                     <div class="flex items-center gap-2">
-                      <select v-model="member.role_profile" @change="handleRoleChange(member)" :disabled="member.name === user?.name"
+                      <select v-model="member.role_profile" @change="handleRoleChange(member)"
+                        :disabled="member.name === user?.name"
                         class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#0D4688]">
                         <option value="Support">Support</option>
                         <option value="Primary">Primary</option>
@@ -119,7 +125,7 @@
       </Transition>
     </Teleport>
 
-    <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" :user="user"/>
+    <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" :user="user" />
   </div>
   <Footer />
 </template>
@@ -162,7 +168,7 @@ const formatDate = (dateString) => {
   })
 }
 
-const user_popup = async () =>  {
+const user_popup = async () => {
   user.value = await $auth.getSessionUser()
   showModal.value = !showModal.value
 }
@@ -229,7 +235,7 @@ const handleRoleChange = async (member) => {
     })
     if (response.code == 'SUC_200') {
       await $auth.setUserSession($auth?.user?.name)
-      if(member.role_profile === 'Primary'){
+      if (member.role_profile === 'Primary') {
         user_popup()
       }
       toast.success(response.message, { position: "top-right", timeout: 3000 })
@@ -292,7 +298,7 @@ watch(() => $auth.isLoggedIn, async (newValue) => {
 }
 
 .dynamic-content :deep(p) {
-  @apply font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed  sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529];
+  @apply font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529];
 }
 
 .dynamic-content :deep(ul) {
