@@ -91,8 +91,7 @@
                   ]">
                     <span v-if="!isInviting">INVITE</span>
                     <span v-else class="flex items-center">
-                      <LoaderIcon class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
-                      Processing...
+                      <LoaderIcon class="animate-spin h-5 w-5 text-white" />
                     </span>
                   </button>
                 </div>
@@ -115,8 +114,11 @@
                         <option value="Support">Support</option>
                         <option value="Primary">Primary</option>
                       </select>
-                      <button @click="removeMember(member.name)"
-                        class="text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                      <button @click="removeMember(member.name)" 
+                        :disabled="member.name === user?.name"
+                        :class="[
+                          member.name === user?.name ? 'cursor-not-allowed text-gray-400 transition-colors duration-300' : 'text-gray-400 hover:text-gray-600 transition-colors duration-300'
+                        ]">
                         <Trash2 class="w-4 h-4" />
                       </button>
                     </div>
@@ -250,12 +252,24 @@ const handleRoleChange = async (member) => {
     }
   } catch (error) {
     console.error('Registration error:', error)
-    toast.error('Failed to update role. Please try again.')
   }
 }
 
-const removeMember = (id) => {
-  teamMembers.value = teamMembers.value.filter(member => member.name !== id)
+const removeMember = async (id) => {
+  try {
+    let response = await call('british_asian_trust.api.delete_team_member', {
+      email: id
+    })
+    if (response.code == 'SUC_200') {
+      await fetchTeamMember()
+      toast.success(response.message, { position: "top-right", timeout: 3000 })
+    }
+    else {
+      toast.error(response.message, { position: "top-right", timeout: 3000 });
+    }
+  } catch (error) {
+    console.error('Failed to remove member:', error)
+  }
 }
 
 const checkUserRegistration = async () => {
