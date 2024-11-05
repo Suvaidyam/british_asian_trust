@@ -137,6 +137,22 @@ def update_team_member(email, role_profile):
 
 
 @frappe.whitelist(allow_guest=True)
+def delete_team_member(email):
+    # Validate email
+    if not email:
+        new_response.bad_request('ERR_001', 'Email is required.')
+    else:
+        try:
+            # Delete user from BAT Users doctype
+            frappe.delete_doc("BAT Users", email)
+            frappe.db.commit()
+            new_response.ok('SUC_200', None, 'User Deleted')
+        except Exception as e:
+            frappe.log_error(frappe.get_traceback(), _("An error occurred during deletion"))
+            new_response.something_went_wrong('ERR_005', e, 'An error occurred during deletion"))')
+
+
+@frappe.whitelist(allow_guest=True)
 def get_both_user(userId):
     # Validate if user ID is provided
     if not userId:
