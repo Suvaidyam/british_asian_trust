@@ -1,6 +1,6 @@
 <template>
 	<div class="">
-		<NavBar />
+		<!-- <NavBar /> -->
 		<!-- <button v-if="$auth.isLoggedIn" @click="$auth.logout()">Logout</button> -->
 		<router-view />
 	</div>

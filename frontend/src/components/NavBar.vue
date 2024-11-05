@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
     <!-- Fixed Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 bg-white z-50">
-      <div class="max-w-[1512px] mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="  z-50">
+      <div class="max-w-[1512px] bg-white  mx-auto px-4 sm:px-6 lg:px-5">
         <div class="flex justify-between items-center h-20">
           <div class="flex items-center">
             <img src="/logo.png" alt="ISDM Logo" class="h-12 w-auto" />
@@ -87,7 +87,7 @@
       enter-from-class="opacity-0 -translate-y-full" enter-to-class="opacity-100 translate-y-0"
       leave-active-class="transition-all duration-300 ease-in-out" leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-full">
-      <div v-if="isNavigationOpen" class="fixed inset-x-0 top-16 bg-[#0D4688] z-40 overflow-y-auto shadow-md"
+      <div v-if="isNavigationOpen" class="fixed inset-x-0 top-20 bg-[#0D4688] max-w-[1512px] mx-auto z-40 overflow-y-auto shadow-md"
         style="max-height: calc(100vh - 4rem);">
         <div class="max-w-[1512px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div class="space-y-4">
@@ -130,9 +130,9 @@
     </transition>
 
     <!-- Main Content Area (adjust top padding to account for fixed navbar) -->
-    <main class="pt-16 max-w-[1512px] mx-auto">
+    <!-- <main class="pt-16 max-w-[1512px] mx-auto"> -->
       <!-- Your main content goes here -->
-    </main>
+    <!-- </main> -->
 
     <!-- User Profile Slider -->
     <UserProfileSlider :is-open="isProfileSliderOpen" @close="closeProfileSlider" />
