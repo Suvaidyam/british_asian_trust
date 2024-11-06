@@ -126,13 +126,11 @@ fixtures=[
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"User": {
+        "after_insert":"british_asian_trust.api.send_custom_welcome_email"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
