@@ -220,21 +220,25 @@ def my_login_via_google(code: str, state: str):
     # OAuth2 login via Google
     login_via_oauth2("google", code, state, decoder=decoder_compat)
     user = frappe.session.user
-    userinfo = frappe.get_doc("User", user)
-    userinfo.role_profile_name = "Primary"
-    userinfo.save(ignore_permissions=True)
-    frappe.db.commit()
     if not frappe.db.exists("BAT Users", user):
+        userinfo = frappe.get_doc("User", user)
+        userinfo.role_profile_name = "Primary"
+        userinfo.save(ignore_permissions=True)
         bat_user = frappe.get_doc({
             "doctype": "BAT Users",
             "email_address": userinfo.email,
             "full_name": userinfo.full_name,
+            "role_profile": "Primary",
             "is_social_login": 1,
         })
         bat_user.insert(ignore_permissions=True)
         frappe.db.commit()
-    frappe.local.response["type"] = "redirect"
-    frappe.local.response["location"] = "/bat/home"
+        frappe.local.response["type"] = "redirect"
+        frappe.local.response["location"] = "/bat/home"
+    else:
+        frappe.local.response["type"] = "redirect"
+        frappe.local.response["location"] = "/bat/home"
+    
 
 
 @frappe.whitelist(allow_guest=True)
@@ -242,22 +246,25 @@ def my_login_via_office_365(code: str, state: str):
     # OAuth2 login via Office 365
     login_via_oauth2_id_token("office_365", code, state, decoder=decoder_compat)
     user = frappe.session.user
-    userinfo = frappe.get_doc("User", user)
-    userinfo.role_profile_name = "Primary"
-    userinfo.save(ignore_permissions=True)
-    frappe.db.commit()
     if not frappe.db.exists("BAT Users", user):
+        userinfo = frappe.get_doc("User", user)
+        userinfo.role_profile_name = "Primary"
+        userinfo.save(ignore_permissions=True)
         bat_user = frappe.get_doc({
             "doctype": "BAT Users",
             "email_address": userinfo.email,
             "full_name": userinfo.full_name,
+            "role_profile": "Primary",
             "is_social_login": 1,
         })
         bat_user.insert(ignore_permissions=True)
         frappe.db.commit()
-    frappe.local.response["type"] = "redirect"
-    frappe.local.response["location"] = "/bat/home"
-
+        frappe.local.response["type"] = "redirect"
+        frappe.local.response["location"] = "/bat/home"
+    else:
+        frappe.local.response["type"] = "redirect"
+        frappe.local.response["location"] = "/bat/home"
+        
 @frappe.whitelist(allow_guest=True)
 def get_faqs():
     # Fetch all FAQs
