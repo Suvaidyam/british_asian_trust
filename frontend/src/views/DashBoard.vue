@@ -50,7 +50,7 @@
                 <img :src="user.user_image" :alt="user.name" class="w-8 h-8 rounded-full" />
                 <div>
                   <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
-                  <p class="text-xs text-gray-500">{{ user.role_profile }}</p>
+                  <p class="text-xs text-gray-500"><span v-if="user.designation">{{ user.designation }}</span><span v-else>--</span></p>
                 </div>
               </div>
             </div>
@@ -299,7 +299,6 @@ const completeRegistration = async () => {
 onMounted(async () => {
   user.value = await $auth.getSessionUser()
   await checkUserRegistration()
-  await fetchTeamMember()
   await fetchAssessmentInfo()
 })
 
