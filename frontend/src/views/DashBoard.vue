@@ -11,7 +11,7 @@
         <!-- Left Content -->
         <div class="space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <h1 class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
+            <h1  v-if="assessmentInfo.contents && assessmentInfo.contents.length > 0" class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
               {{ assessmentInfo.contents[0].heading }}
             </h1>
             <p class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
