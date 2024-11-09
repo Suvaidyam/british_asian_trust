@@ -1,21 +1,21 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:domain_name",
+ "autoname": "field:domain",
  "creation": "2024-09-25 15:41:03.144618",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "organization_tab",
   "organization_name",
-  "domain_name",
+  "domain",
   "year_of_registration",
   "website",
   "column_break_krmf",
   "type_of_organisation",
   "compliance_registrations",
   "sectors",
-  "now_select_the_program_area_you_wish_to_take_this_survey_for"
+  "program_area"
  ],
  "fields": [
   {
@@ -29,12 +29,6 @@
    "in_list_view": 1,
    "label": "Organization name",
    "reqd": 1
-  },
-  {
-   "fieldname": "domain_name",
-   "fieldtype": "Data",
-   "label": "Domain name",
-   "unique": 1
   },
   {
    "fieldname": "year_of_registration",
@@ -66,19 +60,25 @@
    "options": "Sector Child"
   },
   {
-   "fieldname": "now_select_the_program_area_you_wish_to_take_this_survey_for",
+   "fieldname": "column_break_krmf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "program_area",
    "fieldtype": "Select",
    "label": "Now select the program area you wish to take this survey for",
    "options": "Education\nSkill development\nOthers"
   },
   {
-   "fieldname": "column_break_krmf",
-   "fieldtype": "Column Break"
+   "fieldname": "domain",
+   "fieldtype": "Data",
+   "label": "Domain name",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-08 17:22:43.149067",
+ "modified": "2024-11-09 11:28:01.851118",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "Organization",
