@@ -25,7 +25,7 @@ fixtures=[
 # website_theme_scss = "british_asian_trust/public/scss/website"
 
 # include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
+# webform_include_js = {"doctype": "public/js/doctype.js"}  
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
 # include js in page
@@ -230,4 +230,4 @@ doc_events = {
 # }
 
 
-# website_route_rules = [{'from_route': '/bat/<path:app_path>', 'to_route': 'bat'},]
+# website_route_rules = [{'from_route': '/bat/<path:app_path>', 'to_route': 'bat'},]    

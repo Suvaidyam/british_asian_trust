@@ -8,7 +8,14 @@
  "field_order": [
   "organization_tab",
   "organization_name",
-  "domain_name"
+  "domain_name",
+  "year_of_registration",
+  "website",
+  "column_break_krmf",
+  "type_of_organisation",
+  "compliance_registrations",
+  "sectors",
+  "now_select_the_program_area_you_wish_to_take_this_survey_for"
  ],
  "fields": [
   {
@@ -20,19 +27,58 @@
    "fieldname": "organization_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Organization Name",
+   "label": "Organization name",
    "reqd": 1
   },
   {
    "fieldname": "domain_name",
    "fieldtype": "Data",
-   "label": "Domain Name",
+   "label": "Domain name",
    "unique": 1
+  },
+  {
+   "fieldname": "year_of_registration",
+   "fieldtype": "Int",
+   "label": "Year of registration"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website",
+   "length": 100
+  },
+  {
+   "fieldname": "type_of_organisation",
+   "fieldtype": "Select",
+   "label": "Type of organisation",
+   "options": "Section 8\nTrust\nSociety"
+  },
+  {
+   "fieldname": "compliance_registrations",
+   "fieldtype": "Data",
+   "label": "Click on the checkboxes below if you currently have the following registrations",
+   "options": "Compliance Child"
+  },
+  {
+   "fieldname": "sectors",
+   "fieldtype": "Data",
+   "label": "Sectors operating in",
+   "options": "Sector Child"
+  },
+  {
+   "fieldname": "now_select_the_program_area_you_wish_to_take_this_survey_for",
+   "fieldtype": "Select",
+   "label": "Now select the program area you wish to take this survey for",
+   "options": "Education\nSkill development\nOthers"
+  },
+  {
+   "fieldname": "column_break_krmf",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-29 16:26:55.407135",
+ "modified": "2024-11-08 17:22:43.149067",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "Organization",

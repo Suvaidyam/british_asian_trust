@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class FAQs(Document):
+class Compliance(Document):
 	pass

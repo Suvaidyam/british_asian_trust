@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class AssessmentInformation(Document):
+class SectorChild(Document):
 	pass

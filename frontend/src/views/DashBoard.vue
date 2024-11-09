@@ -31,7 +31,7 @@
             <h2 class="font-poppins text-lg sm:text-xl md:text-[20px] lg:text-[20px] font-semibold leading-tight sm:leading-[22px] lg:leading-[22px] tracking-[0.0015em] text-left mb-4">
               Ready to take the survey?
             </h2>
-            <router-link to="/assessmenttest" class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300">
+            <router-link to="/assessment" class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300">
               START ASSESSMENT
             </router-link>
           </div>

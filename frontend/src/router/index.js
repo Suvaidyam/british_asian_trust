@@ -7,6 +7,7 @@ import Landing from "../views/Landing.vue";
 import AssessmentTest from "../views/AssessmentTest.vue";
 import DashBoard from "../views/DashBoard.vue";
 import UpdatePassword from "../components/ UpdatePassword.vue";
+import AssessmentResults from "../views/ AssessmentResults.vue";
 
 const routes = [
   {
@@ -42,9 +43,14 @@ const routes = [
   },
 
   {
-    path: "/assessmenttest",
+    path: "/assessment",
     name: "AssessmentTest",
     component: AssessmentTest,
+  },
+  {
+    path: "/assessmentresults",
+    name: "AssessmentResults",
+    component: AssessmentResults,
   },
 ];
 

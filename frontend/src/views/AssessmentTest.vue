@@ -1,11 +1,11 @@
 <template>
-  <div class="relative min-h-screen bg-gray-100 font-poppins">
+  <div class="relative min-h-screen  font-poppins">
     <NavBar />
     <div class="absolute bg-effect w-3/4 h-3/4">
       <img src="/effect.png" alt="Background effect">
     </div>
-    <div class="max-w-[1920px] mx-auto ">
-      <div class="bg-white shadow-lg pt-4 flex flex-col lg:flex-row">
+    <div class="max-w-[1920px] mx-auto">
+      <div class="bg-white pt-4 flex flex-col lg:flex-row">
         <!-- Sidebar -->
         <div class="lg:w-64 bg-white border-b lg:border-r border-gray-200 lg:h-screen">
           <div class="p-4 border-b border-gray-200 flex justify-between items-center lg:block">
@@ -21,10 +21,9 @@
                 <button
                   @click="changeSection(index)"
                   :class="[
-                    'w-full text-left px-4 py-3 h-[36px] flex items-center',
-                    currentSection === index ? 'bg-blue-100 text-[#0D4688] rounded-full' : 'text-[#596C8C] ',
-                    section.isLocked ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50',
-                    !isVisibleSection(section) ? 'hidden' : ''
+                    'w-full text-left px-6 py-3 h-[36px] flex items-center',
+                    currentSection === index ? 'bg-blue-100 text-[#0D4688]' : 'text-[#596C8C]',
+                    section.isLocked ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
                   ]"
                   :disabled="section.isLocked"
                 >
@@ -45,12 +44,12 @@
         <div class="flex-1 overflow-y-auto lg:h-screen">
           <div class="p-4 sm:p-6 md:p-8">
             <nav class="text-sm mb-4">
-              <a href="#" class="text-[#0D4688] hover:underline">Home</a> / 
-              <a href="#" class="text-[#0D4688] hover:underline">Assessment</a>
+              <a :href="homeRoute" class="text-[#0D4688] hover:underline">{{ homeLabel }}</a> / 
+              <a :href="assessmentRoute" class="text-[#0D4688] hover:underline">{{ assessmentLabel }}</a>
             </nav>
             <h1 class="text-2xl sm:text-3xl font-bold text-[#0D4688] mb-6">Assessment Sample Test</h1>
             
-            <div v-if="currentSection !== null && isVisibleSection(allSections[currentSection])">
+            <div v-if="currentSection !== null">
               <div v-for="(question, index) in allSections[currentSection].questions" :key="index" class="mb-8">
                 <div class="flex items-start">
                   <h3 class="text-base sm:text-lg font-semibold text-[#0D4688] mb-2 flex-grow">{{ index + 1 }}. {{ question.text }}</h3>
@@ -145,7 +144,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { MenuIcon, CheckIcon, LockIcon, InfoIcon } from 'lucide-vue-next'
 import NavBar from '../components/NavBar.vue'
 
@@ -222,25 +221,12 @@ const currentSection = ref(0)
 const agreeToTerms = ref(false)
 const sidebarOpen = ref(false)
 const selectedAssessmentType = ref('')
+const homeRoute = ref('/home')
+const homeLabel = ref('Home')
+const assessmentRoute = ref('/assessment')
+const assessmentLabel = ref('Assessment')
 
-const isVisibleSection = (section) => {
-  if (!selectedAssessmentType.value) return true
-  if (section.name === 'Section A') return true
-  const sectionLetter = section.name.split(' ')[1]
-  if (selectedAssessmentType.value === 'Health' && ['B', 'C', 'D'].includes(sectionLetter)) return true
-  if (selectedAssessmentType.value === 'Education' && ['C', 'D'].includes(sectionLetter)) return true
-  if (selectedAssessmentType.value === 'Other' && ['B', 'D'].includes(sectionLetter)) return true
-  return false
-}
-
-const visibleSections = computed(() => {
-  return allSections.value.filter(isVisibleSection)
-})
-
-const isLastSection = computed(() => {
-  const visibleSectionIndex = visibleSections.value.findIndex(section => section.name === allSections.value[currentSection.value].name)
-  return  visibleSectionIndex === visibleSections.value.length - 1
-})
+const isLastSection = computed(() => currentSection.value === allSections.value.length - 1)
 
 const canSubmit = computed(() => {
   const currentQuestions = allSections.value[currentSection.value].questions
@@ -253,7 +239,7 @@ const canSubmit = computed(() => {
 })
 
 const changeSection = (index) => {
-  if (!allSections.value[index].isLocked && isVisibleSection(allSections.value[index])) {
+  if (!allSections.value[index].isLocked) {
     currentSection.value = index
     sidebarOpen.value = false
   }
@@ -289,10 +275,7 @@ const submitSection = () => {
     })
   }
   if (!isLastSection.value) {
-    const nextVisibleSection = visibleSections.value.find(section => !section.isCompleted)
-    if (nextVisibleSection) {
-      currentSection.value = allSections.value.findIndex(section => section.name === nextVisibleSection.name)
-    }
+    currentSection.value++
   } else {
     // Handle final submission
     alert('Assessment completed!')
@@ -307,13 +290,6 @@ const showInfo = (question) => {
 const toggleSidebar = () => {
   sidebarOpen.value = !sidebarOpen.value
 }
-
-// Watch for changes in the selected assessment type and reset currentSection if needed
-watch(selectedAssessmentType, () => {
-  if (!isVisibleSection(allSections.value[currentSection.value])) {
-    currentSection.value = 0
-  }
-})
 
 // Initialize: Lock all sections except the first one
 allSections.value.forEach((section, index) => {
