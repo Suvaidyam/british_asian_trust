@@ -19,7 +19,7 @@ def register_user(email, full_name, termsAccepted):
     domain = email.split('@')[1]
 
     # Check if the organization or user already exists
-    if frappe.db.exists("Organization", {"domain_name": domain}) or frappe.db.exists("BAT Users", {"email_address": email}):
+    if frappe.db.exists("Organization", {"domain": domain}) or frappe.db.exists("BAT Users", {"email_address": email}):
         new_response.bad_request('ERR_002', 'Organization with this Domain already exists.')
     else:
         try:
@@ -58,7 +58,7 @@ def complate_registration(organization, designation):
             if not frappe.db.exists("Organization", domain):
                 organization_doc = frappe.get_doc({
                     "doctype": "Organization",
-                    "domain_name": domain,
+                    "domain": domain,
                     "organization_name": organization
                 })
                 organization_doc.insert(ignore_permissions=True)
