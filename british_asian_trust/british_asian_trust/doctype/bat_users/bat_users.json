@@ -10,24 +10,27 @@
   "email_address",
   "designation",
   "organization",
-  "is_social_login",
-  "concent_check",
+  "column_break_ofii",
   "role_profile",
-  "column_break_khco"
+  "is_social_user",
+  "consent",
+  "is_deleted"
  ],
  "fields": [
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Full Name",
+   "label": "Full name",
+   "length": 100,
    "reqd": 1
   },
   {
    "fieldname": "email_address",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Email Address",
+   "label": "Email address",
+   "length": 50,
    "options": "Email",
    "reqd": 1,
    "unique": 1
@@ -36,6 +39,7 @@
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
+   "length": 50,
    "mandatory_depends_on": "eval:doc.is_social_login ==0 ",
    "options": "Designation"
   },
@@ -43,35 +47,45 @@
    "fieldname": "organization",
    "fieldtype": "Link",
    "label": "Organization",
+   "length": 50,
    "mandatory_depends_on": "eval:doc.is_social_login ==0",
    "options": "Organization"
   },
   {
-   "default": "0",
-   "fieldname": "is_social_login",
-   "fieldtype": "Check",
-   "label": "Is Social User"
+   "fieldname": "role_profile",
+   "fieldtype": "Link",
+   "label": "Role profile",
+   "length": 50,
+   "options": "Role Profile"
   },
   {
    "default": "0",
-   "fieldname": "concent_check",
+   "fieldname": "is_social_user",
    "fieldtype": "Check",
-   "label": "Concent Check",
+   "label": "Social User"
+  },
+  {
+   "default": "0",
+   "fieldname": "consent",
+   "fieldtype": "Check",
+   "label": "Consent",
    "read_only": 1
   },
   {
-   "fieldname": "column_break_khco",
-   "fieldtype": "Column Break"
+   "default": "0",
+   "fieldname": "is_deleted",
+   "fieldtype": "Check",
+   "label": "Deleted",
+   "search_index": 1
   },
   {
-   "fieldname": "role_profile",
-   "fieldtype": "Data",
-   "label": "Role Profile"
+   "fieldname": "column_break_ofii",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-05 14:25:31.931289",
+ "modified": "2024-11-08 16:15:53.507041",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "BAT Users",
@@ -89,29 +103,6 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Primary",
-   "select": 1,
-   "share": 1,
-   "write": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Support",
-   "select": 1,
-   "share": 1
   }
  ],
  "show_title_field_in_link": 1,

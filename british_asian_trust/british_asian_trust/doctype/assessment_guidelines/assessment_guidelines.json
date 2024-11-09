@@ -1,51 +1,45 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-10-29 18:10:26.399654",
+ "creation": "2024-11-08 18:36:22.248471",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "assessment_information",
-  "information",
-  "image"
+  "ref_doctype",
+  "contents"
  ],
  "fields": [
   {
-   "fieldname": "information",
-   "fieldtype": "HTML Editor",
+   "fieldname": "ref_doctype",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Information",
+   "label": "Ref DocType",
+   "options": "DocType",
    "reqd": 1
   },
   {
-   "fieldname": "image",
-   "fieldtype": "Attach Image",
-   "label": "Image",
-   "reqd": 1
-  },
-  {
-   "fieldname": "assessment_information",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Assessment Information",
-   "reqd": 1
+   "fieldname": "contents",
+   "fieldtype": "Table",
+   "label": "Contents",
+   "options": "Content Child"
   }
  ],
  "index_web_pages_for_search": 1,
- "issingle": 1,
  "links": [],
- "modified": "2024-11-04 15:40:15.581241",
+ "modified": "2024-11-08 18:39:00.759940",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
- "name": "Assessment Information",
+ "name": "Assessment Guidelines",
  "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
    "delete": 1,
    "email": 1,
+   "export": 1,
    "print": 1,
    "read": 1,
+   "report": 1,
    "role": "System Manager",
    "share": 1,
    "write": 1

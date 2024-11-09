@@ -12,18 +12,18 @@ EXTRA_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 
 
-class TestFAQs(UnitTestCase):
+class TestSectorChild(UnitTestCase):
 	"""
-	Unit tests for FAQs.
+	Unit tests for SectorChild.
 	Use this class for testing individual functions and methods.
 	"""
 
 	pass
 
 
-class TestFAQs(IntegrationTestCase):
+class TestSectorChild(IntegrationTestCase):
 	"""
-	Integration tests for FAQs.
+	Integration tests for SectorChild.
 	Use this class for testing interactions between multiple components.
 	"""
 

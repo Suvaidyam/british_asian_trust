@@ -1,44 +1,37 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "Q.###",
- "creation": "2024-11-04 11:54:14.529792",
+ "autoname": "format:D-{##}",
+ "creation": "2024-11-08 16:13:27.029568",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "question",
-  "answer",
-  "is_open"
+  "designation_name",
+  "enabled"
  ],
  "fields": [
   {
-   "fieldname": "question",
-   "fieldtype": "Small Text",
+   "fieldname": "designation_name",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Question",
-   "reqd": 1
-  },
-  {
-   "fieldname": "answer",
-   "fieldtype": "Small Text",
-   "in_list_view": 1,
-   "label": "Answer",
+   "label": "Designation name",
+   "length": 255,
    "reqd": 1
   },
   {
    "default": "0",
-   "fieldname": "is_open",
+   "fieldname": "enabled",
    "fieldtype": "Check",
-   "label": "Is Open"
+   "label": "Enabled"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-04 12:17:54.970198",
+ "modified": "2024-11-08 16:34:56.049890",
  "modified_by": "Administrator",
- "module": "British Asian Trust",
- "name": "FAQs",
- "naming_rule": "Expression (old style)",
+ "module": "Master",
+ "name": "Designation",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
