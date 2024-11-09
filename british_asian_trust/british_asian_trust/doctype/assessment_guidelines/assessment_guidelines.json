@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:A-{#}",
  "creation": "2024-11-08 18:36:22.248471",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -14,6 +15,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Ref DocType",
+   "link_filters": "[[\"DocType\",\"module\",\"=\",\"Assessment\"]]",
    "options": "DocType",
    "reqd": 1
   },
@@ -26,10 +28,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-08 18:39:00.759940",
+ "modified": "2024-11-09 10:10:28.914153",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "Assessment Guidelines",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

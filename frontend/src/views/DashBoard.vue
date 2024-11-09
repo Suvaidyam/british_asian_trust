@@ -6,23 +6,27 @@
       <div class="absolute bg-effect w-3/4 h-3/4">
         <img src="/effect.png" alt="Background effect">
       </div>
+      
       <div class="grid md:grid-cols-[1fr_350px] lg:grid-cols-[1fr_400px] gap-8">
         <!-- Left Content -->
         <div class="space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <h1 class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
-              {{ assessmentInfo?.assessment_information }}
+              {{ assessmentInfo.contents[0].heading }}
             </h1>
             <p class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
-              Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo?.modified) }}</span>
+              Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo.modified) }}</span>
             </p>
           </div>
 
-          <div class="relative h-48 sm:h-64 md:h-[264px] lg:h-[300px] w-full rounded-lg overflow-hidden">
-            <img :src="assessmentInfo.image" :alt="assessmentInfo.name" class="w-full h-full object-cover" />
+          <div class="space-y-6">
+            <template v-for="(content, index) in assessmentInfo.contents" :key="index">
+              <div v-if="content.type === 'Image'" class="relative h-48 sm:h-64 md:h-[264px] lg:h-[300px] w-full rounded-lg overflow-hidden">
+                <img :src="content.image" :alt="content.name" class="w-full h-full object-cover" />
+              </div>
+              <div v-else-if="content.type === 'HTML'" class="prose max-w-none flex flex-col gap-4 dynamic-content" v-html="content.html"></div>
+            </template>
           </div>
-
-          <div class="prose max-w-none flex flex-col gap-4 dynamic-content" v-html="assessmentInfo?.information"></div>
         </div>
 
         <!-- Right Sidebar -->
@@ -155,7 +159,8 @@ const isInviting = ref(false)
 const fetchAssessmentInfo = async () => {
   try {
     const response = await call('british_asian_trust.api.get_assessment_information')
-    assessmentInfo.value = response
+    console.log(response, "response");
+    assessmentInfo.value = response[0]
   } catch (error) {
     console.error('Failed to fetch assessment information:', error)
     toast.error('Failed to fetch assessment information. Please try again.')
@@ -279,7 +284,7 @@ const checkUserRegistration = async () => {
   try {
     user.value = await $auth.getSessionUser()
     fetchTeamMember()
-    if  (user.value?.bat_designation && user.value?.bat_organization) {
+    if (user.value?.bat_designation && user.value?.bat_organization) {
       showRegistrationPopup.value = false
     } else {
       showRegistrationPopup.value = true

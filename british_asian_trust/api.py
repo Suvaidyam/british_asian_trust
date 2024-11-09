@@ -272,7 +272,12 @@ def get_faqs():
 
 @frappe.whitelist(allow_guest=True)
 def get_assessment_information():
-    return frappe.get_single("Assessment Information")
+    ids = frappe.get_all("Assessment Guidelines",pluck='name', ignore_permissions=True)
+    data = []
+    for id in ids:
+        doc = frappe.get_doc("Assessment Guidelines", id)
+        data.append(doc)
+    return data
 
 
 @frappe.whitelist(allow_guest=True)
