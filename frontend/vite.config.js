@@ -16,7 +16,7 @@ export default defineConfig({
 		}
 	},
 	build: {
-		outDir: '../british_asian_trust/public/frontend',
+		outDir: '../british_asian_trust/public/bat',
 		emptyOutDir: true,
 		target: 'es2015',
 	},

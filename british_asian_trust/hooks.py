@@ -232,4 +232,4 @@ doc_events = {
 # }
 
 
-# website_route_rules = [{'from_route': '/bat/<path:app_path>', 'to_route': 'bat'},]    
+website_route_rules = [{'from_route': '/bat/<path:app_path>', 'to_route': 'bat'},]    
