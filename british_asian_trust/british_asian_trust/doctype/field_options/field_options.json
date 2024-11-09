@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{ref_doctype}-{field}-{code}",
+ "creation": "2024-11-09 13:09:26.150677",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "ref_doctype",
+  "field",
+  "code",
+  "label",
+  "score"
+ ],
+ "fields": [
+  {
+   "fieldname": "ref_doctype",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Ref DocType",
+   "link_filters": "[[\"DocType\",\"module\",\"=\",\"Assessment\"]]",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "field",
+   "fieldtype": "Autocomplete",
+   "in_list_view": 1,
+   "label": "Field",
+   "reqd": 1
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "Code",
+   "length": 30,
+   "reqd": 1
+  },
+  {
+   "fieldname": "label",
+   "fieldtype": "Small Text",
+   "label": "Label",
+   "reqd": 1
+  },
+  {
+   "fieldname": "score",
+   "fieldtype": "Float",
+   "label": "Score",
+   "precision": "1"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-09 19:03:47.373959",
+ "modified_by": "Administrator",
+ "module": "British Asian Trust",
+ "name": "Field Options",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "label"
+}

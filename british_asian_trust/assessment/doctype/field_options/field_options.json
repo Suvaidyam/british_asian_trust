@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{ref_doctype}-{field}",
+ "creation": "2024-11-09 13:09:26.150677",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "ref_doctype",
+  "field",
+  "options"
+ ],
+ "fields": [
+  {
+   "fieldname": "ref_doctype",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Ref DocType",
+   "link_filters": "[[\"DocType\",\"module\",\"=\",\"Assessment\"]]",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "field",
+   "fieldtype": "Autocomplete",
+   "in_list_view": 1,
+   "label": "Field",
+   "reqd": 1
+  },
+  {
+   "fieldname": "options",
+   "fieldtype": "Table",
+   "label": "Options",
+   "options": "Options Child",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-09 17:44:50.015812",
+ "modified_by": "Administrator",
+ "module": "Assessment",
+ "name": "Field Options",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
