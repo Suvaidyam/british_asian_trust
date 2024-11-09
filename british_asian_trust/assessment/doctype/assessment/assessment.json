@@ -1,24 +1,81 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:Q{###}",
  "creation": "2024-11-09 10:02:24.212813",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_kao2"
+  "section_a_tab",
+  "section_a",
+  "vision_mission_status",
+  "strategic_plan_status",
+  "tab_2_tab",
+  "section_b",
+  "board_member_ratio",
+  "board_role_clarity"
  ],
  "fields": [
   {
-   "fieldname": "section_break_kao2",
-   "fieldtype": "Section Break"
+   "fieldname": "section_a",
+   "fieldtype": "Section Break",
+   "label": "Clarity and Coherence about organisation\u2019s mission"
+  },
+  {
+   "fieldname": "vision_mission_status",
+   "fieldtype": "Link",
+   "label": "Do you have a documented vision and mission statement?",
+   "length": 50,
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"vision_mission_status\"]]",
+   "options": "Field Options"
+  },
+  {
+   "description": "A strategic plan outlines an organisation's overall direction, goals, and strategies for achieving its mission over a specific period (typically 3-5 years). It is a comprehensive roadmap that guides the organisation in achieving its long-term goals and adapting to changing circumstances. ",
+   "fieldname": "strategic_plan_status",
+   "fieldtype": "Link",
+   "label": "Does the organisation have a strategic plan in place?\u202f\u202f",
+   "length": 50,
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"strategic_plan_status\"]]",
+   "options": "Field Options"
+  },
+  {
+   "fieldname": "tab_2_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section B"
+  },
+  {
+   "fieldname": "section_a_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section A"
+  },
+  {
+   "fieldname": "section_b",
+   "fieldtype": "Section Break",
+   "label": "Board Management "
+  },
+  {
+   "description": "(founders, staff members, or their friends/ family or other closely related individuals)",
+   "fieldname": "board_member_ratio",
+   "fieldtype": "Link",
+   "label": "What is the ratio of independent to non-independent members in your Board of Directors or Trustees?\u202f",
+   "length": 50,
+   "options": "Field Options"
+  },
+  {
+   "fieldname": "board_role_clarity",
+   "fieldtype": "Link",
+   "label": "What is the level of role clarity among Board members/ Trustees?",
+   "length": 50,
+   "options": "Field Options"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-09 10:02:24.212813",
+ "modified": "2024-11-09 19:07:37.284877",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
