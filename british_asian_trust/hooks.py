@@ -10,8 +10,8 @@ app_license = "mit"
 # ------------------
 
 fixtures=[
-    "Designation"
-    "Role"
+    "Designation",
+    "Role",
     "Role Profile"
 ]
 

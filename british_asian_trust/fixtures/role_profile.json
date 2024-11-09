@@ -1,0 +1,26 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2024-11-09 11:00:19.189745",
+  "name": "Support",
+  "role_profile": "Support",
+  "roles": [
+   {
+    "role": "Support"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2024-11-09 10:59:39.760719",
+  "name": "Primary",
+  "role_profile": "Primary",
+  "roles": [
+   {
+    "role": "Primary"
+   }
+  ]
+ }
+]

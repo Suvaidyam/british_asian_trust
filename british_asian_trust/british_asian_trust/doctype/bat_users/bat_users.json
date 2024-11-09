@@ -14,7 +14,8 @@
   "role_profile",
   "is_social_user",
   "consent",
-  "is_deleted"
+  "is_deleted",
+  "is_primary"
  ],
  "fields": [
   {
@@ -76,16 +77,24 @@
    "fieldname": "is_deleted",
    "fieldtype": "Check",
    "label": "Deleted",
+   "read_only": 1,
    "search_index": 1
   },
   {
    "fieldname": "column_break_ofii",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_primary",
+   "fieldtype": "Check",
+   "label": "Is Primary?",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-08 16:15:53.507041",
+ "modified": "2024-11-09 12:33:36.953708",
  "modified_by": "Administrator",
  "module": "British Asian Trust",
  "name": "BAT Users",
