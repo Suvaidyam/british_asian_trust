@@ -19,7 +19,7 @@ def register_user(email, full_name, termsAccepted):
     domain = email.split('@')[1]
 
     # Check if the organization or user already exists
-    if frappe.db.exists("Organization", {"domain": domain}) or frappe.db.exists("BAT Users", {"email_address": email}):
+    if frappe.db.exists("Organization", {"domain": domain}) or frappe.db.exists("BAT Users", {"email_address": email, "is_deleted": 0}):
         new_response.bad_request('ERR_002', 'Organization with this Domain already exists.')
     else:
         try:
@@ -29,7 +29,8 @@ def register_user(email, full_name, termsAccepted):
                 "full_name": full_name,
                 "email_address": email,
                 "role_profile": "Primary",
-                "concent_check": termsAccepted
+                "is_primary": 1,
+                "consent": termsAccepted
             })
 
             bar_user.insert(ignore_permissions=True)
@@ -50,7 +51,7 @@ def complate_registration(organization, designation):
     else:
         try:
             domain = frappe.session.user.split('@')[1]
-            bat_user = frappe.get_doc("BAT Users", frappe.session.user)
+            bat_user = frappe.get_doc("BAT Users", {"email_address": frappe.session.user, "is_deleted": 0 })
             bat_user.organization = domain
             bat_user.designation = designation
 
@@ -83,11 +84,11 @@ def register_invities_user(email, role_profile="Support"):
         new_response.bad_request('ERR_001', 'You can only invite users from your organization.')
     
     # Check if the maximum number of users for the organization has been reached
-    count = frappe.db.count("BAT Users", filters={"organization": frappe.session.user.split('@')[1]})
+    count = frappe.db.count("BAT Users", filters={"organization": frappe.session.user.split('@')[1], "is_deleted": 0})
     if count > 2:
         new_response.bad_request('ERR_003', 'You have reached the maximum limit of users you can invite.')
     else:
-        if frappe.db.exists("BAT Users", {"email_address": email}):
+        if frappe.db.exists("BAT Users", {"email_address": email, "is_deleted": 0}):
             new_response.bad_request('ERR_002', 'User with this email already exists.')
         else:
             if not frappe.utils.validate_email_address(email):
@@ -123,9 +124,9 @@ def update_team_member(email, role_profile):
     else:
         try:
             # Update role profile for both session user and target user
-            bat_user = frappe.get_doc("BAT Users", email)
+            bat_user = frappe.get_doc("BAT Users", {"email_address": email, "is_deleted": 0})
             bat_user.role_profile = role_profile
-            session_user = frappe.get_doc("BAT Users", frappe.session.user)
+            session_user = frappe.get_doc("BAT Users", {"email_address": frappe.session.user, "is_deleted": 0})
             session_user.role_profile = "Primary" if role_profile == "Support" else "Support"
             session_user.save(ignore_permissions=True)
             bat_user.save(ignore_permissions=True)
@@ -144,7 +145,9 @@ def delete_team_member(email):
     else:
         try:
             # Delete user from BAT Users doctype
-            frappe.delete_doc("BAT Users", email)
+            bat_user = frappe.get_doc("BAT Users", {"email_address": email, "is_deleted": 0})
+            bat_user.is_deleted = 1
+            bat_user.save(ignore_permissions=True)
             frappe.db.commit()
             new_response.ok('SUC_200', None, 'User Deleted')
         except Exception as e:
@@ -166,7 +169,7 @@ def get_both_user(userId):
 
     try:
         # Fetch user from BAT Users doctype
-        bat_user = frappe.get_doc("BAT Users", userId)
+        bat_user = frappe.get_doc("BAT Users", {"email_address": userId, "is_deleted": 0})
     except frappe.DoesNotExistError:
         frappe.throw(f"User with ID {userId} not found in 'BAT Users' DocType")
 
@@ -194,10 +197,10 @@ def get_both_user(userId):
 @frappe.whitelist(allow_guest=True)
 def get_team_members():
     # Fetch all team members associated with the session user's organization
-    user = frappe.get_doc("BAT Users", frappe.session.user)
+    user = frappe.get_doc("BAT Users", {"email_address": frappe.session.user, "is_deleted": 0})
     if not user.organization:
         return []
-    teamMember = frappe.get_all("BAT Users", filters={"organization": user.organization}, fields=["*"])
+    teamMember = frappe.get_all("BAT Users", filters={"organization": user.organization, "is_deleted": 0}, fields=["*"])
     return teamMember
 
 
@@ -210,7 +213,7 @@ def get_designations():
 @frappe.whitelist(allow_guest=True)
 def get_bat_users():
     # Fetch all BAT Users
-    return frappe.get_all("BAT Users", fields=["*"])
+    return frappe.get_all("BAT Users", filters={"is_deleted": 0}, fields=["*"])
 
 
 from frappe.integrations.oauth2_logins import decoder_compat, login_via_oauth2, login_via_oauth2_id_token
@@ -220,7 +223,7 @@ def my_login_via_google(code: str, state: str):
     # OAuth2 login via Google
     login_via_oauth2("google", code, state, decoder=decoder_compat)
     user = frappe.session.user
-    if not frappe.db.exists("BAT Users", user):
+    if not frappe.db.exists("BAT Users", {"email_address": user, "is_deleted": 0}):
         userinfo = frappe.get_doc("User", user)
         userinfo.role_profile_name = "Primary"
         userinfo.save(ignore_permissions=True)
@@ -229,6 +232,7 @@ def my_login_via_google(code: str, state: str):
             "email_address": userinfo.email,
             "full_name": userinfo.full_name,
             "role_profile": "Primary",
+            "is_primary": 1,
             "is_social_login": 1,
         })
         bat_user.insert(ignore_permissions=True)
@@ -246,7 +250,7 @@ def my_login_via_office_365(code: str, state: str):
     # OAuth2 login via Office 365
     login_via_oauth2_id_token("office_365", code, state, decoder=decoder_compat)
     user = frappe.session.user
-    if not frappe.db.exists("BAT Users", user):
+    if not frappe.db.exists("BAT Users", {"email_address": user, "is_deleted": 0}):
         userinfo = frappe.get_doc("User", user)
         userinfo.role_profile_name = "Primary"
         userinfo.save(ignore_permissions=True)
@@ -255,6 +259,7 @@ def my_login_via_office_365(code: str, state: str):
             "email_address": userinfo.email,
             "full_name": userinfo.full_name,
             "role_profile": "Primary",
+            "is_primary": 1,
             "is_social_login": 1,
         })
         bat_user.insert(ignore_permissions=True)
@@ -268,7 +273,7 @@ def my_login_via_office_365(code: str, state: str):
 @frappe.whitelist(allow_guest=True)
 def get_faqs():
     # Fetch all FAQs
-    return frappe.get_all("FAQs", fields=["*"])
+    return frappe.get_all("FAQ", filters={"enabled":1}, fields=["*"])
 
 @frappe.whitelist(allow_guest=True)
 def get_assessment_information():

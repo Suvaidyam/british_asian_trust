@@ -12,7 +12,7 @@
         <div class="space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <h1  v-if="assessmentInfo.contents && assessmentInfo.contents.length > 0" class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
-              {{ assessmentInfo.contents[0].heading }}
+              {{ assessmentInfo?.contents[0]?.heading }}
             </h1>
             <p class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
               Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo.modified) }}</span>
@@ -160,7 +160,7 @@ const fetchAssessmentInfo = async () => {
   try {
     const response = await call('british_asian_trust.api.get_assessment_information')
     console.log(response, "response");
-    assessmentInfo.value = response[0]
+    assessmentInfo.value = response[0] || {}
   } catch (error) {
     console.error('Failed to fetch assessment information:', error)
     toast.error('Failed to fetch assessment information. Please try again.')
@@ -283,7 +283,7 @@ const removeMember = async (id) => {
 const checkUserRegistration = async () => {
   try {
     user.value = await $auth.getSessionUser()
-    fetchTeamMember()
+      await fetchTeamMember()
     if (user.value?.bat_designation && user.value?.bat_organization) {
       showRegistrationPopup.value = false
     } else {
