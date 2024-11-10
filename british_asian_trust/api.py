@@ -312,3 +312,10 @@ def reset_password(self):
     url = "/update-password?key=" + key
     link = get_url(url)
     return link
+
+
+
+@frappe.whitelist(allow_guest=True)
+def get_assessment_form():
+    data = frappe.get_meta("Assessment")
+    print(data,"data")

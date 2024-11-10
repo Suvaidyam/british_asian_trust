@@ -144,7 +144,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, inject, onMounted } from 'vue'
 import { MenuIcon, CheckIcon, LockIcon, InfoIcon } from 'lucide-vue-next'
 import NavBar from '../components/NavBar.vue'
 
@@ -225,6 +225,21 @@ const homeRoute = ref('/home')
 const homeLabel = ref('Home')
 const assessmentRoute = ref('/assessment')
 const assessmentLabel = ref('Assessment')
+const call = inject('$call')
+
+const fetchFormDAta = async () => {
+  try {
+    const response = await call('british_asian_trust.api.get_assessment_form')
+    console.log(response, "response");
+    
+  } catch (error) {
+    console.error('Failed to fetch assessment information:', error)
+  }
+}
+
+onMounted(() => {
+  fetchFormDAta()
+})
 
 const isLastSection = computed(() => currentSection.value === allSections.value.length - 1)
 
@@ -281,6 +296,7 @@ const submitSection = () => {
     alert('Assessment completed!')
   }
 }
+
 
 const showInfo = (question) => {
   // Implement the logic to show more information about the question

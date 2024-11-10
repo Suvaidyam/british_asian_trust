@@ -11,3 +11,4 @@ def get_meta(doc_type):
         new_response.ok('RES_200',doc)
     except Exception as e:
         new_response.bad_request('ERR_001', 'You must accept the terms to proceed.')
+
