@@ -91,29 +91,36 @@ def register_invities_user(email, role_profile="Support"):
         if frappe.db.exists("BAT Users", {"email_address": email, "is_deleted": 0}):
             new_response.bad_request('ERR_002', 'User with this email already exists.')
         else:
-            if not frappe.utils.validate_email_address(email):
-                return _("Invalid email address: {0}").format(email)
+            if frappe.db.exists("BAT Users", {"email_address": email, "is_deleted": 1}):
+                bat_user = frappe.get_doc("BAT Users", {"email_address": email, "is_deleted": 1})
+                bat_user.is_deleted = 0
+                bat_user.save(ignore_permissions=True)
+                frappe.db.commit()
+                new_response.ok('SUC_200', None, 'User Created')
             else:
-                # Prepare and insert new user
-                name = ' '.join(email.split('@')[0].split('.')).title()
-                organization = email.split('@')[1]
-                try:
-                    bat_user = frappe.get_doc({
-                        "doctype": "BAT Users",
-                        "full_name": name,
-                        "email_address": email,
-                        "organization": organization,
-                        "role_profile": role_profile
-                    })
+                if not frappe.utils.validate_email_address(email):
+                    return _("Invalid email address: {0}").format(email)
+                else:
+                    # Prepare and insert new user
+                    name = ' '.join(email.split('@')[0].split('.')).title()
+                    organization = email.split('@')[1]
+                    try:
+                        bat_user = frappe.get_doc({
+                            "doctype": "BAT Users",
+                            "full_name": name,
+                            "email_address": email,
+                            "organization": organization,
+                            "role_profile": role_profile
+                        })
 
-                    bat_user.insert(ignore_permissions=True)
-                    frappe.db.commit()
+                        bat_user.insert(ignore_permissions=True)
+                        frappe.db.commit()
 
-                    new_response.ok('SUC_200', None, 'User Created')
+                        new_response.ok('SUC_200', None, 'User Created')
 
-                except Exception as e:
-                    frappe.log_error(frappe.get_traceback(), _("An error occurred during registration"))
-                    new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
+                    except Exception as e:
+                        frappe.log_error(frappe.get_traceback(), _("An error occurred during registration"))
+                        new_response.something_went_wrong('ERR_005', e, 'An error occurred during registration')
 
 
 @frappe.whitelist(allow_guest=True)
@@ -215,6 +222,12 @@ def get_bat_users():
     # Fetch all BAT Users
     return frappe.get_all("BAT Users", filters={"is_deleted": 0}, fields=["*"])
 
+
+@frappe.whitelist(allow_guest=True)
+def get_user():
+    # Fetch user details
+    user = frappe.get_doc("User", frappe.session.user)
+    return user
 
 from frappe.integrations.oauth2_logins import decoder_compat, login_via_oauth2, login_via_oauth2_id_token
 
