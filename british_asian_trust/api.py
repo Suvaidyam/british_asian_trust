@@ -323,13 +323,3 @@ def reset_password(self):
     url = "/bat/updatepassword?key=" + key
     link = get_url(url)
     return link
-<<<<<<< HEAD
-
-
-
-@frappe.whitelist(allow_guest=True)
-def get_assessment_form():
-    data = frappe.get_meta("Assessment")
-    print(data,"data")
-=======
->>>>>>> 138f3ba60ebe5f8e94e2fb763c17b8ccef1c38b3
