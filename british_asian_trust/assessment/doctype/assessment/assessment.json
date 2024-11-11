@@ -10,10 +10,14 @@
   "section_a",
   "vision_mission_status",
   "strategic_plan_status",
+  "vehicles",
+  "abc",
   "tab_2_tab",
   "section_b",
   "board_member_ratio",
-  "board_role_clarity"
+  "board_role_clarity",
+  "section_c_tab",
+  "q"
  ],
  "fields": [
   {
@@ -59,6 +63,7 @@
    "fieldtype": "Link",
    "label": "What is the ratio of independent to non-independent members in your Board of Directors or Trustees?\u202f",
    "length": 50,
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"board_member_ratio\"]]",
    "options": "Field Options"
   },
   {
@@ -66,12 +71,35 @@
    "fieldtype": "Link",
    "label": "What is the level of role clarity among Board members/ Trustees?",
    "length": 50,
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"board_role_clarity\"]]",
    "options": "Field Options"
+  },
+  {
+   "fieldname": "section_c_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section C"
+  },
+  {
+   "fieldname": "q",
+   "fieldtype": "Data",
+   "label": "Q",
+   "options": "Field Options"
+  },
+  {
+   "fieldname": "abc",
+   "fieldtype": "Data",
+   "label": "Abc"
+  },
+  {
+   "fieldname": "vehicles",
+   "fieldtype": "Table MultiSelect",
+   "label": "Vehicles",
+   "options": "Options Child"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-09 19:07:37.284877",
+ "modified": "2024-11-11 14:47:11.856072",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",

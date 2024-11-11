@@ -128,7 +128,6 @@
         </div>
       </Transition>
     </Teleport>
-
     <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" :user="user" />
   </div>
   <Footer />
