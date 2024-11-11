@@ -298,18 +298,16 @@ def get_assessment_information():
     return data
 
 
-@frappe.whitelist(allow_guest=True)
-def send_custom_welcome_email(doc, method):
+def send_custom_welcome_email(doc):
     link= reset_password(doc)
-    
-    subject = "Welcome to ISDM Outcome Readiness Portal"
-    html_content = frappe.render_template("british_asian_trust/templates/pages/welcome_email_template.html",{"doc":doc, "verification_link": link})
-
-    # Send the email
+    message_content = frappe.render_template("british_asian_trust/templates/pages/welcome_email_template.html",{"doc":doc, "verification_link": link})
+    now = frappe.flags.in_test or frappe.flags.in_install
     frappe.sendmail(
         recipients=[doc.email],
-        subject=subject,
-        message=html_content
+        subject= 'Welcome to ISDM Outcome Readiness Portal',
+        message=message_content,
+        delayed=(not now) if now is not None else doc.flags.delay_emails,
+        retry=3,
     )
 
 
@@ -322,9 +320,10 @@ def reset_password(self):
     hashed_key = sha256(key.encode('utf-8')).hexdigest()
     frappe.db.set_value("User", self.name, "reset_password_key", hashed_key)
     frappe.db.set_value("User", self.name, "last_reset_password_key_generated_on", now_datetime())
-    url = "/update-password?key=" + key
+    url = "/bat/updatepassword?key=" + key
     link = get_url(url)
     return link
+<<<<<<< HEAD
 
 
 
@@ -332,3 +331,5 @@ def reset_password(self):
 def get_assessment_form():
     data = frappe.get_meta("Assessment")
     print(data,"data")
+=======
+>>>>>>> 138f3ba60ebe5f8e94e2fb763c17b8ccef1c38b3
