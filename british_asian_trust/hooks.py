@@ -120,19 +120,22 @@ fixtures=[
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"User": "british_asian_trust.overrides.CustomUser"
+}
 
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	"User": {
-        "after_insert":"british_asian_trust.api.send_custom_welcome_email"
-	}
-}
+# doc_events = {
+# 	# "User": {
+#     #     "after_insert":"british_asian_trust.api.send_custom_welcome_email"
+# 	# },
+# 	"BAT Users": {
+#         "after_insert":"british_asian_trust.api.send_custom_email"
+# 	}
+# }
 
 # Scheduled Tasks
 # ---------------

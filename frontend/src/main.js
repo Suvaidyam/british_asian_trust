@@ -28,7 +28,7 @@ app.provide("$socket", socket);
 router.beforeEach(async (to, from, next) => {
     if (!auth.isLoggedIn) {
         // Redirect to Landing page if the user is not logged in and tries to access a protected page
-        if (!['Register', 'Forgot', 'Login', 'Landing'].includes(to.name)) {
+        if (!['Register', 'Forgot', 'Login', 'Landing',"UpdatePassword"].includes(to.name)) {
             next({ name: 'Landing', query: { route: to.path } });
         } else {
             next();
