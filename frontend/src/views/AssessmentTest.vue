@@ -6,7 +6,7 @@
     </div>
     <div class="max-w-[1920px] mx-auto ">
       
-        <FormView :doctype="'Assessment'"></FormView>
+        <FormView :doctype="'Assessment'" :sidebar="true" :section="false"></FormView>
       
     </div>
   </div>
