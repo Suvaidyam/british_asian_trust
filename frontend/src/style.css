@@ -130,3 +130,12 @@
     height: 50%;
   }
 }
+
+
+
+:root{
+  --bg-primary: #FF6B00;
+  --bg-secondary: #FF6B01;
+  --text-primary: #FFFFFF;
+  --text-secondary:#FF6B01 ;
+}
