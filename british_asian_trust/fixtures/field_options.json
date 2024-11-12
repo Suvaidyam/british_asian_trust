@@ -1,0 +1,178 @@
+[
+ {
+  "code": "d",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "vision_mission_status",
+  "label": "We have a clear, compelling expression of the organisation's mission and vision, updated to reflect current thinking ",
+  "modified": "2024-11-09 18:59:04.287927",
+  "name": "Assessment-vision_mission_status-d",
+  "ref_doctype": "Assessment",
+  "score": 3.0
+ },
+ {
+  "code": "c",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "strategic_plan_status",
+  "label": "No, we do not have a plan ",
+  "modified": "2024-11-09 19:00:37.138154",
+  "name": "Assessment-strategic_plan_status-c",
+  "ref_doctype": "Assessment",
+  "score": 0.0
+ },
+ {
+  "code": "a",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "board_member_ratio",
+  "label": "Mostly independent  ",
+  "modified": "2024-11-09 19:01:07.104734",
+  "name": "Assessment-board_member_ratio-a",
+  "ref_doctype": "Assessment",
+  "score": 3.0
+ },
+ {
+  "code": "c",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "board_member_ratio",
+  "label": "Mostly non independent  ",
+  "modified": "2024-11-09 19:01:36.122280",
+  "name": "Assessment-board_member_ratio-c",
+  "ref_doctype": "Assessment",
+  "score": 1.0
+ },
+ {
+  "code": "a",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "board_role_clarity",
+  "label": "Roles are not well defined and based on needs and have been communicated to the Board verbally",
+  "modified": "2024-11-09 19:02:07.862069",
+  "name": "Assessment-board_role_clarity-a",
+  "ref_doctype": "Assessment",
+  "score": 1.0
+ },
+ {
+  "code": "b",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "vision_mission_status",
+  "label": "In progress, we are currently working on defining them",
+  "modified": "2024-11-09 18:58:21.958005",
+  "name": "Assessment-vision_mission_status-b",
+  "ref_doctype": "Assessment",
+  "score": 1.0
+ },
+ {
+  "code": "c",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "vision_mission_status",
+  "label": "We have a vision and mission documented but it is somewhat vague and/or not realisable and not updated in the last five years ",
+  "modified": "2024-11-09 18:58:45.075814",
+  "name": "Assessment-vision_mission_status-c",
+  "ref_doctype": "Assessment",
+  "score": 2.0
+ },
+ {
+  "code": "b",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "board_role_clarity",
+  "label": "Roles are somewhat defined and documented, but not strategic",
+  "modified": "2024-11-09 19:02:26.893897",
+  "name": "Assessment-board_role_clarity-b",
+  "ref_doctype": "Assessment",
+  "score": 2.0
+ },
+ {
+  "code": "c",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "board_role_clarity",
+  "label": "Roles are well documented and strategically defined to make the best use of Board’s expertise",
+  "modified": "2024-11-09 19:02:44.878266",
+  "name": "Assessment-board_role_clarity-c",
+  "ref_doctype": "Assessment",
+  "score": 3.0
+ },
+ {
+  "code": "C",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "vehicles",
+  "label": "Bugatti",
+  "modified": "2024-11-11 13:17:00.480147",
+  "name": "Assessment-vehicles-C",
+  "ref_doctype": "Assessment",
+  "score": 0.0
+ },
+ {
+  "code": "b",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "strategic_plan_status",
+  "label": "Yes, we have a plan, but it is not documented  ",
+  "modified": "2024-11-09 19:00:23.132005",
+  "name": "Assessment-strategic_plan_status-b",
+  "ref_doctype": "Assessment",
+  "score": 1.0
+ },
+ {
+  "code": "b",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "board_member_ratio",
+  "label": "Almost equal ratio  ",
+  "modified": "2024-11-09 19:01:23.281552",
+  "name": "Assessment-board_member_ratio-b",
+  "ref_doctype": "Assessment",
+  "score": 2.0
+ },
+ {
+  "code": "B",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "vehicles",
+  "label": "Audi",
+  "modified": "2024-11-11 13:16:21.278304",
+  "name": "Assessment-vehicles-B",
+  "ref_doctype": "Assessment",
+  "score": 0.0
+ },
+ {
+  "code": "A",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "vehicles",
+  "label": "BMW",
+  "modified": "2024-11-11 12:20:43.963778",
+  "name": "Assessment-vehicles-A",
+  "ref_doctype": "Assessment",
+  "score": 1.0
+ },
+ {
+  "code": "a",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "strategic_plan_status",
+  "label": "Yes, a written plan exists",
+  "modified": "2024-11-09 19:00:06.127810",
+  "name": "Assessment-strategic_plan_status-a",
+  "ref_doctype": "Assessment",
+  "score": 2.0
+ },
+ {
+  "code": "a",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "vision_mission_status",
+  "label": "No, we do not have a documented vision or mission",
+  "modified": "2024-11-09 18:57:35.355560",
+  "name": "Assessment-vision_mission_status-a",
+  "ref_doctype": "Assessment",
+  "score": 0.0
+ }
+]
