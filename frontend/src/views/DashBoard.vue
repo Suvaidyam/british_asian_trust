@@ -328,7 +328,7 @@ watch(() => router.currentRoute.value, async () => {
   await checkUserRegistration()
 })
 
-watch(() => $auth.isLoggedIn, async (newValue) => {
+watch(() => $auth.cookie, async (newValue) => {
   if (newValue) {
     await $auth.setUserSession($auth?.cookie?.user_id)
   }
