@@ -323,3 +323,8 @@ def reset_password(self):
     url = "/bat/updatepassword?key=" + key
     link = get_url(url)
     return link
+
+
+
+def user_before_insert(self, method):
+    print("User Before Insert",self,'************************************',method)
