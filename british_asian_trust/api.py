@@ -241,7 +241,15 @@ def my_login_via_google(code: str, state: str):
         if userinfo.email.split('@')[1] == "gmail.com":
             userinfo.role_profile_name = "Restricted"
             userinfo.save(ignore_permissions=True)
-            frappe.db.commit()
+            bat_user = frappe.get_doc({
+                "doctype": "BAT Users",
+                "email_address": userinfo.email,
+                "full_name": userinfo.full_name,
+                "role_profile": "Restricted",
+                "is_primary": 1,
+                "is_social_login": 1,
+            })
+            bat_user.insert(ignore_permissions=True)
         else:    
             userinfo.role_profile_name = "Primary"
             userinfo.save(ignore_permissions=True)
@@ -254,7 +262,7 @@ def my_login_via_google(code: str, state: str):
                 "is_social_login": 1,
             })
             bat_user.insert(ignore_permissions=True)
-            frappe.db.commit()
+        frappe.db.commit()
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/bat/home"
     else:
@@ -273,6 +281,15 @@ def my_login_via_office_365(code: str, state: str):
         if userinfo.email.split('@')[1] == "outlook.com":
             userinfo.role_profile_name = "Restricted"
             userinfo.save(ignore_permissions=True)
+            bat_user = frappe.get_doc({
+                "doctype": "BAT Users",
+                "email_address": userinfo.email,
+                "full_name": userinfo.full_name,
+                "role_profile": "Restricted",
+                "is_primary": 1,
+                "is_social_login": 1,
+            })
+            bat_user.insert(ignore_permissions=True)
         else:    
             userinfo.role_profile_name = "Primary"
             userinfo.save(ignore_permissions=True)
@@ -285,7 +302,7 @@ def my_login_via_office_365(code: str, state: str):
                 "is_social_login": 1,
             })
             bat_user.insert(ignore_permissions=True)
-            frappe.db.commit()
+        frappe.db.commit()
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/bat/home"
     else:
