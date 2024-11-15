@@ -12,8 +12,7 @@ app_license = "mit"
 fixtures=[
     "Designation",
     "Role",
-    "Role Profile",
-    "Field Options"
+    "Role Profile"
 ]
 
 # include js, css files in header of desk.html
@@ -129,14 +128,14 @@ override_doctype_class = {
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	"User": {
-        "before_validate":"british_asian_trust.api.user_before_insert",
-	},
-	# "BAT Users": {
-    #     "after_insert":"british_asian_trust.api.send_custom_email"
-	# }
-}
+# doc_events = {
+# 	# "User": {
+#     #     "after_insert":"british_asian_trust.api.send_custom_welcome_email"
+# 	# },
+# 	"BAT Users": {
+#         "after_insert":"british_asian_trust.api.send_custom_email"
+# 	}
+# }
 
 # Scheduled Tasks
 # ---------------

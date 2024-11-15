@@ -6,45 +6,54 @@
       <div class="absolute bg-effect w-3/4 h-3/4">
         <img src="/effect.png" alt="Background effect">
       </div>
-      
+
       <div class="grid md:grid-cols-[1fr_350px] lg:grid-cols-[1fr_400px] gap-8">
         <!-- Left Content -->
         <div class="space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <h1  v-if="assessmentInfo.contents && assessmentInfo.contents.length > 0" class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
+            <h1 v-if="assessmentInfo.contents && assessmentInfo.contents.length > 0"
+              class="font-poppins text-2xl sm:text-3xl md:text-[34px] lg:text-[34px] font-semibold leading-tight sm:leading-[37.4px] lg:leading-[37.4px] tracking-[0.0025em] text-center sm:text-left text-[#0D4688]">
               {{ assessmentInfo?.contents[0]?.heading }}
             </h1>
-            <p class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
+            <p
+              class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
               Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo.modified) }}</span>
             </p>
           </div>
 
           <div class="space-y-6">
             <template v-for="(content, index) in assessmentInfo.contents" :key="index">
-              <div v-if="content.type === 'Image'" class="relative h-48 sm:h-64 md:h-[264px] lg:h-[300px] w-full rounded-lg overflow-hidden">
+              <div v-if="content.type === 'Image'"
+                class="relative h-48 sm:h-64 md:h-[264px] lg:h-[300px] w-full rounded-lg overflow-hidden">
                 <img :src="content.image" :alt="content.name" class="w-full h-full object-cover" />
               </div>
-              <div v-else-if="content.type === 'HTML'" class="prose max-w-none flex flex-col gap-4 dynamic-content" v-html="content.html"></div>
+              <div v-else-if="content.type === 'HTML'" class="prose max-w-none flex flex-col gap-4 dynamic-content"
+                v-html="content.html"></div>
             </template>
           </div>
         </div>
 
         <!-- Right Sidebar -->
         <div class="space-y-6">
-          <div class="bg-gradient-to-r from-[#0D4688] to-[#406EA3] bg-[length:200%] bg-[99.63deg] w-full sm:w-[376px] md:w-[350px] lg:w-[400px] h-auto sm:h-[114px] rounded-lg p-6 text-white">
-            <h2 class="font-poppins text-lg sm:text-xl md:text-[20px] lg:text-[20px] font-semibold leading-tight sm:leading-[22px] lg:leading-[22px] tracking-[0.0015em] text-left mb-4">
+          <div
+            class="bg-gradient-to-r from-[#0D4688] to-[#406EA3] bg-[length:200%] bg-[99.63deg] w-full sm:w-[376px] md:w-[350px] lg:w-[400px] h-auto sm:h-[114px] rounded-lg p-6 text-white">
+            <h2
+              class="font-poppins text-lg sm:text-xl md:text-[20px] lg:text-[20px] font-semibold leading-tight sm:leading-[22px] lg:leading-[22px] tracking-[0.0015em] text-left mb-4">
               Ready to take the survey?
             </h2>
-            <router-link to="/assessment" class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300">
+            <router-link to="/assessment"
+              class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300">
               START ASSESSMENT
             </router-link>
           </div>
 
           <div class="flex items-center justify-between mb-6">
-            <h2 class="font-poppins text-[18px] sm:text-[19px] md:text-[20px] font-medium leading-[20px] sm:leading-[21px] md:leading-[22px] text-left lg:text-[20px] lg:leading-[22px] text-[#0D4688]">
+            <h2
+              class="font-poppins text-[18px] sm:text-[19px] md:text-[20px] font-medium leading-[20px] sm:leading-[21px] md:leading-[22px] text-left lg:text-[20px] lg:leading-[22px] text-[#0D4688]">
               Users
             </h2>
-            <button @click="user_popup" :class="[user?.bat_role_profile != 'Primary' ? 'hidden' : '']" class="p-1 text-white bg-[#0D4688] transition-colors duration-300">
+            <button @click="user_popup" :class="[user?.bat_role_profile != 'Primary' ? 'hidden' : '']"
+              class="p-1 text-white bg-[#0D4688] transition-colors duration-300">
               <Plus class="w-[15px] h-[15px]" />
             </button>
           </div>
@@ -54,7 +63,8 @@
                 <img :src="user.user_image" :alt="user.name" class="w-8 h-8 rounded-full" />
                 <div>
                   <h3 class="text-sm font-medium">{{ user.full_name }}</h3>
-                  <p class="text-xs text-gray-500"><span v-if="user.designation">{{ user.designation }}</span><span v-else>--</span></p>
+                  <p class="text-xs text-gray-500"><span v-if="user.designation">{{ user.designation }}</span><span
+                      v-else>--</span></p>
                 </div>
               </div>
             </div>
@@ -70,7 +80,8 @@
           <div class="bg-white rounded-lg w-full max-w-2xl">
             <div class="p-6">
               <div class="flex items-center justify-between mb-6">
-                <h2 class="font-poppins text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-[24px] sm:leading-[25.2px] md:leading-[26.4px] text-left lg:text-[24px] lg:leading-[26.4px]">
+                <h2
+                  class="font-poppins text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-[24px] sm:leading-[25.2px] md:leading-[26.4px] text-left lg:text-[24px] lg:leading-[26.4px]">
                   Invite User
                 </h2>
                 <button @click="user_popup" class="text-gray-500 hover:text-gray-700 transition-colors duration-300">
@@ -112,11 +123,9 @@
                         <option value="Support">Support</option>
                         <option value="Primary">Primary</option>
                       </select>
-                      <button @click="removeMember(member.name)" 
-                        :disabled="member.name === user?.name"
-                        :class="[
-                          member.name === user?.name ? 'cursor-not-allowed text-gray-400 transition-colors duration-300' : 'text-gray-400 hover:text-gray-600 transition-colors duration-300'
-                        ]">
+                      <button @click="removeMember(member.name)" :disabled="member.name === user?.name" :class="[
+                        member.name === user?.name ? 'cursor-not-allowed text-gray-400 transition-colors duration-300' : 'text-gray-400 hover:text-gray-600 transition-colors duration-300'
+                      ]">
                         <Trash2 class="w-4 h-4" />
                       </button>
                     </div>
@@ -129,6 +138,9 @@
       </Transition>
     </Teleport>
     <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" :user="user" />
+    <div v-if="restrictedRolePopup"
+      class="fixed inset-0 bg-white flex justify-center items-center p-4 w-full max-w-[1920px]">You have Not Assess
+    </div>
   </div>
   <Footer />
 </template>
@@ -154,6 +166,7 @@ const user = ref(null)
 const teamMembers = ref([])
 const assessmentInfo = ref({})
 const isInviting = ref(false)
+const restrictedRolePopup = ref(false)
 
 const fetchAssessmentInfo = async () => {
   try {
@@ -282,11 +295,16 @@ const removeMember = async (id) => {
 const checkUserRegistration = async () => {
   try {
     user.value = await $auth.getSessionUser()
-      await fetchTeamMember()
-    if (user.value?.bat_designation && user.value?.bat_organization) {
-      showRegistrationPopup.value = false
+    await fetchTeamMember()
+    if (user.value?.bat_role_profile == 'Restricted') {
+      restrictedRolePopup.value = true
     } else {
-      showRegistrationPopup.value = true
+      restrictedRolePopup.value = false
+      if (user.value?.bat_designation && user.value?.bat_organization) {
+        showRegistrationPopup.value = false
+      } else {
+        showRegistrationPopup.value = true
+      }
     }
   } catch (error) {
     console.error('Error checking user registration:', error)

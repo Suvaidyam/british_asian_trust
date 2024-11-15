@@ -238,20 +238,23 @@ def my_login_via_google(code: str, state: str):
     user = frappe.session.user
     if not frappe.db.exists("BAT Users", {"email_address": user, "is_deleted": 0}):
         userinfo = frappe.get_doc("User", user)
-        userinfo.role_profile_name = "Primary"
-        userinfo.save(ignore_permissions=True)
-        bat_user = frappe.get_doc({
-            "doctype": "BAT Users",
-            "email_address": userinfo.email,
-            "full_name": userinfo.full_name,
-            "role_profile": "Primary",
-            "is_primary": 1,
-            "is_social_login": 1,
-        })
-        bat_user.insert(ignore_permissions=True)
-        frappe.db.commit()
-        frappe.local.response["type"] = "redirect"
-        frappe.local.response["location"] = "/bat/home"
+        if userinfo.email.split('@')[1] == "gmail.com":
+            userinfo.role_profile_name = "Restricted"
+        else:    
+            userinfo.role_profile_name = "Primary"
+            userinfo.save(ignore_permissions=True)
+            bat_user = frappe.get_doc({
+                "doctype": "BAT Users",
+                "email_address": userinfo.email,
+                "full_name": userinfo.full_name,
+                "role_profile": "Primary",
+                "is_primary": 1,
+                "is_social_login": 1,
+            })
+            bat_user.insert(ignore_permissions=True)
+            frappe.db.commit()
+            frappe.local.response["type"] = "redirect"
+            frappe.local.response["location"] = "/bat/home"
     else:
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/bat/home"
@@ -265,20 +268,23 @@ def my_login_via_office_365(code: str, state: str):
     user = frappe.session.user
     if not frappe.db.exists("BAT Users", {"email_address": user, "is_deleted": 0}):
         userinfo = frappe.get_doc("User", user)
-        userinfo.role_profile_name = "Primary"
-        userinfo.save(ignore_permissions=True)
-        bat_user = frappe.get_doc({
-            "doctype": "BAT Users",
-            "email_address": userinfo.email,
-            "full_name": userinfo.full_name,
-            "role_profile": "Primary",
-            "is_primary": 1,
-            "is_social_login": 1,
-        })
-        bat_user.insert(ignore_permissions=True)
-        frappe.db.commit()
-        frappe.local.response["type"] = "redirect"
-        frappe.local.response["location"] = "/bat/home"
+        if userinfo.email.split('@')[1] == "outlook.com":
+            userinfo.role_profile_name = "Restricted"
+        else:    
+            userinfo.role_profile_name = "Primary"
+            userinfo.save(ignore_permissions=True)
+            bat_user = frappe.get_doc({
+                "doctype": "BAT Users",
+                "email_address": userinfo.email,
+                "full_name": userinfo.full_name,
+                "role_profile": "Primary",
+                "is_primary": 1,
+                "is_social_login": 1,
+            })
+            bat_user.insert(ignore_permissions=True)
+            frappe.db.commit()
+            frappe.local.response["type"] = "redirect"
+            frappe.local.response["location"] = "/bat/home"
     else:
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/bat/home"
@@ -323,8 +329,3 @@ def reset_password(self):
     url = "/bat/updatepassword?key=" + key
     link = get_url(url)
     return link
-
-
-
-def user_before_insert(doc, method):
-    return frappe.throw("User Before Insert",doc.email)
