@@ -326,5 +326,5 @@ def reset_password(self):
 
 
 
-def user_before_insert(self, method):
-    print("User Before Insert",self,'************************************',method)
+def user_before_insert(doc, method):
+    return frappe.throw("User Before Insert",doc.email)
