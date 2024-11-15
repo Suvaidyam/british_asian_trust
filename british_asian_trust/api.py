@@ -240,6 +240,8 @@ def my_login_via_google(code: str, state: str):
         userinfo = frappe.get_doc("User", user)
         if userinfo.email.split('@')[1] == "gmail.com":
             userinfo.role_profile_name = "Restricted"
+            userinfo.save(ignore_permissions=True)
+            frappe.db.commit()
         else:    
             userinfo.role_profile_name = "Primary"
             userinfo.save(ignore_permissions=True)
@@ -253,8 +255,8 @@ def my_login_via_google(code: str, state: str):
             })
             bat_user.insert(ignore_permissions=True)
             frappe.db.commit()
-            frappe.local.response["type"] = "redirect"
-            frappe.local.response["location"] = "/bat/home"
+        frappe.local.response["type"] = "redirect"
+        frappe.local.response["location"] = "/bat/home"
     else:
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/bat/home"
@@ -270,6 +272,7 @@ def my_login_via_office_365(code: str, state: str):
         userinfo = frappe.get_doc("User", user)
         if userinfo.email.split('@')[1] == "outlook.com":
             userinfo.role_profile_name = "Restricted"
+            userinfo.save(ignore_permissions=True)
         else:    
             userinfo.role_profile_name = "Primary"
             userinfo.save(ignore_permissions=True)
@@ -283,8 +286,8 @@ def my_login_via_office_365(code: str, state: str):
             })
             bat_user.insert(ignore_permissions=True)
             frappe.db.commit()
-            frappe.local.response["type"] = "redirect"
-            frappe.local.response["location"] = "/bat/home"
+        frappe.local.response["type"] = "redirect"
+        frappe.local.response["location"] = "/bat/home"
     else:
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/bat/home"
