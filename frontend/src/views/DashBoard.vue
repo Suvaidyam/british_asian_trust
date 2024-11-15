@@ -292,9 +292,10 @@ const removeMember = async (id) => {
   }
 }
 
-const checkUserRegistration = async () => {
+const checkUserRegistration =  () => {
   try {
-    user.value = await $auth.getSessionUser()
+    setTimeout(async()=>{
+      user.value = await $auth.getSessionUser()
     await fetchTeamMember()
     if (user.value?.bat_role_profile == 'Restricted') {
       restrictedRolePopup.value = true
@@ -306,6 +307,7 @@ const checkUserRegistration = async () => {
         showRegistrationPopup.value = true
       }
     }
+    }, 1000)
   } catch (error) {
     console.error('Error checking user registration:', error)
     showRegistrationPopup.value = false
@@ -324,15 +326,16 @@ onMounted(async () => {
   await fetchAssessmentInfo()
 })
 
-watch(() => router.currentRoute.value, async () => {
-  await checkUserRegistration()
-})
 
 watch(() => $auth.cookie, async (newValue) => {
   if (newValue) {
     await $auth.setUserSession($auth?.cookie?.user_id)
   }
 }, { deep: true, immediate: true })
+
+watch(() => router.currentRoute.value, async () => {
+  await checkUserRegistration()
+})
 </script>
 
 <style scoped>
