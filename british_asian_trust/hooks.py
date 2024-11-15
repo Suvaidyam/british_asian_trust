@@ -131,7 +131,7 @@ override_doctype_class = {
 
 doc_events = {
 	"User": {
-        "before_insert":"british_asian_trust.api.user_before_insert",
+        "before_validate":"british_asian_trust.api.user_before_insert",
 	},
 	# "BAT Users": {
     #     "after_insert":"british_asian_trust.api.send_custom_email"
