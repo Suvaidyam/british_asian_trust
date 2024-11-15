@@ -139,7 +139,22 @@
     </Teleport>
     <RegistrationPopup v-if="showRegistrationPopup" @registration-complete="completeRegistration" :user="user" />
     <div v-if="restrictedRolePopup"
-      class="fixed inset-0 bg-white flex justify-center items-center p-4 w-full max-w-[1920px]">You have Not Assess
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 w-full max-w-[1920px]">
+      <div class="bg-white rounded-lg p-6 w-full sm:w-[376px] md:w-[350px] lg:w-[400px] border">
+        <h2
+          class="font-poppins text-[18px] sm:text-[19px] md:text-[20px] font-medium leading-[20px] sm:leading-[21px] md:leading-[22px] text-left lg:text-[20px] lg:leading-[22px] text-[#0D4688]">
+          Restricted Role
+        </h2>
+        <p class="font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-normal leading-relaxed sm:leading-[19.6px] lg:leading-[19.6px] tracking-[0.0025em] text-justify text-[#212529] mt-2">
+          You have been assigned a restricted role. Please contact your administrator to update your role.
+        </p>
+        <div>
+          <button @click="logout"
+            class="w-full sm:w-[180px] md:w-[200px] lg:w-[180px] h-[36px] font-poppins text-sm sm:text-base md:text-[14px] lg:text-[14px] font-semibold leading-[15.4px] tracking-[0.0125em] text-center bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full transition-colors duration-300 mt-4">
+            Go Back
+          </button>
+        </div>
+    </div>
     </div>
   </div>
   <Footer />
@@ -167,6 +182,11 @@ const teamMembers = ref([])
 const assessmentInfo = ref({})
 const isInviting = ref(false)
 const restrictedRolePopup = ref(false)
+
+const logout = async () => {
+  await $auth.logout()
+  router.push('/login')
+}
 
 const fetchAssessmentInfo = async () => {
   try {
