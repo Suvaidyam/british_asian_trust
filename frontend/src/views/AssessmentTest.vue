@@ -15,7 +15,7 @@
 <script setup>
 
 import NavBar from '../components/NavBar.vue'
-import FormView from '../components/sva_form_ui/FormView.vue';
+import {FormView} from '../../../../sva_form_vuejs/form_view';
 
 
 </script>
