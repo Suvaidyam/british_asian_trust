@@ -89,7 +89,7 @@
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .bg-effect {
-    top: -75%;
+    top: -85%;
     width: 80%;
   }
 
@@ -103,8 +103,8 @@
 
 @media (min-width: 1025px) and (max-width: 1440px) {
   .bg-effect {
-    top: -92%;
-    width: 85%;
+    top: -110%;
+    width: 89%;
   }
 
   .bg-effect1 {

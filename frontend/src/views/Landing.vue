@@ -53,7 +53,7 @@
               </div>
               <div class="space-y-12 sm:space-y-16 md:space-y-20 lg:space-y-24 h-full flex flex-col justify-between">
                 <div v-for="(step, index) in steps" :key="index"
-                  class="relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+                  class="relative flex  sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                   <div
                     class="relative bg-white h-10 w-10 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-20 lg:w-20 flex items-center justify-center z-10 rounded-full shadow-md">
                     <component :is="step.icon"
