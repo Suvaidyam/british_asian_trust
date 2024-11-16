@@ -3,8 +3,6 @@
 
 import frappe
 from frappe.model.document import Document
-from british_asian_trust.Services.response import Response
-new_response = Response()
 
 
 class Organization(Document):

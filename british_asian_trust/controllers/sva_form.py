@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from british_asian_trust.Services.response import Response
+from british_asian_trust.controllers.response import Response
 
 new_response = Response()
 
