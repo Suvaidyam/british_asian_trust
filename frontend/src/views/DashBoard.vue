@@ -312,10 +312,10 @@ const removeMember = async (id) => {
   }
 }
 
-const checkUserRegistration =  () => {
+const checkUserRegistration = async () => {
   try {
     setTimeout(async()=>{
-      user.value = await $auth.getSessionUser()
+     user.value = await $auth.getSessionUser()
     await fetchTeamMember()
     if (user.value?.bat_role_profile == 'Restricted') {
       restrictedRolePopup.value = true
@@ -332,6 +332,7 @@ const checkUserRegistration =  () => {
     console.error('Error checking user registration:', error)
     showRegistrationPopup.value = false
   }
+  console.log(restrictedRolePopup.value, "restrictedRolePopup")
 }
 
 const completeRegistration = async () => {

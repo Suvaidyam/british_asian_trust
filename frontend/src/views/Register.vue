@@ -237,7 +237,7 @@ const handleGoogleLogin = () => {
 }
 
 const handleMicrosoftLogin = () => {
-  window.location.href = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fbtasian.suvaidyam.com%2Fapi%2Fmethod%2Ffrappe.integrations.oauth2_logins.login_via_office365&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiZWI2Y2I3ZTVkZDY0N2QwMDVjNzQ5Y2Q3NDc2N2U4OTM3YmJkYmYwZTc5MWQyMGQ1NDUwMjkwYWYiLCAicmVkaXJlY3RfdG8iOiAiL2FwcC9idWlsZCJ9&response_type=code&scope=openid+email+profile&client_id=c28ed05b-846a-414e-b8df-bbb602316b22"
+  window.location.href = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?redirect_uri=https%3a%2f%2fbtasian.suvaidyam.com%2fapi%2fmethod%2fbritish_asian_trust.api.my_login_via_office_365&state=eyJzaXRlIjogImh0dHA6Ly9idGFzaWFuLnN1dmFpZHlhbS5jb20iLCAidG9rZW4iOiAiYTIwNTJlY2YzODIzMDI5NTQ2NThjMjY2ZDliOGI3ZWYwYTAwYjJhMjYxODFjYzQ0YmFkNjQ1YjMiLCAicmVkaXJlY3RfdG8iOiAiL2FwcCJ9&response_type=code&scope=openid+email+profile&client_id=c28ed05b-846a-414e-b8df-bbb602316b22&sso_nonce=AwABEgEAAAADAOz_BQD0_6Ar8NwBdlHYKzVYmVX60SYWmU33iETSyQ_ougU6j_1JG37adzZ-SO-HreW8x9QnR79ZfuhZMek433986gCjxYcgAA&client-request-id=bceba0a3-5344-4ea6-a171-a8c06b638a9a&mscrid=bceba0a3-5344-4ea6-a171-a8c06b638a9a"
 }
 
 const closeModal = () => {
