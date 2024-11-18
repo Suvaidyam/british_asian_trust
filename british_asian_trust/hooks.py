@@ -12,7 +12,8 @@ app_license = "mit"
 fixtures=[
     "Designation",
     "Role",
-    "Role Profile"
+    "Role Profile",
+    "Field Options"
 ]
 
 # include js, css files in header of desk.html
