@@ -5,7 +5,7 @@
       <img src="/effect.png" alt="Background effect">
     </div>
     <div class="max-w-[1920px] mx-auto">
-      <FormView :doctype="'Assessment'" :sidebar="true" :section="false" :isRoute="'/assessmentresults'"></FormView>
+      <FormView :doctype="'Assessment'" :doc="doc" :sidebar="true" :section="false" :isRoute="'/assessmentresults'"></FormView>
     </div>
   </div>
 
@@ -56,8 +56,9 @@ import { ref, onMounted } from 'vue';
 import NavBar from '../components/NavBar.vue';
 import { FormView } from '../../../../sva_form_vuejs/form_view';
 
-const showPopup = ref(true);
+const showPopup = ref(false);
 const isSubmitting = ref(false);
+
 const questions = [
   { text: "Organization Name", type: "text", required: true },
   { text: "Industry", type: "select", options: ["Technology", "Healthcare", "Finance", "Education", "Manufacturing", "Other"], required: true },
@@ -81,7 +82,7 @@ const submitProfile = async () => {
 };
 
 onMounted(() => {
-  showPopup.value = true;
+  showPopup.value = false;
 });
 </script>
 
