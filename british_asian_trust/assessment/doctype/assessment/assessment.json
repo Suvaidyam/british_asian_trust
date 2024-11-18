@@ -21,7 +21,37 @@
   "board_role_clarity",
   "section_c_tab",
   "hyyy_section",
-  "q"
+  "q",
+  "section_d_tab",
+  "section_d",
+  "test",
+  "section_e_tab",
+  "section_e",
+  "test_e",
+  "section_f_tab",
+  "section_f",
+  "test_f",
+  "section_g_tab",
+  "section_g",
+  "test_g",
+  "section_h_tab",
+  "section_h",
+  "test_h",
+  "section_i_tab",
+  "section_i",
+  "test_i",
+  "section_j_tab",
+  "section_j",
+  "test_j",
+  "section_k_tab",
+  "section_k",
+  "test_k",
+  "section_l_tab",
+  "section_l",
+  "test_l",
+  "section_m_tab",
+  "section_m",
+  "test_m"
  ],
  "fields": [
   {
@@ -120,11 +150,161 @@
   {
    "fieldname": "section_a_matrix",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_d_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section D"
+  },
+  {
+   "fieldname": "test",
+   "fieldtype": "Data",
+   "label": "test"
+  },
+  {
+   "fieldname": "section_d",
+   "fieldtype": "Section Break",
+   "label": "Monitoring, evaluation and learning systems"
+  },
+  {
+   "fieldname": "section_e_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section E"
+  },
+  {
+   "fieldname": "section_e",
+   "fieldtype": "Section Break",
+   "label": "Human Resources"
+  },
+  {
+   "fieldname": "test_e",
+   "fieldtype": "Data",
+   "label": "test e"
+  },
+  {
+   "fieldname": "section_f_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section F"
+  },
+  {
+   "fieldname": "section_f",
+   "fieldtype": "Section Break",
+   "label": "Risk Management"
+  },
+  {
+   "fieldname": "test_f",
+   "fieldtype": "Data",
+   "label": "test f"
+  },
+  {
+   "fieldname": "section_g_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section G"
+  },
+  {
+   "fieldname": "section_g",
+   "fieldtype": "Section Break",
+   "label": "Financial Management"
+  },
+  {
+   "fieldname": "test_g",
+   "fieldtype": "Data",
+   "label": "test g"
+  },
+  {
+   "fieldname": "section_h_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section H"
+  },
+  {
+   "fieldname": "section_h",
+   "fieldtype": "Section Break",
+   "label": "Fundraising"
+  },
+  {
+   "fieldname": "test_h",
+   "fieldtype": "Data",
+   "label": "test h"
+  },
+  {
+   "fieldname": "section_i_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section I"
+  },
+  {
+   "fieldname": "section_i",
+   "fieldtype": "Section Break",
+   "label": "Stakeholder management and partnerships"
+  },
+  {
+   "fieldname": "test_i",
+   "fieldtype": "Data",
+   "label": "test i"
+  },
+  {
+   "fieldname": "section_j_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section J"
+  },
+  {
+   "fieldname": "section_j",
+   "fieldtype": "Section Break",
+   "label": "Program Overview"
+  },
+  {
+   "fieldname": "test_j",
+   "fieldtype": "Data",
+   "label": "test j"
+  },
+  {
+   "fieldname": "section_k_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section K"
+  },
+  {
+   "fieldname": "section_k",
+   "fieldtype": "Section Break",
+   "label": "Program management and delivery"
+  },
+  {
+   "fieldname": "test_k",
+   "fieldtype": "Data",
+   "label": "test k"
+  },
+  {
+   "fieldname": "section_l_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section L"
+  },
+  {
+   "fieldname": "section_l",
+   "fieldtype": "Section Break",
+   "label": "Monitoring, Evaluation and Learning"
+  },
+  {
+   "fieldname": "test_l",
+   "fieldtype": "Data",
+   "label": "test l"
+  },
+  {
+   "fieldname": "section_m_tab",
+   "fieldtype": "Tab Break",
+   "label": "Section M"
+  },
+  {
+   "fieldname": "section_m",
+   "fieldtype": "Section Break",
+   "label": "Budgeting\u202fand Risk Management"
+  },
+  {
+   "fieldname": "test_m",
+   "fieldtype": "Data",
+   "label": "test m"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-18 10:42:28.759725",
+ "modified": "2024-11-18 13:24:29.037684",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",
