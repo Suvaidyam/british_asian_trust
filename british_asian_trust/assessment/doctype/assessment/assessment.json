@@ -12,6 +12,9 @@
   "strategic_plan_status",
   "vehicles",
   "abc",
+  "section_a_matrix",
+  "hyyy",
+  "abx",
   "tab_2_tab",
   "section_b",
   "board_member_ratio",
@@ -101,11 +104,27 @@
    "fieldname": "hyyy_section",
    "fieldtype": "Section Break",
    "label": "HYYY"
+  },
+  {
+   "fieldname": "hyyy",
+   "fieldtype": "Link",
+   "label": "HYYY",
+   "options": "Field Options"
+  },
+  {
+   "fieldname": "abx",
+   "fieldtype": "Link",
+   "label": "abx",
+   "options": "Field Options"
+  },
+  {
+   "fieldname": "section_a_matrix",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-12 10:41:00.490012",
+ "modified": "2024-11-18 10:42:28.759725",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",

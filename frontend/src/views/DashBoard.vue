@@ -17,7 +17,7 @@
             </h1>
             <p
               class="font-sans text-xs sm:text-sm md:text-[12px] lg:text-[12px] font-normal leading-tight sm:leading-[13.2px] lg:leading-[13.2px] tracking-[0.004em] text-[#596C8C] mt-2 sm:mt-0">
-              Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo.modified) }}</span>
+              <!-- Posted on: <span class="font-source-sans">{{ formatDate(assessmentInfo.modified) }}</span> -->
             </p>
           </div>
 
