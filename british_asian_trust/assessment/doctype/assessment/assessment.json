@@ -11,7 +11,18 @@
   "mission_vision",
   "has_strategic_plan",
   "strategic_plan_components",
+  "strategic_plan_usage",
+  "please_upload_a_copy_of_your_strategic_plan",
   "tab_2_tab",
+  "section_b",
+  "board_member_ratio",
+  "board_competencies",
+  "board_role_clarity",
+  "documented_policies",
+  "section_b_matrix",
+  "board_trustees_meets_every_quarter",
+  "board_pre_reading_materials",
+  "meeting_minutes_tracking",
   "section_c_tab",
   "section_c",
   "q",
@@ -250,13 +261,86 @@
    "fieldtype": "Table MultiSelect",
    "label": "Which of the following components does your strategic plan or similar document include?",
    "mandatory_depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
+   "options": "Options Child"
+  },
+  {
+   "depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
+   "fieldname": "strategic_plan_usage",
+   "fieldtype": "Link",
+   "label": "Which statement best describes your usage of this strategic plan?",
+   "mandatory_depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
+   "options": "Field Options"
+  },
+  {
+   "depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
+   "fieldname": "please_upload_a_copy_of_your_strategic_plan",
+   "fieldtype": "Attach",
+   "label": "Please upload a copy of your strategic plan"
+  },
+  {
+   "description": "(founders, staff members, or their friends/ family or other closely related individuals)",
+   "fieldname": "board_member_ratio",
+   "fieldtype": "Link",
+   "label": "What is the ratio of independent to non-independent members in your Board of Directors or Trustees?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "board_competencies",
+   "fieldtype": "Table MultiSelect",
+   "label": "What competencies/ expertise are represented on your Board?",
+   "options": "Options Child",
+   "reqd": 1
+  },
+  {
+   "fieldname": "board_role_clarity",
+   "fieldtype": "Link",
+   "label": "What is the level of role clarity among Board members/ Trustees? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "board_trustees_meets_every_quarter",
+   "fieldtype": "Link",
+   "label": "Board/ Trustees meets every quarter",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "board_pre_reading_materials",
+   "fieldtype": "Link",
+   "label": "Board/ Trustees receives pre-reading materials sufficiently in advance of its Board meetings ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "meeting_minutes_tracking",
+   "fieldtype": "Link",
+   "label": "Minutes of meetings capture decisions and actions from previous meetings. These are shared promptly",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Select the option that best describes your organisation\u2019s practices on the following ",
+   "fieldname": "section_b_matrix",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_b",
+   "fieldtype": "Section Break",
+   "label": "Board Management"
+  },
+  {
+   "fieldname": "documented_policies",
+   "fieldtype": "Table MultiSelect",
+   "label": "Please indicate which of the following policies exist in written/ documented format within your organisation:",
    "options": "Options Child",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-18 15:07:28.286136",
+ "modified": "2024-11-18 17:59:41.813572",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",
