@@ -272,12 +272,6 @@
    "options": "Field Options"
   },
   {
-   "depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
-   "fieldname": "please_upload_a_copy_of_your_strategic_plan",
-   "fieldtype": "Attach",
-   "label": "Please upload a copy of your strategic plan"
-  },
-  {
    "description": "(founders, staff members, or their friends/ family or other closely related individuals)",
    "fieldname": "board_member_ratio",
    "fieldtype": "Link",
@@ -336,11 +330,16 @@
    "label": "Please indicate which of the following policies exist in written/ documented format within your organisation:",
    "options": "Options Child",
    "reqd": 1
+  },
+  {
+   "fieldname": "please_upload_a_copy_of_your_strategic_plan",
+   "fieldtype": "Attach",
+   "label": "Please upload a copy of your strategic plan"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-18 17:59:41.813572",
+ "modified": "2024-11-19 11:46:20.155243",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",
