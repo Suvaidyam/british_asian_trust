@@ -449,5 +449,16 @@
   "name": "Assessment-documented_policies-i",
   "ref_doctype": "Assessment",
   "score": 1.0
+ },
+ {
+  "code": "f",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "mission_vision",
+  "label": "test",
+  "modified": "2024-11-19 12:07:54.990791",
+  "name": "Assessment-mission_vision-f",
+  "ref_doctype": "Assessment",
+  "score": 1.0
  }
 ]
