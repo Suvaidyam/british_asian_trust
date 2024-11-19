@@ -13,7 +13,8 @@ fixtures=[
     "Designation",
     "Role",
     "Role Profile",
-    "Field Options"
+    "Field Options",
+    "Property Setter"
 ]
 
 # include js, css files in header of desk.html
