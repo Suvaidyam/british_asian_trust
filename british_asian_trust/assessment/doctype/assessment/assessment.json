@@ -6,6 +6,9 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "profile_tab",
+  "organization_profile_section",
+  "profile",
   "section_a_tab",
   "section_a",
   "mission_vision",
@@ -25,22 +28,68 @@
   "meeting_minutes_tracking",
   "section_c_tab",
   "section_c",
-  "q",
+  "decision_making_authority",
+  "section_break_usjk",
+  "senior_leadership",
+  "mid_level_leadership",
+  "section_break_jlrs",
+  "leadership_role_definition",
+  "leadership_expectation_setting",
+  "employee_task_autonomy",
+  "section_break_jjqw",
+  "leadership_response_strategy",
+  "section_break_sbos",
+  "leadership_response_to_feedback",
+  "leadership_steps_for_strategy_effectiveness",
+  "leadership_response_to_challenges",
   "section_d_tab",
   "section_d",
-  "test",
+  "theory_of_change_status",
+  "mel_responsibility",
+  "mel_data_usage",
+  "program_impact_communication",
+  "impact_report_upload",
+  "section_break_hyjk",
+  "3a_only_organisational_leadership",
+  "leadership_mel_collaboration",
+  "3c_only_the_mel_team",
+  "staff_mel_involvement",
   "section_e_tab",
   "section_e",
-  "test_e",
+  "hr_planning_approach",
+  "documented_job_descriptions",
+  "are_all_the_field_roles_well_staffed",
+  "performance_appraisal_system",
+  "performance_criticality_in_rewards",
+  "learning_and_development_opportunities",
+  "learning_and_development_budget",
   "section_f_tab",
   "section_f",
-  "test_f",
+  "risk_assessment_management_process",
+  "risk_review_frequency",
+  "risk_review_participants",
+  "organizational_response",
+  "opportunity_approach",
+  "situation_approach",
+  "top_three_risks",
+  "risk_1",
+  "risk_2",
+  "risk_3",
   "section_g_tab",
   "section_g",
-  "test_g",
+  "financial_planning_approach",
+  "financial_management_lead",
+  "cash_flow_review_frequency",
+  "financial_resource_management",
+  "accounting_system_components",
+  "program_financial_efficiency_evaluation",
+  "budget_source_breakdown",
+  "financial_status_comparison",
   "section_h_tab",
   "section_h",
-  "test_h",
+  "fundraising_management",
+  "fundraising_strategy",
+  "multi_year_grants_count",
   "section_i_tab",
   "section_i",
   "test_i",
@@ -79,20 +128,9 @@
    "label": "Section C"
   },
   {
-   "fieldname": "q",
-   "fieldtype": "Data",
-   "label": "Q",
-   "options": "Field Options"
-  },
-  {
    "fieldname": "section_d_tab",
    "fieldtype": "Tab Break",
    "label": "Section D"
-  },
-  {
-   "fieldname": "test",
-   "fieldtype": "Data",
-   "label": "test"
   },
   {
    "fieldname": "section_d",
@@ -110,11 +148,6 @@
    "label": "Human Resources"
   },
   {
-   "fieldname": "test_e",
-   "fieldtype": "Data",
-   "label": "test e"
-  },
-  {
    "fieldname": "section_f_tab",
    "fieldtype": "Tab Break",
    "label": "Section F"
@@ -123,11 +156,6 @@
    "fieldname": "section_f",
    "fieldtype": "Section Break",
    "label": "Risk Management"
-  },
-  {
-   "fieldname": "test_f",
-   "fieldtype": "Data",
-   "label": "test f"
   },
   {
    "fieldname": "section_g_tab",
@@ -140,11 +168,6 @@
    "label": "Financial Management"
   },
   {
-   "fieldname": "test_g",
-   "fieldtype": "Data",
-   "label": "test g"
-  },
-  {
    "fieldname": "section_h_tab",
    "fieldtype": "Tab Break",
    "label": "Section H"
@@ -153,11 +176,6 @@
    "fieldname": "section_h",
    "fieldtype": "Section Break",
    "label": "Fundraising"
-  },
-  {
-   "fieldname": "test_h",
-   "fieldtype": "Data",
-   "label": "test h"
   },
   {
    "fieldname": "section_i_tab",
@@ -335,11 +353,377 @@
    "fieldname": "please_upload_a_copy_of_your_strategic_plan",
    "fieldtype": "Attach",
    "label": "Please upload a copy of your strategic plan"
+  },
+  {
+   "fieldname": "profile_tab",
+   "fieldtype": "Tab Break",
+   "label": "Profile"
+  },
+  {
+   "fieldname": "organization_profile_section",
+   "fieldtype": "Section Break",
+   "label": "Organization Profile"
+  },
+  {
+   "fieldname": "profile",
+   "fieldtype": "Data",
+   "label": "profile"
+  },
+  {
+   "description": "Are leadership roles filled within your organisation, considering both senior management and mid-level leadership? ",
+   "fieldname": "section_break_usjk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "senior_leadership",
+   "fieldtype": "Link",
+   "label": "Senior leadership",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mid_level_leadership",
+   "fieldtype": "Link",
+   "label": "Mid level leadership",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "decision_making_authority",
+   "fieldtype": "Link",
+   "label": "Who takes major decisions in the organisation?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Please rate the following statements about the leadership\u2019 way of working in your organisation ",
+   "fieldname": "section_break_jlrs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "leadership_role_definition",
+   "fieldtype": "Link",
+   "label": "Leadership team defines the roles, responsibilities, required actions, and timelines for team members. ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "leadership_expectation_setting",
+   "fieldtype": "Link",
+   "label": "Leadership team sets clear expectations for others and follows through on their progress. ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee_task_autonomy",
+   "fieldtype": "Link",
+   "label": "Leadership team allows employees to decide how they wish to complete the tasks. ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "theory_of_change_status",
+   "fieldtype": "Link",
+   "label": "Thinking of all programs you run, please select the option that best describes your Theory of Change (TOC) ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mel_responsibility",
+   "fieldtype": "Link",
+   "label": "Who performs monitoring, evaluation and learning (MEL) at the organisation level? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Who engages in MEL processes? ",
+   "fieldname": "section_break_hyjk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "3a_only_organisational_leadership",
+   "fieldtype": "Link",
+   "label": "3a Only organisational leadership ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "leadership_mel_collaboration",
+   "fieldtype": "Link",
+   "label": "3b Organisational leadership along with program leadership/ managers",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "3c_only_the_mel_team",
+   "fieldtype": "Link",
+   "label": "3c Only the MEL team ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "staff_mel_involvement",
+   "fieldtype": "Link",
+   "label": "3d Staff at various levels, including field staff, along with organisational leadership and program leadership/ managers and MEL team ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mel_data_usage",
+   "fieldtype": "Table MultiSelect",
+   "label": "How do you generally use data from MEL within the organisation (select all that apply)? ",
+   "options": "Options Child",
+   "reqd": 1
+  },
+  {
+   "fieldname": "program_impact_communication",
+   "fieldtype": "Table MultiSelect",
+   "label": "How does the organisation communicate the impact of its programs externally?",
+   "options": "Options Child",
+   "reqd": 1
+  },
+  {
+   "fieldname": "impact_report_upload",
+   "fieldtype": "Attach",
+   "label": "Please upload the most recent impact report for the organisation or for any one of your projects/programs (optional). "
+  },
+  {
+   "fieldname": "hr_planning_approach",
+   "fieldtype": "Link",
+   "label": "Which of the following statements best describes your organisation's approach to human resource planning?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "documented_job_descriptions",
+   "fieldtype": "Link",
+   "label": "Are there documented job descriptions outlining the roles and responsibilities for each position within the organisation?\u202f",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "are_all_the_field_roles_well_staffed",
+   "fieldtype": "Link",
+   "label": "Are all the field roles well staffed?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "To the achievement of program or organisational outcomes?",
+   "fieldname": "performance_appraisal_system",
+   "fieldtype": "Link",
+   "label": "Does the organisation have a formal performance appraisal system that links employee key performance indicators ?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "performance_criticality_in_rewards",
+   "fieldtype": "Link",
+   "label": "How critical is performance in rewarding and promoting employees?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "learning_and_development_opportunities",
+   "fieldtype": "Link",
+   "label": "What opportunities are available for continuous learning and development?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "learning_and_development_budget",
+   "fieldtype": "Link",
+   "label": "Is there a budget allocated for learning and development?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "risk_assessment_management_process",
+   "fieldtype": "Link",
+   "label": "What describes your risk assessment and management process the best? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "risk_review_frequency",
+   "fieldtype": "Link",
+   "label": "How often do you review and discuss risks in the organisation? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "risk_review_participants",
+   "fieldtype": "Link",
+   "label": "Who is involved in risk review and management discussions in the organisation? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_jjqw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Consider the following scenario: \nYour organisation runs an education program in rural areas, where field staff regularly monitor school attendance. During a visit, a field officer finds that many students are irregular or dropping out due to a lack of transportation. The officer sets up a volunteer transport system with the local community members. After working well for a few months, and student attendance improving, there are complaints that the members coordinating the transport system are charging high sums of money from the community. The community members blame the field officer, and the village head escalates the issue to your leadership. ",
+   "fieldname": "leadership_response_strategy",
+   "fieldtype": "Link",
+   "label": "How is your leadership likely to respond to this situation?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "top_three_risks",
+   "fieldtype": "Section Break",
+   "label": "In your opinion, what are the top three risks faced by your organisation?"
+  },
+  {
+   "fieldname": "risk_1",
+   "fieldtype": "Small Text",
+   "label": "Risk 1",
+   "reqd": 1
+  },
+  {
+   "fieldname": "risk_2",
+   "fieldtype": "Small Text",
+   "label": "Risk 2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "risk_3",
+   "fieldtype": "Small Text",
+   "label": "Risk 3",
+   "reqd": 1
+  },
+  {
+   "description": "Consider the following scenario:\n\nYour organisation is preparing for a significant policy change imposed by the government that will impact key programs\u2019 continuity and delivery. The organisation needs to respond swiftly to ensure compliance while minimising disruptions to program continuity and delivery.",
+   "fieldname": "organizational_response",
+   "fieldtype": "Link",
+   "label": "How would your organisation typically respond to this situation? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Consider the following scenario:\n\nYou are a non-profit with a strong track record of providing skill development opportunities and jobs to young people from vulnerable communities in a very rural area. Your success has come from placing young men in jobs who are willing to migrate to cities.  A donor interested in women empowerment approaches you to focus more on young women in the community and is willing to pay a high reward for every woman placed. You know from experience that the community is conservative and that women in this area face many socio-cultural barriers.",
+   "fieldname": "opportunity_approach",
+   "fieldtype": "Link",
+   "label": "How would you approach this opportunity? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Consider the following scenario: \n\nYou are a nonprofit working in ten states on maternal and child health, with a large field staff. Your field staff work in remote and underdeveloped areas, hail from local areas and is not semi-literate. You are considering implementing a new technology platform to streamline data collection and analysis in field. The technology is promising but has not been widely tested so far. There is resistance from field staff who prefer sticking to existing methods that have worked well so far.",
+   "fieldname": "situation_approach",
+   "fieldtype": "Link",
+   "label": "How would you approach this situation?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "financial_planning_approach",
+   "fieldtype": "Link",
+   "label": "What best describes your organisation\u2019s approach to annual financial planning and management?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "financial_management_lead",
+   "fieldtype": "Link",
+   "label": "Who drives financial management at the org level? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cash_flow_review_frequency",
+   "fieldtype": "Link",
+   "label": "How regularly are cash flow (income and expenditure) projections and actuals prepared and reviewed by all relevant functions?",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "financial_resource_management",
+   "fieldtype": "Link",
+   "label": "When unexpected challenges or opportunities arise, how does your organisation manage financial resources? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Answer type - multiple select between a,b,c single select between (a,b,c) and d ",
+   "fieldname": "accounting_system_components",
+   "fieldtype": "Table MultiSelect",
+   "label": "Which of the following components does your accounting system allow for?",
+   "options": "Options Child"
+  },
+  {
+   "fieldname": "program_financial_efficiency_evaluation",
+   "fieldtype": "Link",
+   "label": "How does your organisation evaluate the financial efficiency of your programs? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "budget_source_breakdown",
+   "fieldtype": "Link",
+   "label": "How much of your annual budget (in approx. %) for last three year came from the following sources on average? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Thinking about how current expenses and how much money you presently have in the bank",
+   "fieldname": "financial_status_comparison",
+   "fieldtype": "Link",
+   "label": "Which of the following is true for your organisation? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fundraising_management",
+   "fieldtype": "Link",
+   "label": "How is fundraising managed within the organisation?\u202f",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fundraising_strategy",
+   "fieldtype": "Link",
+   "label": "Does your organisation have a fundraising strategy? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "multi_year_grants_count",
+   "fieldtype": "Int",
+   "label": "How many multi-year grants is the organisation currently managing?\u202f ",
+   "reqd": 1
+  },
+  {
+   "description": "<b>Consider the following scenario:</b>\nA non-profit organisation focused on environmental conservation has been receiving feedback that its community outreach programs are not effectively engaging younger audiences. During a program review meeting, the leadership team is presented with this concern along with potential strategies for improvement, such as using social media campaigns, hosting community events, and collaborating with local schools.",
+   "fieldname": "section_break_sbos",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "leadership_response_to_feedback",
+   "fieldtype": "Link",
+   "label": "How would your leadership team respond to this feedback? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "leadership_steps_for_strategy_effectiveness",
+   "fieldtype": "Link",
+   "label": "What steps would your leadership team take to ensure the new strategies are effective? ",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "leadership_response_to_challenges",
+   "fieldtype": "Link",
+   "label": "How would the leadership team handle unexpected challenges during implementation? ",
+   "options": "Field Options",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-19 11:46:20.155243",
+ "modified": "2024-11-19 19:17:35.702713",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",

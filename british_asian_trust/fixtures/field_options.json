@@ -80,50 +80,6 @@
   "code": "a",
   "docstatus": 0,
   "doctype": "Field Options",
-  "field": "strategic_plan_components",
-  "label": "Organisation's strategic priorities for next 3-5 years",
-  "modified": "2024-11-18 16:39:07.101358",
-  "name": "Assessment-strategic_plan_components-a",
-  "ref_doctype": "Assessment",
-  "score": 1.0
- },
- {
-  "code": "b",
-  "docstatus": 0,
-  "doctype": "Field Options",
-  "field": "strategic_plan_components",
-  "label": "Action plans to achieve strategic priorities  ",
-  "modified": "2024-11-18 16:39:27.121209",
-  "name": "Assessment-strategic_plan_components-b",
-  "ref_doctype": "Assessment",
-  "score": 1.0
- },
- {
-  "code": "c",
-  "docstatus": 0,
-  "doctype": "Field Options",
-  "field": "strategic_plan_components",
-  "label": "Indicators to measure progress against strategic priorities ",
-  "modified": "2024-11-18 16:39:45.537354",
-  "name": "Assessment-strategic_plan_components-c",
-  "ref_doctype": "Assessment",
-  "score": 1.0
- },
- {
-  "code": "f",
-  "docstatus": 0,
-  "doctype": "Field Options",
-  "field": "strategic_plan_components",
-  "label": "None of the above ",
-  "modified": "2024-11-18 16:41:03.439506",
-  "name": "Assessment-strategic_plan_components-d",
-  "ref_doctype": "Assessment",
-  "score": 0.0
- },
- {
-  "code": "a",
-  "docstatus": 0,
-  "doctype": "Field Options",
   "field": "strategic_plan_usage",
   "label": "The strategic plan has been converted into annual action plan and is regularly referenced by staff at all levels to guide decision-making, program level goals and individual goals",
   "modified": "2024-11-18 16:52:59.833079",
@@ -451,13 +407,35 @@
   "score": 1.0
  },
  {
-  "code": "f",
+  "code": "a",
   "docstatus": 0,
   "doctype": "Field Options",
-  "field": "mission_vision",
-  "label": "test",
-  "modified": "2024-11-19 12:07:54.990791",
-  "name": "Assessment-mission_vision-f",
+  "field": "strategic_plan_components",
+  "label": "Organisation's strategic priorities for next 3-5 years",
+  "modified": "2024-11-19 14:28:53.347171",
+  "name": "Assessment-strategic_plan_components-a",
+  "ref_doctype": "Assessment",
+  "score": 1.0
+ },
+ {
+  "code": "b",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "strategic_plan_components",
+  "label": "Action plans to achieve strategic priorities",
+  "modified": "2024-11-19 14:30:01.257001",
+  "name": "Assessment-strategic_plan_components-b",
+  "ref_doctype": "Assessment",
+  "score": 1.0
+ },
+ {
+  "code": "c",
+  "docstatus": 0,
+  "doctype": "Field Options",
+  "field": "strategic_plan_components",
+  "label": "Indicators to measure progress against strategic priorities",
+  "modified": "2024-11-19 14:30:29.158051",
+  "name": "Assessment-strategic_plan_components-c",
   "ref_doctype": "Assessment",
   "score": 1.0
  }
