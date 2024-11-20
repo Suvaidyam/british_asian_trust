@@ -14,7 +14,8 @@ fixtures=[
     "Role",
     "Role Profile",
     "Field Options",
-    "Property Setter"
+    "Property Setter",
+    "Development Areas"
 ]
 
 # include js, css files in header of desk.html
