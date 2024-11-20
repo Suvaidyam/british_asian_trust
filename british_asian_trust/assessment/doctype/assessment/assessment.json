@@ -8,7 +8,17 @@
  "field_order": [
   "profile_tab",
   "organization_profile_section",
-  "profile",
+  "registration_date",
+  "annual_spending_last_year",
+  "income_last_year",
+  "organisation_registered_name",
+  "organisation_website",
+  "section_break_wouv",
+  "fcra",
+  "csr_form_1",
+  "80g",
+  "12_a_registration",
+  "none_of_the_above",
   "section_a_tab",
   "section_a",
   "mission_vision",
@@ -29,10 +39,10 @@
   "section_c_tab",
   "section_c",
   "decision_making_authority",
-  "section_break_usjk",
+  "section_c_matrix_1",
   "senior_leadership",
   "mid_level_leadership",
-  "section_break_jlrs",
+  "section_c_matrix_2",
   "leadership_role_definition",
   "leadership_expectation_setting",
   "employee_task_autonomy",
@@ -92,7 +102,16 @@
   "multi_year_grants_count",
   "section_i_tab",
   "section_i",
-  "test_i",
+  "stakeholder_management_approach",
+  "section_i_matrix",
+  "stakeholder_communication_practice",
+  "stakeholder_involvement_in_decisions",
+  "challenge_reporting_to_donors",
+  "proactive_sharing_with_stakeholders",
+  "section_break_nila",
+  "conversation_outcome",
+  "communications_plan",
+  "communications_responsibility",
   "section_j_tab",
   "section_j",
   "test_j",
@@ -188,11 +207,6 @@
    "label": "Stakeholder management and partnerships"
   },
   {
-   "fieldname": "test_i",
-   "fieldtype": "Data",
-   "label": "test i"
-  },
-  {
    "fieldname": "section_j_tab",
    "fieldtype": "Tab Break",
    "label": "Section J"
@@ -279,21 +293,25 @@
    "fieldtype": "Table MultiSelect",
    "label": "Which of the following components does your strategic plan or similar document include?",
    "mandatory_depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
-   "options": "Options Child"
+   "options": "Options Child",
+   "reqd": 1
   },
   {
    "depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
    "fieldname": "strategic_plan_usage",
    "fieldtype": "Link",
    "label": "Which statement best describes your usage of this strategic plan?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"strategic_plan_usage\"]]",
    "mandatory_depends_on": "eval:doc.has_strategic_plan!='Assessment-has_strategic_plan-c'",
-   "options": "Field Options"
+   "options": "Field Options",
+   "reqd": 1
   },
   {
    "description": "(founders, staff members, or their friends/ family or other closely related individuals)",
    "fieldname": "board_member_ratio",
    "fieldtype": "Link",
    "label": "What is the ratio of independent to non-independent members in your Board of Directors or Trustees?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"board_member_ratio\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -308,6 +326,7 @@
    "fieldname": "board_role_clarity",
    "fieldtype": "Link",
    "label": "What is the level of role clarity among Board members/ Trustees? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"board_role_clarity\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -315,6 +334,7 @@
    "fieldname": "board_trustees_meets_every_quarter",
    "fieldtype": "Link",
    "label": "Board/ Trustees meets every quarter",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"board_trustees_meets_every_quarter\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -322,6 +342,7 @@
    "fieldname": "board_pre_reading_materials",
    "fieldtype": "Link",
    "label": "Board/ Trustees receives pre-reading materials sufficiently in advance of its Board meetings ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"board_pre_reading_materials\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -329,6 +350,7 @@
    "fieldname": "meeting_minutes_tracking",
    "fieldtype": "Link",
    "label": "Minutes of meetings capture decisions and actions from previous meetings. These are shared promptly",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"meeting_minutes_tracking\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -365,19 +387,10 @@
    "label": "Organization Profile"
   },
   {
-   "fieldname": "profile",
-   "fieldtype": "Data",
-   "label": "profile"
-  },
-  {
-   "description": "Are leadership roles filled within your organisation, considering both senior management and mid-level leadership? ",
-   "fieldname": "section_break_usjk",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "senior_leadership",
    "fieldtype": "Link",
    "label": "Senior leadership",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"senior_leadership\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -385,6 +398,7 @@
    "fieldname": "mid_level_leadership",
    "fieldtype": "Link",
    "label": "Mid level leadership",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"mid_level_leadership\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -392,18 +406,15 @@
    "fieldname": "decision_making_authority",
    "fieldtype": "Link",
    "label": "Who takes major decisions in the organisation?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"decision_making_authority\"]]",
    "options": "Field Options",
    "reqd": 1
-  },
-  {
-   "description": "Please rate the following statements about the leadership\u2019 way of working in your organisation ",
-   "fieldname": "section_break_jlrs",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "leadership_role_definition",
    "fieldtype": "Link",
    "label": "Leadership team defines the roles, responsibilities, required actions, and timelines for team members. ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"leadership_role_definition\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -411,6 +422,7 @@
    "fieldname": "leadership_expectation_setting",
    "fieldtype": "Link",
    "label": "Leadership team sets clear expectations for others and follows through on their progress. ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"leadership_expectation_setting\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -418,6 +430,7 @@
    "fieldname": "employee_task_autonomy",
    "fieldtype": "Link",
    "label": "Leadership team allows employees to decide how they wish to complete the tasks. ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"employee_task_autonomy\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -425,6 +438,7 @@
    "fieldname": "theory_of_change_status",
    "fieldtype": "Link",
    "label": "Thinking of all programs you run, please select the option that best describes your Theory of Change (TOC) ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"theory_of_change_status\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -432,6 +446,7 @@
    "fieldname": "mel_responsibility",
    "fieldtype": "Link",
    "label": "Who performs monitoring, evaluation and learning (MEL) at the organisation level? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"mel_responsibility\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -444,6 +459,7 @@
    "fieldname": "3a_only_organisational_leadership",
    "fieldtype": "Link",
    "label": "3a Only organisational leadership ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"3a_only_organisational_leadership\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -451,6 +467,7 @@
    "fieldname": "leadership_mel_collaboration",
    "fieldtype": "Link",
    "label": "3b Organisational leadership along with program leadership/ managers",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"leadership_mel_collaboration\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -458,6 +475,7 @@
    "fieldname": "3c_only_the_mel_team",
    "fieldtype": "Link",
    "label": "3c Only the MEL team ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"3c_only_the_mel_team\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -465,6 +483,7 @@
    "fieldname": "staff_mel_involvement",
    "fieldtype": "Link",
    "label": "3d Staff at various levels, including field staff, along with organisational leadership and program leadership/ managers and MEL team ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"staff_mel_involvement\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -491,6 +510,7 @@
    "fieldname": "hr_planning_approach",
    "fieldtype": "Link",
    "label": "Which of the following statements best describes your organisation's approach to human resource planning?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"hr_planning_approach\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -498,6 +518,7 @@
    "fieldname": "documented_job_descriptions",
    "fieldtype": "Link",
    "label": "Are there documented job descriptions outlining the roles and responsibilities for each position within the organisation?\u202f",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"documented_job_descriptions\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -505,6 +526,7 @@
    "fieldname": "are_all_the_field_roles_well_staffed",
    "fieldtype": "Link",
    "label": "Are all the field roles well staffed?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"are_all_the_field_roles_well_staffed\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -513,6 +535,7 @@
    "fieldname": "performance_appraisal_system",
    "fieldtype": "Link",
    "label": "Does the organisation have a formal performance appraisal system that links employee key performance indicators ?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"performance_appraisal_system\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -520,6 +543,7 @@
    "fieldname": "performance_criticality_in_rewards",
    "fieldtype": "Link",
    "label": "How critical is performance in rewarding and promoting employees?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"performance_criticality_in_rewards\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -527,6 +551,7 @@
    "fieldname": "learning_and_development_opportunities",
    "fieldtype": "Link",
    "label": "What opportunities are available for continuous learning and development?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"learning_and_development_opportunities\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -534,6 +559,7 @@
    "fieldname": "learning_and_development_budget",
    "fieldtype": "Link",
    "label": "Is there a budget allocated for learning and development?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"learning_and_development_budget\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -541,6 +567,7 @@
    "fieldname": "risk_assessment_management_process",
    "fieldtype": "Link",
    "label": "What describes your risk assessment and management process the best? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"risk_assessment_management_process\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -548,6 +575,7 @@
    "fieldname": "risk_review_frequency",
    "fieldtype": "Link",
    "label": "How often do you review and discuss risks in the organisation? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"risk_review_frequency\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -555,6 +583,7 @@
    "fieldname": "risk_review_participants",
    "fieldtype": "Link",
    "label": "Who is involved in risk review and management discussions in the organisation? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"risk_review_participants\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -567,6 +596,7 @@
    "fieldname": "leadership_response_strategy",
    "fieldtype": "Link",
    "label": "How is your leadership likely to respond to this situation?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"leadership_response_strategy\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -598,6 +628,7 @@
    "fieldname": "organizational_response",
    "fieldtype": "Link",
    "label": "How would your organisation typically respond to this situation? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"organizational_response\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -606,6 +637,7 @@
    "fieldname": "opportunity_approach",
    "fieldtype": "Link",
    "label": "How would you approach this opportunity? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"opportunity_approach\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -614,6 +646,7 @@
    "fieldname": "situation_approach",
    "fieldtype": "Link",
    "label": "How would you approach this situation?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"situation_approach\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -621,6 +654,7 @@
    "fieldname": "financial_planning_approach",
    "fieldtype": "Link",
    "label": "What best describes your organisation\u2019s approach to annual financial planning and management?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"financial_planning_approach\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -628,6 +662,7 @@
    "fieldname": "financial_management_lead",
    "fieldtype": "Link",
    "label": "Who drives financial management at the org level? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"financial_management_lead\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -635,6 +670,7 @@
    "fieldname": "cash_flow_review_frequency",
    "fieldtype": "Link",
    "label": "How regularly are cash flow (income and expenditure) projections and actuals prepared and reviewed by all relevant functions?",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"cash_flow_review_frequency\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -642,6 +678,7 @@
    "fieldname": "financial_resource_management",
    "fieldtype": "Link",
    "label": "When unexpected challenges or opportunities arise, how does your organisation manage financial resources? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"financial_resource_management\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -656,6 +693,7 @@
    "fieldname": "program_financial_efficiency_evaluation",
    "fieldtype": "Link",
    "label": "How does your organisation evaluate the financial efficiency of your programs? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"program_financial_efficiency_evaluation\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -663,6 +701,7 @@
    "fieldname": "budget_source_breakdown",
    "fieldtype": "Link",
    "label": "How much of your annual budget (in approx. %) for last three year came from the following sources on average? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"budget_source_breakdown\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -671,6 +710,7 @@
    "fieldname": "financial_status_comparison",
    "fieldtype": "Link",
    "label": "Which of the following is true for your organisation? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"financial_status_comparison\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -678,6 +718,7 @@
    "fieldname": "fundraising_management",
    "fieldtype": "Link",
    "label": "How is fundraising managed within the organisation?\u202f",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"fundraising_management\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -685,6 +726,7 @@
    "fieldname": "fundraising_strategy",
    "fieldtype": "Link",
    "label": "Does your organisation have a fundraising strategy? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"fundraising_strategy\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -703,6 +745,7 @@
    "fieldname": "leadership_response_to_feedback",
    "fieldtype": "Link",
    "label": "How would your leadership team respond to this feedback? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"leadership_response_to_feedback\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -710,6 +753,7 @@
    "fieldname": "leadership_steps_for_strategy_effectiveness",
    "fieldtype": "Link",
    "label": "What steps would your leadership team take to ensure the new strategies are effective? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"leadership_steps_for_strategy_effectiveness\"]]",
    "options": "Field Options",
    "reqd": 1
   },
@@ -717,13 +761,162 @@
    "fieldname": "leadership_response_to_challenges",
    "fieldtype": "Link",
    "label": "How would the leadership team handle unexpected challenges during implementation? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"leadership_response_to_challenges\"]]",
    "options": "Field Options",
    "reqd": 1
+  },
+  {
+   "description": "Partnerships contribute to achieving shared goals and outcomes, such as improved service delivery, increased beneficiary reach, or enhanced social impact. For this section, think of all internal and external stakeholders who get impacted by you and who impact you ",
+   "fieldname": "stakeholder_management_approach",
+   "fieldtype": "Link",
+   "label": "What best describes your approach to identification and management of stakeholders at an organisational level? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"stakeholder_management_approach\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "stakeholder_communication_practice",
+   "fieldtype": "Link",
+   "label": "We regularly communicate with key stakeholders to ensure their needs and expectations are understood and met. ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"stakeholder_communication_practice\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "description": "Are leadership roles filled within your organisation, considering both senior management and mid-level leadership? ",
+   "fieldname": "section_c_matrix_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Please rate the following statements about the leadership\u2019 way of working in your organisation ",
+   "fieldname": "section_c_matrix_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Please rate the following statements about ways of stakeholder management in your organisation ",
+   "fieldname": "section_i_matrix",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "stakeholder_involvement_in_decisions",
+   "fieldtype": "Link",
+   "label": "We actively involve communities, donors and other relevant stakeholders in decision-making processes related to outcomes. ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"stakeholder_involvement_in_decisions\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "challenge_reporting_to_donors",
+   "fieldtype": "Link",
+   "label": "We raise any challenges in the project delivery to donors and partners in a timely manner. ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"challenge_reporting_to_donors\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "proactive_sharing_with_stakeholders",
+   "fieldtype": "Link",
+   "label": "We pro-actively (not just when asked) share project outcomes and learnings with stakeholders to foster transparency and trust. ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"proactive_sharing_with_stakeholders\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_nila",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Consider the following scenario:\nYour organisation is collaborating with several partners to implement a community   development project aimed at improving educational outcomes in a local area. During the planning phase, stakeholders convene to discuss their respective roles, the project's objectives, and how they can effectively work together to achieve these goals.",
+   "fieldname": "conversation_outcome",
+   "fieldtype": "Link",
+   "label": "In this context, what would your result from these conversations be?  ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"conversation_outcome\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "communications_plan",
+   "fieldtype": "Link",
+   "label": "Does your organisation have a communications plan? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"communications_plan\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "communications_responsibility",
+   "fieldtype": "Link",
+   "label": "Is there a specific individual or team responsible for managing the organisation's communication efforts? ",
+   "link_filters": "[[\"Field Options\",\"field\",\"=\",\"communications_responsibility\"]]",
+   "options": "Field Options",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registration_date",
+   "fieldtype": "Data",
+   "label": "Year and month of registration: [month/year] - has to be more than 3 years "
+  },
+  {
+   "description": "[number in lakh] - has to be more than equal to 50L  ",
+   "fieldname": "annual_spending_last_year",
+   "fieldtype": "Data",
+   "label": "What was your annual spending in the last financial year? "
+  },
+  {
+   "description": " [number in lakh] - has to be more than equal to 10L",
+   "fieldname": "income_last_year",
+   "fieldtype": "Data",
+   "label": "What was your income in the past financial year?"
+  },
+  {
+   "fieldname": "organisation_registered_name",
+   "fieldtype": "Data",
+   "label": "Organisation registered name"
+  },
+  {
+   "fieldname": "organisation_website",
+   "fieldtype": "Select",
+   "label": "Organisation website",
+   "options": "\nSection 8\nTrust\nSociety\nPublic Ltd\nPrivate Ltd"
+  },
+  {
+   "description": "Click on the checkboxes below if you currently have the following registrations",
+   "fieldname": "section_break_wouv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "fcra",
+   "fieldtype": "Check",
+   "label": "FCRA"
+  },
+  {
+   "default": "0",
+   "fieldname": "csr_form_1",
+   "fieldtype": "Check",
+   "label": "CSR Form 1 "
+  },
+  {
+   "default": "0",
+   "fieldname": "80g",
+   "fieldtype": "Check",
+   "label": "80G"
+  },
+  {
+   "default": "0",
+   "fieldname": "12_a_registration",
+   "fieldtype": "Check",
+   "label": "12 A registration "
+  },
+  {
+   "default": "0",
+   "fieldname": "none_of_the_above",
+   "fieldtype": "Check",
+   "label": "None of the above "
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-19 19:17:35.702713",
+ "modified": "2024-11-20 12:47:38.298299",
  "modified_by": "Administrator",
  "module": "Assessment",
  "name": "Assessment",
