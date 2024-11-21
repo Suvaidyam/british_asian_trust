@@ -5,7 +5,8 @@
       <img src="/effect.png" alt="Background effect">
     </div>
     <div class="max-w-[1920px] mx-auto">
-      <FormView :doctype="'Assessment'" :doc="doc" :sidebar="true" :section="false" :isRoute="'/assessmentresults'"></FormView>
+      <FormView :doctype="'Assessment'"  :section="true" :isRoute="'/assessmentresults'"></FormView>
+      <!-- <Footer /> -->
     </div>
   </div>
 
@@ -55,6 +56,7 @@
 import { ref, onMounted } from 'vue';
 import NavBar from '../components/NavBar.vue';
 import { FormView } from '../../../../sva_form_vuejs/form_view';
+import Footer from '../components/Footer.vue';
 
 const showPopup = ref(false);
 const isSubmitting = ref(false);
